@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class ConexaoBanco {
 
     public static Connection conn = null;
-    public static String banco = "jdbc:mysql://localhost:3306/serviço_tecnico?useSSL=false";
+    public static String banco = "jdbc:mysql://localhost:3306/projeto_final?useSSL=false";
     public static String login = "root";
     public static String senha = "12345";
 
