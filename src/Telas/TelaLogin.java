@@ -68,7 +68,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(220, 199, 170));
 
-        jPanel3.setBackground(new java.awt.Color(107, 122, 143));
+        jPanel3.setBackground(new java.awt.Color(6, 47, 79));
 
         LblBenVindo.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 24)); // NOI18N
         LblBenVindo.setForeground(new java.awt.Color(255, 255, 255));
@@ -102,14 +102,14 @@ public class TelaLogin extends javax.swing.JFrame {
         );
 
         LblUsuario.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        LblUsuario.setForeground(new java.awt.Color(107, 122, 143));
+        LblUsuario.setForeground(new java.awt.Color(6, 47, 79));
         LblUsuario.setText("Usuário");
 
         TxtUsuario.setBackground(new java.awt.Color(231, 223, 221));
         TxtUsuario.setForeground(new java.awt.Color(0, 0, 0));
 
         LblSenha.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        LblSenha.setForeground(new java.awt.Color(107, 122, 143));
+        LblSenha.setForeground(new java.awt.Color(6, 47, 79));
         LblSenha.setText("Senha");
 
         PasSenha.setBackground(new java.awt.Color(231, 223, 221));

@@ -24,8 +24,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuCadastro = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        MenuUsuario = new javax.swing.JMenuItem();
+        MenuAluno = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -33,6 +33,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(220, 199, 170));
+        jPanel1.setToolTipText("Tela principal");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -47,13 +48,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         MenuCadastro.setText("Cadastro");
 
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem2.setText("Funcionário");
-        MenuCadastro.add(jMenuItem2);
+        MenuUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
+        MenuUsuario.setText("Usuário");
+        MenuCadastro.add(MenuUsuario);
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setText("Usuário");
-        MenuCadastro.add(jMenuItem1);
+        MenuAluno.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        MenuAluno.setText("Aluno");
+        MenuCadastro.add(MenuAluno);
 
         jMenuBar1.add(MenuCadastro);
 
@@ -92,7 +93,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
             public void paint(Graphics g, JComponent c) {
                   //[220,199,170]
                   //[107,122,143]
-                g.setColor(new java.awt.Color(107, 122, 143));
+                  //[6,47,79]
+                g.setColor(new java.awt.Color(6,47,79));
                 g.fillRect(0, 0, c.getWidth(), c.getHeight());
             }
 
@@ -127,8 +129,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     private void changeComponentColors(Component comp) {
-        comp.setBackground(new java.awt.Color(107, 122, 143));
-        comp.setForeground(Color.white);
+        comp.setBackground(new java.awt.Color(247,195,49));
+        comp.setForeground(Color.WHITE);
     }
 
     
@@ -165,13 +167,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    javax.swing.JMenuItem MenuAluno;
     javax.swing.JMenu MenuCadastro;
+    javax.swing.JMenuItem MenuUsuario;
     javax.swing.JMenu jMenu1;
     javax.swing.JMenu jMenu2;
     javax.swing.JMenu jMenu3;
     javax.swing.JMenuBar jMenuBar1;
-    javax.swing.JMenuItem jMenuItem1;
-    javax.swing.JMenuItem jMenuItem2;
     javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
