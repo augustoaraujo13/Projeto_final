@@ -165,6 +165,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         MenuUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
         MenuUsuario.setText("Usuário");
+        MenuUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuUsuarioActionPerformed(evt);
+            }
+        });
         MenuCadastro.add(MenuUsuario);
 
         MenuAluno.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
@@ -200,6 +205,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(761, 539));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void MenuUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuUsuarioActionPerformed
+      TelaUsuario tu = new TelaUsuario();
+      tu.setVisible(true);
+      AreaTrabalho.add(tu);
+    }//GEN-LAST:event_MenuUsuarioActionPerformed
 
     private void customizeMenuBar(JMenuBar menuBar) {
 
