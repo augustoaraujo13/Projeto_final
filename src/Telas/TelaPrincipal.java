@@ -4,11 +4,13 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -62,13 +64,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
         LblDataAtual = new javax.swing.JLabel();
         LblHora = new javax.swing.JLabel();
         LblHoraAtual = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Icones/Fundo.png"));
+        Image image = icon.getImage();
+        AreaTrabalho = new javax.swing.JDesktopPane(){
+
+            public void paintComponent(Graphics g){
+                g.drawImage(image,0,0,getWidth(),getHeight(),this);
+            }
+
+        };
+        MenuPrincipal = new javax.swing.JMenuBar();
         MenuCadastro = new javax.swing.JMenu();
         MenuUsuario = new javax.swing.JMenuItem();
         MenuAluno = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        MenuTurma = new javax.swing.JMenu();
+        MenuOpcoes = new javax.swing.JMenu();
+        MenuSobre = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,17 +131,34 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        javax.swing.GroupLayout AreaTrabalhoLayout = new javax.swing.GroupLayout(AreaTrabalho);
+        AreaTrabalho.setLayout(AreaTrabalhoLayout);
+        AreaTrabalhoLayout.setHorizontalGroup(
+            AreaTrabalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        AreaTrabalhoLayout.setVerticalGroup(
+            AreaTrabalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 420, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout PainelPrincipalLayout = new javax.swing.GroupLayout(PainelPrincipal);
         PainelPrincipal.setLayout(PainelPrincipalLayout);
         PainelPrincipalLayout.setHorizontalGroup(
             PainelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(PainelDeSaudacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelPrincipalLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(AreaTrabalho)
+                .addContainerGap())
         );
         PainelPrincipalLayout.setVerticalGroup(
             PainelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelPrincipalLayout.createSequentialGroup()
                 .addComponent(PainelDeSaudacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 432, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(AreaTrabalho)
+                .addContainerGap())
         );
 
         MenuCadastro.setText("Cadastro");
@@ -143,20 +171,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
         MenuAluno.setText("Aluno");
         MenuCadastro.add(MenuAluno);
 
-        jMenuBar1.add(MenuCadastro);
+        MenuPrincipal.add(MenuCadastro);
 
-        jMenu2.setText("Turma");
-        jMenuBar1.add(jMenu2);
+        MenuTurma.setText("Turma");
+        MenuPrincipal.add(MenuTurma);
 
-        jMenu1.setText("Opções");
-        jMenuBar1.add(jMenu1);
+        MenuOpcoes.setText("Opções");
+        MenuPrincipal.add(MenuOpcoes);
 
-        jMenu3.setText("Sobre");
-        jMenuBar1.add(jMenu3);
+        MenuSobre.setText("Sobre");
+        MenuPrincipal.add(MenuSobre);
 
-        customizeMenuBar(jMenuBar1);
+        customizeMenuBar(MenuPrincipal);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(MenuPrincipal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -252,18 +280,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    javax.swing.JDesktopPane AreaTrabalho;
     javax.swing.JLabel LblData;
     javax.swing.JLabel LblDataAtual;
     javax.swing.JLabel LblHora;
     javax.swing.JLabel LblHoraAtual;
     javax.swing.JMenuItem MenuAluno;
     javax.swing.JMenu MenuCadastro;
+    javax.swing.JMenu MenuOpcoes;
+    javax.swing.JMenuBar MenuPrincipal;
+    javax.swing.JMenu MenuSobre;
+    javax.swing.JMenu MenuTurma;
     javax.swing.JMenuItem MenuUsuario;
     javax.swing.JPanel PainelDeSaudacao;
     javax.swing.JPanel PainelPrincipal;
-    javax.swing.JMenu jMenu1;
-    javax.swing.JMenu jMenu2;
-    javax.swing.JMenu jMenu3;
-    javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }
