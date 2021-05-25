@@ -82,6 +82,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         MenuSobre = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tela principal");
 
         PainelPrincipal.setBackground(new java.awt.Color(220, 199, 170));
         PainelPrincipal.setToolTipText("Tela principal");
@@ -117,7 +118,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addComponent(LblHora)
                 .addGap(18, 18, 18)
                 .addComponent(LblHoraAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(463, Short.MAX_VALUE))
+                .addContainerGap(584, Short.MAX_VALUE))
         );
         PainelDeSaudacaoLayout.setVerticalGroup(
             PainelDeSaudacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,6 +175,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         MenuAluno.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         MenuAluno.setText("Aluno");
+        MenuAluno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuAlunoActionPerformed(evt);
+            }
+        });
         MenuCadastro.add(MenuAluno);
 
         MenuPrincipal.add(MenuCadastro);
@@ -202,7 +208,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addComponent(PainelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(761, 539));
+        setSize(new java.awt.Dimension(882, 539));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -211,6 +217,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
       tu.setVisible(true);
       AreaTrabalho.add(tu);
     }//GEN-LAST:event_MenuUsuarioActionPerformed
+
+    private void MenuAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuAlunoActionPerformed
+        TelaAluno ta = new TelaAluno();
+        ta.setVisible(true);
+        AreaTrabalho.add(ta);
+        
+    }//GEN-LAST:event_MenuAlunoActionPerformed
 
     private void customizeMenuBar(JMenuBar menuBar) {
 

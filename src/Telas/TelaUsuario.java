@@ -31,13 +31,13 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
             st.setString(1, TxtUsuario.getText().trim());
             st.setString(2, CbCargo.getSelectedItem().toString());
-            st.setString(3, TxtEmail.getText().trim());
-            st.setString(4, TxtCpf.getText().trim());
+            st.setString(3, TxtCpf.getText().trim());
+            st.setString(4, TxtEmail.getText().trim());
             st.setString(5, TxtTelefone.getText().trim());
             st.setString(6, TxtLogin.getText().trim());
             st.setString(7, TxtSenha.getText().trim());
 
-            if ((TxtUsuario.getText().isEmpty()) || (TxtEmail.getText().isEmpty())
+            if ((TxtUsuario.getText().isEmpty()) || (TxtCpf.getText().isEmpty())
                     || (TxtLogin.getText().isEmpty()) || (TxtSenha.getText().isEmpty())) {
 
                 String informacao2 = "Preencha os campos obrigatórios!";
@@ -51,8 +51,8 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 TxtId.setText(null);
                 TxtUsuario.setText(null);
                 CbCargo.setSelectedItem(null);
-                TxtEmail.setText(null);
                 TxtCpf.setText(null);
+                TxtEmail.setText(null);
                 TxtTelefone.setText(null);
                 TxtLogin.setText(null);
                 TxtSenha.setText(null);
@@ -80,8 +80,8 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 TxtId.setText(rs.getString(1));
                 TxtUsuario.setText(rs.getString(2));
                 CbCargo.setSelectedItem(rs.getString(3));
-                TxtEmail.setText(rs.getString(4));
-                TxtCpf.setText(rs.getString(5));
+                TxtCpf.setText(rs.getString(4));
+                TxtEmail.setText(rs.getString(5));
                 TxtTelefone.setText(rs.getString(6));
                 TxtLogin.setText(rs.getString(7));
                 TxtSenha.setText(rs.getString(8));
@@ -95,8 +95,8 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 TxtId.setText(null);
                 TxtUsuario.setText(null);
                 CbCargo.setSelectedItem(null);
-                TxtEmail.setText(null);
                 TxtCpf.setText(null);
+                TxtEmail.setText(null);
                 TxtTelefone.setText(null);
                 TxtLogin.setText(null);
                 TxtSenha.setText(null);
@@ -110,7 +110,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
             TxtId.setText(null);
             TxtUsuario.setText(null);
-            TxtEmail.setText(null);
+            TxtCpf.setText(null);
             TxtLogin.setText(null);
             TxtSenha.setText(null);
             CbCargo.setSelectedItem(null);
@@ -129,14 +129,14 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
             st.setString(1, TxtUsuario.getText().trim());
             st.setString(2, CbCargo.getSelectedItem().toString());
-            st.setString(3, TxtEmail.getText().trim());
-            st.setString(4, TxtCpf.getText().trim());
+            st.setString(3, TxtCpf.getText().trim());
+            st.setString(4, TxtEmail.getText().trim());
             st.setString(5, TxtTelefone.getText().trim());
             st.setString(6, TxtLogin.getText().trim());
             st.setString(7, TxtSenha.getText().trim());
             st.setString(8, TxtId.getText().trim());
 
-            if ((TxtUsuario.getText().isEmpty()) || (TxtEmail.getText().isEmpty())
+            if ((TxtUsuario.getText().isEmpty()) || (TxtCpf.getText().isEmpty())
                     || (TxtLogin.getText().isEmpty()) || (TxtSenha.getText().isEmpty())) {
 
                 String informacao2 = "Preencha os campos obrigatórios!!!!";
@@ -154,8 +154,8 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 TxtId.setText(null);
                 TxtUsuario.setText(null);
                 CbCargo.setSelectedItem(null);
-                TxtEmail.setText(null);
                 TxtCpf.setText(null);
+                TxtEmail.setText(null);
                 TxtTelefone.setText(null);
                 TxtLogin.setText(null);
                 TxtSenha.setText(null);
@@ -203,8 +203,8 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                     TxtId.setText(null);
                     TxtUsuario.setText(null);
                     CbCargo.setSelectedItem(null);
-                    TxtEmail.setText(null);
                     TxtCpf.setText(null);
+                    TxtEmail.setText(null);
                     TxtTelefone.setText(null);
                     TxtLogin.setText(null);
                     TxtSenha.setText(null);
@@ -232,8 +232,8 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         TxtId.setText(null);
         TxtUsuario.setText(null);
         CbCargo.setSelectedItem(null);
-        TxtEmail.setText(null);
         TxtCpf.setText(null);
+        TxtEmail.setText(null);
         TxtTelefone.setText(null);
         TxtLogin.setText(null);
         TxtSenha.setText(null);
@@ -245,14 +245,14 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         PainelUsuarioInterno = new javax.swing.JPanel();
-        LblUsuario = new javax.swing.JLabel();
+        LblNomeUsuario = new javax.swing.JLabel();
         TxtUsuario = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         CbCargo = new javax.swing.JComboBox<>();
-        LblEmail = new javax.swing.JLabel();
-        TxtEmail = new javax.swing.JTextField();
         LblCpf = new javax.swing.JLabel();
         TxtCpf = new javax.swing.JTextField();
+        LblEmail = new javax.swing.JLabel();
+        TxtEmail = new javax.swing.JTextField();
         LblTelefone = new javax.swing.JLabel();
         TxtTelefone = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -274,12 +274,12 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Cadastro de usuários");
+        setTitle("Painel de usuários.");
 
         PainelUsuarioInterno.setBackground(new java.awt.Color(6, 47, 79));
 
-        LblUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        LblUsuario.setText("Usuário *");
+        LblNomeUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        LblNomeUsuario.setText("Nome *");
 
         TxtUsuario.setBackground(new java.awt.Color(231, 223, 221));
         TxtUsuario.setForeground(new java.awt.Color(0, 0, 0));
@@ -301,17 +301,17 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             }
         });
 
-        LblEmail.setForeground(new java.awt.Color(255, 255, 255));
-        LblEmail.setText("Email * ");
-
-        TxtEmail.setBackground(new java.awt.Color(231, 223, 221));
-        TxtEmail.setForeground(new java.awt.Color(0, 0, 0));
-
         LblCpf.setForeground(new java.awt.Color(255, 255, 255));
         LblCpf.setText("CPF");
 
         TxtCpf.setBackground(new java.awt.Color(231, 223, 221));
         TxtCpf.setForeground(new java.awt.Color(0, 0, 0));
+
+        LblEmail.setForeground(new java.awt.Color(255, 255, 255));
+        LblEmail.setText("Email *");
+
+        TxtEmail.setBackground(new java.awt.Color(231, 223, 221));
+        TxtEmail.setForeground(new java.awt.Color(0, 0, 0));
 
         LblTelefone.setForeground(new java.awt.Color(255, 255, 255));
         LblTelefone.setText("Telefone");
@@ -320,7 +320,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         TxtTelefone.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Senha*");
+        jLabel3.setText("Senha *");
 
         BtnCriar.setBackground(new java.awt.Color(0, 204, 0));
         BtnCriar.setForeground(new java.awt.Color(0, 0, 0));
@@ -356,7 +356,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         });
 
         LblLogin.setForeground(new java.awt.Color(255, 255, 255));
-        LblLogin.setText("Login*");
+        LblLogin.setText("Login *");
 
         TxtLogin.setBackground(new java.awt.Color(231, 223, 221));
         TxtLogin.setForeground(new java.awt.Color(0, 0, 0));
@@ -389,7 +389,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
         LblCamposObrigatorios.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         LblCamposObrigatorios.setForeground(new java.awt.Color(255, 255, 255));
-        LblCamposObrigatorios.setText("Campos obrigatórios*");
+        LblCamposObrigatorios.setText("Campos obrigatórios *");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -413,17 +413,17 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             .addGroup(PainelUsuarioInternoLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LblUsuario)
-                    .addComponent(LblEmail)
+                    .addComponent(LblNomeUsuario)
                     .addComponent(LblCpf)
+                    .addComponent(LblEmail)
                     .addComponent(LblLogin))
                 .addGap(26, 26, 26)
                 .addGroup(PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PainelUsuarioInternoLayout.createSequentialGroup()
                         .addGroup(PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(TxtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(TxtEmail)
                             .addComponent(TxtCpf)
+                            .addComponent(TxtEmail)
                             .addComponent(TxtLogin))
                         .addGap(18, 18, 18)
                         .addGroup(PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -453,27 +453,27 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                                 .addComponent(BtnDeletar)
                                 .addGap(18, 18, 18)
                                 .addComponent(BtnLimpar)))))
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
         PainelUsuarioInternoLayout.setVerticalGroup(
             PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelUsuarioInternoLayout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addGroup(PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LblUsuario)
+                    .addComponent(LblNomeUsuario)
                     .addComponent(TxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(TxtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LblEmail)
+                    .addComponent(TxtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblCpf)
                     .addComponent(CbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LblCpf)
+                    .addComponent(TxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblEmail)
                     .addComponent(TxtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LblTelefone))
                 .addGap(18, 18, 18)
@@ -554,8 +554,8 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     javax.swing.JLabel LblCpf;
     javax.swing.JLabel LblEmail;
     javax.swing.JLabel LblLogin;
+    javax.swing.JLabel LblNomeUsuario;
     javax.swing.JLabel LblTelefone;
-    javax.swing.JLabel LblUsuario;
     javax.swing.JPanel PainelUsuarioInterno;
     javax.swing.JTextField TxtCpf;
     javax.swing.JTextField TxtEmail;
