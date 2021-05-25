@@ -37,10 +37,10 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             st.setString(6, TxtLogin.getText().trim());
             st.setString(7, TxtSenha.getText().trim());
 
-            if ((TxtUsuario.getText().isEmpty())
+            if ((TxtUsuario.getText().isEmpty()) || (TxtEmail.getText().isEmpty())
                     || (TxtLogin.getText().isEmpty()) || (TxtSenha.getText().isEmpty())) {
 
-                String informacao2 = "Preencha os campos obrigatórios!!!!";
+                String informacao2 = "Preencha os campos obrigatórios!";
                 JOptionPane.showMessageDialog(this, informacao2);
 
             } else {
@@ -88,7 +88,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 BtnCriar.setEnabled(false);
 
             } else {
-                String resposta = "O usuario que você pesquisou não existe";
+                String resposta = "O usuario que você pesquisou não existe.";
 
                 JOptionPane.showMessageDialog(this, resposta);
 
@@ -119,6 +119,127 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
     }
 
+    private void Alterar() {
+
+        String alterando = "update usuarios set usuario =?, cargo =?, email =?, CPF =?,"
+                + "telefone =?, login =?, senha =? where id_user =?;";
+
+        try {
+            st = conn.prepareStatement(alterando);
+
+            st.setString(1, TxtUsuario.getText().trim());
+            st.setString(2, CbCargo.getSelectedItem().toString());
+            st.setString(3, TxtEmail.getText().trim());
+            st.setString(4, TxtCpf.getText().trim());
+            st.setString(5, TxtTelefone.getText().trim());
+            st.setString(6, TxtLogin.getText().trim());
+            st.setString(7, TxtSenha.getText().trim());
+            st.setString(8, TxtId.getText().trim());
+
+            if ((TxtUsuario.getText().isEmpty()) || (TxtEmail.getText().isEmpty())
+                    || (TxtLogin.getText().isEmpty()) || (TxtSenha.getText().isEmpty())) {
+
+                String informacao2 = "Preencha os campos obrigatórios!!!!";
+                JOptionPane.showMessageDialog(this, informacao2);
+
+            } else {
+                String comcluido = "Dados alterados com sucesso!";
+
+                st.executeUpdate();
+
+                JOptionPane.showMessageDialog(this, comcluido);
+
+                BtnCriar.setEnabled(true);
+
+                TxtId.setText(null);
+                TxtUsuario.setText(null);
+                CbCargo.setSelectedItem(null);
+                TxtEmail.setText(null);
+                TxtCpf.setText(null);
+                TxtTelefone.setText(null);
+                TxtLogin.setText(null);
+                TxtSenha.setText(null);
+
+            }
+
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+            ///System.out.println(e);
+        }
+
+    }
+
+    private void Deletar() {
+
+        String confirmando = "Deseja deletar esse usuário?";
+        String confirmando2 = "Atenção";
+
+        int confirmar = JOptionPane.showConfirmDialog(null, confirmando, confirmando, JOptionPane.YES_NO_OPTION);
+
+        if (confirmar == JOptionPane.YES_OPTION) {
+
+            String deletando = "delete from usuarios where id_user=?;";
+
+            try {
+
+                st = conn.prepareStatement(deletando);
+                st.setString(1, TxtId.getText().trim());
+
+                if (TxtId.getText().isEmpty()) {
+
+                    String informacao = "Preencha o campo Id, para excluir usuario!";
+                    JOptionPane.showMessageDialog(this, informacao);
+
+                } else {
+
+                    String comcluido = "Usuário excluído com sucesso!";
+
+                    st.executeUpdate();
+
+                    JOptionPane.showMessageDialog(this, comcluido);
+
+                    BtnCriar.setEnabled(true);
+
+                    TxtId.setText(null);
+                    TxtUsuario.setText(null);
+                    CbCargo.setSelectedItem(null);
+                    TxtEmail.setText(null);
+                    TxtCpf.setText(null);
+                    TxtTelefone.setText(null);
+                    TxtLogin.setText(null);
+                    TxtSenha.setText(null);
+
+                }
+
+            } catch (HeadlessException | SQLException e) {
+                JOptionPane.showMessageDialog(null, e);
+                ///System.out.println(e);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Houve um erro, tente novamente");
+        }
+    }
+
+    private void limpar() {
+
+        String comcluido = "Os campos foram limpos!!";
+
+        JOptionPane.showMessageDialog(this, comcluido);
+
+        BtnCriar.setEnabled(true);
+
+        TxtId.setText(null);
+        TxtUsuario.setText(null);
+        CbCargo.setSelectedItem(null);
+        TxtEmail.setText(null);
+        TxtCpf.setText(null);
+        TxtTelefone.setText(null);
+        TxtLogin.setText(null);
+        TxtSenha.setText(null);
+
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -146,6 +267,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         TxtId = new javax.swing.JTextField();
         LblCamposObrigatorios = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        BtnLimpar = new javax.swing.JButton();
 
         setBorder(null);
         setClosable(true);
@@ -180,7 +302,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         });
 
         LblEmail.setForeground(new java.awt.Color(255, 255, 255));
-        LblEmail.setText("Email ");
+        LblEmail.setText("Email * ");
 
         TxtEmail.setBackground(new java.awt.Color(231, 223, 221));
         TxtEmail.setForeground(new java.awt.Color(0, 0, 0));
@@ -203,7 +325,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         BtnCriar.setBackground(new java.awt.Color(0, 204, 0));
         BtnCriar.setForeground(new java.awt.Color(0, 0, 0));
         BtnCriar.setText("Criar");
-        BtnCriar.setToolTipText("Cria um novo usuário");
+        BtnCriar.setToolTipText("Cria um novo usuário.");
         BtnCriar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnCriar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,7 +336,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         BtnAlterar.setBackground(new java.awt.Color(255, 153, 0));
         BtnAlterar.setForeground(new java.awt.Color(0, 0, 0));
         BtnAlterar.setText("Alterar");
-        BtnAlterar.setToolTipText("Altera o usuário no banco de dados");
+        BtnAlterar.setToolTipText("Altera os dados do usuário.");
         BtnAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -225,7 +347,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         BtnDeletar.setBackground(new java.awt.Color(255, 0, 0));
         BtnDeletar.setForeground(new java.awt.Color(0, 0, 0));
         BtnDeletar.setText("Deletar");
-        BtnDeletar.setToolTipText("Cuidado!! Deleta o usuário no banco de dados");
+        BtnDeletar.setToolTipText("Cuidado!! Deleta o usuário.");
         BtnDeletar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnDeletar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -247,7 +369,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         BtnBuscar.setBackground(new java.awt.Color(0, 153, 255));
         BtnBuscar.setForeground(new java.awt.Color(0, 0, 0));
         BtnBuscar.setText("Buscar");
-        BtnBuscar.setToolTipText("Busca o usuário no banco de dados");
+        BtnBuscar.setToolTipText("Busca o usuário.");
         BtnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -259,7 +381,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         TxtSenha.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Id");
+        jLabel4.setText("Id #");
 
         TxtId.setEditable(false);
         TxtId.setBackground(new java.awt.Color(231, 223, 221));
@@ -271,7 +393,18 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Campos automático #");
+        jLabel2.setText("Campos automáticos #");
+
+        BtnLimpar.setBackground(new java.awt.Color(204, 0, 204));
+        BtnLimpar.setForeground(new java.awt.Color(0, 0, 0));
+        BtnLimpar.setText("Limpar");
+        BtnLimpar.setToolTipText("Limpa os campos.");
+        BtnLimpar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnLimparActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PainelUsuarioInternoLayout = new javax.swing.GroupLayout(PainelUsuarioInterno);
         PainelUsuarioInterno.setLayout(PainelUsuarioInternoLayout);
@@ -294,20 +427,16 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                             .addComponent(TxtLogin))
                         .addGap(18, 18, 18)
                         .addGroup(PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PainelUsuarioInternoLayout.createSequentialGroup()
-                                .addGroup(PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(LblTelefone)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel1))
-                                .addGap(18, 18, 18)
-                                .addGroup(PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TxtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(CbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TxtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(PainelUsuarioInternoLayout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(57, 57, 57)
-                                .addComponent(TxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(LblTelefone)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addGroup(PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(PainelUsuarioInternoLayout.createSequentialGroup()
                         .addGroup(PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PainelUsuarioInternoLayout.createSequentialGroup()
@@ -321,8 +450,10 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                             .addGroup(PainelUsuarioInternoLayout.createSequentialGroup()
                                 .addComponent(BtnAlterar)
                                 .addGap(18, 18, 18)
-                                .addComponent(BtnDeletar)))))
-                .addContainerGap(167, Short.MAX_VALUE))
+                                .addComponent(BtnDeletar)
+                                .addGap(18, 18, 18)
+                                .addComponent(BtnLimpar)))))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
         PainelUsuarioInternoLayout.setVerticalGroup(
             PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -356,7 +487,8 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                     .addComponent(BtnBuscar)
                     .addComponent(BtnCriar)
                     .addComponent(BtnAlterar)
-                    .addComponent(BtnDeletar))
+                    .addComponent(BtnDeletar)
+                    .addComponent(BtnLimpar))
                 .addGap(18, 18, 18)
                 .addGroup(PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LblCamposObrigatorios)
@@ -379,11 +511,11 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDeletarActionPerformed
-        //Deletar();
+        Deletar();
     }//GEN-LAST:event_BtnDeletarActionPerformed
 
     private void BtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAlterarActionPerformed
-        //Alterar();
+        Alterar();
     }//GEN-LAST:event_BtnAlterarActionPerformed
 
     private void BtnCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCriarActionPerformed
@@ -406,12 +538,17 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtLoginActionPerformed
 
+    private void BtnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimparActionPerformed
+        limpar();
+    }//GEN-LAST:event_BtnLimparActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JButton BtnAlterar;
     javax.swing.JButton BtnBuscar;
     javax.swing.JButton BtnCriar;
     javax.swing.JButton BtnDeletar;
+    javax.swing.JButton BtnLimpar;
     javax.swing.JComboBox<String> CbCargo;
     javax.swing.JLabel LblCamposObrigatorios;
     javax.swing.JLabel LblCpf;
