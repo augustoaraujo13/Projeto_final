@@ -60,6 +60,16 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             }
 
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, e);
+            // System.out.println(e);
+            TxtId.setText(null);
+            TxtUsuario.setText(null);
+            CbCargo.setSelectedItem(null);
+            TxtCpf.setText(null);
+            TxtEmail.setText(null);
+            TxtTelefone.setText(null);
+            TxtLogin.setText(null);
+            TxtSenha.setText(null);
         }
 
     }
@@ -105,7 +115,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
         } catch (HeadlessException | SQLException e) {
 
-            JOptionPane.showMessageDialog(this, "OS Inválida!");
+            JOptionPane.showMessageDialog(this, "Id Inválida!");
             // System.out.println(e);
 
             TxtId.setText(null);
@@ -165,6 +175,14 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(null, e);
             ///System.out.println(e);
+            TxtId.setText(null);
+            TxtUsuario.setText(null);
+            CbCargo.setSelectedItem(null);
+            TxtCpf.setText(null);
+            TxtEmail.setText(null);
+            TxtTelefone.setText(null);
+            TxtLogin.setText(null);
+            TxtSenha.setText(null);
         }
 
     }
@@ -214,14 +232,30 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             } catch (HeadlessException | SQLException e) {
                 JOptionPane.showMessageDialog(null, e);
                 ///System.out.println(e);
+                TxtId.setText(null);
+                TxtUsuario.setText(null);
+                CbCargo.setSelectedItem(null);
+                TxtCpf.setText(null);
+                TxtEmail.setText(null);
+                TxtTelefone.setText(null);
+                TxtLogin.setText(null);
+                TxtSenha.setText(null);
             }
 
         } else {
             JOptionPane.showMessageDialog(null, "Houve um erro, tente novamente");
+            TxtId.setText(null);
+            TxtUsuario.setText(null);
+            CbCargo.setSelectedItem(null);
+            TxtCpf.setText(null);
+            TxtEmail.setText(null);
+            TxtTelefone.setText(null);
+            TxtLogin.setText(null);
+            TxtSenha.setText(null);
         }
     }
 
-    private void limpar() {
+    private void Limpar() {
 
         String comcluido = "Os campos foram limpos!!";
 
@@ -539,7 +573,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_TxtLoginActionPerformed
 
     private void BtnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimparActionPerformed
-        limpar();
+        Limpar();
     }//GEN-LAST:event_BtnLimparActionPerformed
 
 

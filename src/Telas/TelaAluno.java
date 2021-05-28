@@ -1,9 +1,464 @@
 package Telas;
 
+import Conexao.ConexaoBanco;
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.util.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.text.MaskFormatter;
+
 public class TelaAluno extends javax.swing.JInternalFrame {
+
+    Connection conn = null;
+    PreparedStatement st = null;
+    ResultSet rs = null;
 
     public TelaAluno() {
         initComponents();
+        conn = ConexaoBanco.abrirBanco();
+        formatarNascimeto();
+        formatarCpf();
+        formatarTelefone();
+    }
+
+    private void formatarNascimeto() {
+
+        try {
+            MaskFormatter ms = new MaskFormatter("####/##/##");
+            ms.install(ForNascimento);
+        } catch (ParseException e) {
+        }
+
+    }
+
+    private void formatarCpf() {
+
+        try {
+            MaskFormatter ms = new MaskFormatter("###.###.###-##");
+            ms.install(ForCpfResposanvel);
+            ms.install(ForCpf);
+        } catch (ParseException e) {
+        }
+
+    }
+
+    private void formatarTelefone() {
+
+        try {
+            MaskFormatter ms = new MaskFormatter("##-#-####-####");
+            ms.install(ForTelefone);
+            ms.install(ForTelefoneResposanvel);
+        } catch (ParseException e) {
+        }
+
+    }
+
+    private void Criar() {
+
+        String criando = "insert into alunos(situacao, nome, nascimento, CPF, email,"
+                + " telefone, responsavel, CPF_responsavel, email_responsavel,"
+                + " telefone_responsavel, endereco)"
+                + "values(?,?,?,?,?,?,?,?,?,?,?)";
+        String comcluido = "Novo alunoo cadastrado!";
+
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+            String dataString = ForNascimento.getText();
+            Date data = sdf.parse(dataString);
+
+            st = conn.prepareStatement(criando);
+
+            st.setString(1, CbSituacao.getSelectedItem().toString());
+            st.setString(2, TxtNome.getText().trim());
+            st.setDate(3, new java.sql.Date(data.getTime()));
+            st.setString(4, ForCpf.getText().trim());
+            st.setString(5, TxtEmail.getText().trim());
+            st.setString(6, ForTelefone.getText().trim());
+            st.setString(7, TxtResposavel.getText().trim());
+            st.setString(8, ForCpfResposanvel.getText().trim());
+            st.setString(9, TxtEmailResposavel.getText().trim());
+            st.setString(10, ForTelefoneResposanvel.getText().trim());
+            st.setString(11, TxtEndereco.getText().trim());
+
+            if ((TxtNome.getText().isEmpty())
+                    || (ForNascimento.getText().isEmpty()) || (ForCpf.getText().isEmpty())
+                    || (TxtEmail.getText().isEmpty()) || (TxtEndereco.getText().isEmpty())) {
+
+                String informacao2 = "Preencha os campos obrigatórios!";
+                JOptionPane.showMessageDialog(this, informacao2);
+
+            } else {
+                st.executeUpdate();
+
+                JOptionPane.showMessageDialog(this, comcluido);
+
+                TxtNome.setText(null);
+                ForNascimento.setText(null);
+                ForCpf.setText(null);
+                TxtEmail.setText(null);
+                ForTelefone.setText(null);
+                TxtResposavel.setText(null);
+                ForCpfResposanvel.setText(null);
+                TxtEmailResposavel.setText(null);
+                ForTelefoneResposanvel.setText(null);
+                TxtEndereco.setText(null);
+
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, e);
+            //System.out.println(e);
+
+            TxtNome.setText(null);
+            ForNascimento.setText(null);
+            ForCpf.setText(null);
+            TxtEmail.setText(null);
+            ForTelefone.setText(null);
+            TxtResposavel.setText(null);
+            ForCpfResposanvel.setText(null);
+            TxtEmailResposavel.setText(null);
+            ForTelefoneResposanvel.setText(null);
+            TxtEndereco.setText(null);
+
+        } catch (HeadlessException e2) {
+            JOptionPane.showMessageDialog(this, e2);
+            //System.out.println(e2);
+
+            TxtNome.setText(null);
+            ForNascimento.setText(null);
+            ForCpf.setText(null);
+            TxtEmail.setText(null);
+            ForTelefone.setText(null);
+            TxtResposavel.setText(null);
+            ForCpfResposanvel.setText(null);
+            TxtEmailResposavel.setText(null);
+            ForTelefoneResposanvel.setText(null);
+            TxtEndereco.setText(null);
+        } catch (ParseException e3) {
+
+            JOptionPane.showMessageDialog(this, e3);
+            //System.out.println(e2);
+
+            TxtNome.setText(null);
+            ForNascimento.setText(null);
+            ForCpf.setText(null);
+            TxtEmail.setText(null);
+            ForTelefone.setText(null);
+            TxtResposavel.setText(null);
+            ForCpfResposanvel.setText(null);
+            TxtEmailResposavel.setText(null);
+            ForTelefoneResposanvel.setText(null);
+            TxtEndereco.setText(null);
+
+        }
+
+    }
+
+    private void Buscar() {
+
+        String mensagem = "Informe a matrícula do aluno.";
+        String idRecebido = JOptionPane.showInputDialog(mensagem);
+        String busca = "select * from alunos where matricula =" + idRecebido;
+
+        try {
+            /*SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+            String dataString = ForNascimento.getText();
+            Date data = sdf.parse(dataString);
+             */
+
+            st = conn.prepareStatement(busca);
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+                Date dataBanco = rs.getDate(4);
+                String dataRecebida = sdf.format(dataBanco);
+
+                TxtMatricula.setText(rs.getString(1));
+                CbSituacao.setSelectedItem(rs.getString(2));
+                TxtNome.setText(rs.getString(3));
+                ForNascimento.setText(dataRecebida);
+                ForCpf.setText(rs.getString(5));
+                TxtEmail.setText(rs.getString(6));
+                ForTelefone.setText(rs.getString(7));
+                TxtResposavel.setText(rs.getString(8));
+                ForCpfResposanvel.setText(rs.getString(9));
+                TxtEmailResposavel.setText(rs.getString(10));
+                ForTelefoneResposanvel.setText(rs.getString(11));
+                TxtEndereco.setText(rs.getString(12));
+                BtnCriar.setEnabled(false);
+
+            } else {
+                String resposta = "O aluno que você pesquisou não existe.";
+
+                JOptionPane.showMessageDialog(this, resposta);
+
+                TxtMatricula.setText(null);
+                TxtNome.setText(null);
+                ForNascimento.setText(null);
+                ForCpf.setText(null);
+                TxtEmail.setText(null);
+                ForTelefone.setText(null);
+                TxtResposavel.setText(null);
+                ForCpfResposanvel.setText(null);
+                TxtEmailResposavel.setText(null);
+                ForTelefoneResposanvel.setText(null);
+                TxtEndereco.setText(null);
+
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, e);
+            //System.out.println(e);
+
+            TxtMatricula.setText(null);
+            TxtNome.setText(null);
+            ForNascimento.setText(null);
+            ForCpf.setText(null);
+            TxtEmail.setText(null);
+            ForTelefone.setText(null);
+            TxtResposavel.setText(null);
+            ForCpfResposanvel.setText(null);
+            TxtEmailResposavel.setText(null);
+            ForTelefoneResposanvel.setText(null);
+            TxtEndereco.setText(null);
+
+        } catch (HeadlessException e2) {
+            JOptionPane.showMessageDialog(this, e2);
+            //System.out.println(e2);
+
+            TxtMatricula.setText(null);
+            TxtNome.setText(null);
+            ForNascimento.setText(null);
+            ForCpf.setText(null);
+            TxtEmail.setText(null);
+            ForTelefone.setText(null);
+            TxtResposavel.setText(null);
+            ForCpfResposanvel.setText(null);
+            TxtEmailResposavel.setText(null);
+            ForTelefoneResposanvel.setText(null);
+            TxtEndereco.setText(null);
+        }
+        //System.out.println(e2);
+
+    }
+
+    private void Alterar() {
+
+        String alterando = "update alunos set situacao =?, nome = ?, nascimento =?,"
+                + " cpf =?, email =?, telefone =?,"
+                + "responsavel =?, CPF_responsavel = ?, email_responsavel =?,"
+                + " telefone_responsavel =?, endereco =? where matricula =?;";
+
+        String comcluido = "Dados do aluno alterados!";
+
+        try {
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+            String dataString = ForNascimento.getText();
+            Date data = sdf.parse(dataString);
+
+            st = conn.prepareStatement(alterando);
+
+            st.setString(1, CbSituacao.getSelectedItem().toString());
+            st.setString(2, TxtNome.getText().trim());
+            st.setDate(3, new java.sql.Date(data.getTime()));
+            st.setString(4, ForCpf.getText().trim());
+            st.setString(5, TxtEmail.getText().trim());
+            st.setString(6, ForTelefone.getText().trim());
+            st.setString(7, TxtResposavel.getText().trim());
+            st.setString(8, ForCpfResposanvel.getText().trim());
+            st.setString(9, TxtEmailResposavel.getText().trim());
+            st.setString(10, ForTelefoneResposanvel.getText().trim());
+            st.setString(11, TxtEndereco.getText().trim());
+            st.setString(12, TxtMatricula.getText().trim());
+
+            if ((TxtNome.getText().isEmpty())
+                    || (ForNascimento.getText().isEmpty()) || (ForCpf.getText().isEmpty())
+                    || (TxtEmail.getText().isEmpty()) || (TxtEndereco.getText().isEmpty())) {
+
+                String informacao2 = "Preencha os campos obrigatórios!";
+                JOptionPane.showMessageDialog(this, informacao2);
+
+            } else {
+                st.executeUpdate();
+
+                JOptionPane.showMessageDialog(this, comcluido);
+
+                TxtMatricula.setText(null);
+                TxtNome.setText(null);
+                ForNascimento.setText(null);
+                ForCpf.setText(null);
+                TxtEmail.setText(null);
+                ForTelefone.setText(null);
+                TxtResposavel.setText(null);
+                ForCpfResposanvel.setText(null);
+                TxtEmailResposavel.setText(null);
+                ForTelefoneResposanvel.setText(null);
+                TxtEndereco.setText(null);
+
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, e);
+            //System.out.println(e);
+
+            TxtMatricula.setText(null);
+            TxtNome.setText(null);
+            ForNascimento.setText(null);
+            ForCpf.setText(null);
+            TxtEmail.setText(null);
+            ForTelefone.setText(null);
+            TxtResposavel.setText(null);
+            ForCpfResposanvel.setText(null);
+            TxtEmailResposavel.setText(null);
+            ForTelefoneResposanvel.setText(null);
+            TxtEndereco.setText(null);
+
+        } catch (HeadlessException e2) {
+            JOptionPane.showMessageDialog(this, e2);
+            //System.out.println(e2);
+
+            TxtMatricula.setText(null);
+            TxtNome.setText(null);
+            ForNascimento.setText(null);
+            ForCpf.setText(null);
+            TxtEmail.setText(null);
+            ForTelefone.setText(null);
+            TxtResposavel.setText(null);
+            ForCpfResposanvel.setText(null);
+            TxtEmailResposavel.setText(null);
+            ForTelefoneResposanvel.setText(null);
+            TxtEndereco.setText(null);
+        } catch (ParseException e3) {
+
+            JOptionPane.showMessageDialog(this, e3);
+            //System.out.println(e3);
+            TxtMatricula.setText(null);
+            TxtNome.setText(null);
+            ForNascimento.setText(null);
+            ForCpf.setText(null);
+            TxtEmail.setText(null);
+            ForTelefone.setText(null);
+            TxtResposavel.setText(null);
+            ForCpfResposanvel.setText(null);
+            TxtEmailResposavel.setText(null);
+            ForTelefoneResposanvel.setText(null);
+            TxtEndereco.setText(null);
+
+        }
+
+    }
+
+    private void Deletar() {
+
+        String confirmando = "Deseja deletar esse Aluno?";
+        String confirmando2 = "Atenção";
+
+        int confirmar = JOptionPane.showConfirmDialog(null, confirmando, confirmando, JOptionPane.YES_NO_OPTION);
+
+        if (confirmar == JOptionPane.YES_OPTION) {
+
+            String deletando = "delete from alunos where matricula=?;";
+
+            try {
+
+                st = conn.prepareStatement(deletando);
+                st.setString(1, TxtMatricula.getText().trim());
+
+                if (TxtMatricula.getText().isEmpty()) {
+
+                    String informacao = "Preencha o campo matrícula, para excluir o aluno!";
+                    JOptionPane.showMessageDialog(this, informacao);
+
+                } else {
+
+                    String comcluido = "Aluno excluído com sucesso!";
+
+                    st.executeUpdate();
+
+                    JOptionPane.showMessageDialog(this, comcluido);
+
+                    BtnCriar.setEnabled(true);
+
+                    TxtMatricula.setText(null);
+                    TxtNome.setText(null);
+                    ForNascimento.setText(null);
+                    ForCpf.setText(null);
+                    TxtEmail.setText(null);
+                    ForTelefone.setText(null);
+                    TxtResposavel.setText(null);
+                    ForCpfResposanvel.setText(null);
+                    TxtEmailResposavel.setText(null);
+                    ForTelefoneResposanvel.setText(null);
+                    TxtEndereco.setText(null);
+                }
+
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, e);
+                //System.out.println(e);
+
+                TxtMatricula.setText(null);
+                TxtNome.setText(null);
+                ForNascimento.setText(null);
+                ForCpf.setText(null);
+                TxtEmail.setText(null);
+                ForTelefone.setText(null);
+                TxtResposavel.setText(null);
+                ForCpfResposanvel.setText(null);
+                TxtEmailResposavel.setText(null);
+                ForTelefoneResposanvel.setText(null);
+                TxtEndereco.setText(null);
+
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Houve um erro, tente novamente");
+
+            TxtMatricula.setText(null);
+            TxtNome.setText(null);
+            ForNascimento.setText(null);
+            ForCpf.setText(null);
+            TxtEmail.setText(null);
+            ForTelefone.setText(null);
+            TxtResposavel.setText(null);
+            ForCpfResposanvel.setText(null);
+            TxtEmailResposavel.setText(null);
+            ForTelefoneResposanvel.setText(null);
+            TxtEndereco.setText(null);
+
+        }
+
+    }
+
+    private void Limpar() {
+
+        String comcluido = "Os campos foram limpos!!";
+
+        JOptionPane.showMessageDialog(this, comcluido);
+
+        BtnCriar.setEnabled(true);
+        
+        TxtMatricula.setText(null);
+        TxtNome.setText(null);
+        ForNascimento.setText(null);
+        ForCpf.setText(null);
+        TxtEmail.setText(null);
+        ForTelefone.setText(null);
+        TxtResposavel.setText(null);
+        ForCpfResposanvel.setText(null);
+        TxtEmailResposavel.setText(null);
+        ForTelefoneResposanvel.setText(null);
+        TxtEndereco.setText(null);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -16,24 +471,19 @@ public class TelaAluno extends javax.swing.JInternalFrame {
         LblSituacao = new javax.swing.JLabel();
         CbSituacao = new javax.swing.JComboBox<>();
         LblCpf = new javax.swing.JLabel();
-        TxtCpf = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        TxtNascimento = new javax.swing.JTextField();
+        LblNascimento = new javax.swing.JLabel();
         LblEmail = new javax.swing.JLabel();
         TxtEmail = new javax.swing.JTextField();
         LblNome = new javax.swing.JLabel();
         TxtNome = new javax.swing.JTextField();
         LblTelefone = new javax.swing.JLabel();
-        TxtTelefone = new javax.swing.JTextField();
         LblResposavel = new javax.swing.JLabel();
         TxtResposavel = new javax.swing.JTextField();
-        LblCpf1 = new javax.swing.JLabel();
-        TxtCpfResponsavel = new javax.swing.JTextField();
-        LblTelefone1 = new javax.swing.JLabel();
-        TxtTelefoneResponsavel = new javax.swing.JTextField();
+        LblCpfResponsavel = new javax.swing.JLabel();
+        LblTelefoneResponsavel = new javax.swing.JLabel();
         LblEmailResponsavel = new javax.swing.JLabel();
         TxtEmailResposavel = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        LblEndereco = new javax.swing.JLabel();
         TxtEndereco = new javax.swing.JTextField();
         BtnBuscar = new javax.swing.JButton();
         BtnCriar = new javax.swing.JButton();
@@ -42,6 +492,13 @@ public class TelaAluno extends javax.swing.JInternalFrame {
         BtnLimpar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         LblCamposObrigatorios = new javax.swing.JLabel();
+        ForNascimento = new javax.swing.JFormattedTextField();
+        ForCpfResposanvel = new javax.swing.JFormattedTextField();
+        ForCpf = new javax.swing.JFormattedTextField();
+        ForTelefone = new javax.swing.JFormattedTextField();
+        ForTelefoneResposanvel = new javax.swing.JFormattedTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -71,17 +528,8 @@ public class TelaAluno extends javax.swing.JInternalFrame {
         LblCpf.setForeground(new java.awt.Color(255, 255, 255));
         LblCpf.setText("CPF *");
 
-        TxtCpf.setBackground(new java.awt.Color(231, 223, 221));
-
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Nascimeto *");
-
-        TxtNascimento.setBackground(new java.awt.Color(231, 223, 221));
-        TxtNascimento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtNascimentoActionPerformed(evt);
-            }
-        });
+        LblNascimento.setForeground(new java.awt.Color(255, 255, 255));
+        LblNascimento.setText("Nascimeto *");
 
         LblEmail.setForeground(new java.awt.Color(255, 255, 255));
         LblEmail.setText("Email *");
@@ -98,26 +546,17 @@ public class TelaAluno extends javax.swing.JInternalFrame {
         LblTelefone.setForeground(new java.awt.Color(255, 255, 255));
         LblTelefone.setText("Telefone");
 
-        TxtTelefone.setBackground(new java.awt.Color(231, 223, 221));
-        TxtTelefone.setForeground(new java.awt.Color(0, 0, 0));
-
         LblResposavel.setForeground(new java.awt.Color(255, 255, 255));
         LblResposavel.setText("Responsável ");
 
         TxtResposavel.setBackground(new java.awt.Color(231, 223, 221));
         TxtResposavel.setForeground(new java.awt.Color(0, 0, 0));
 
-        LblCpf1.setForeground(new java.awt.Color(255, 255, 255));
-        LblCpf1.setText("CPF Res ");
+        LblCpfResponsavel.setForeground(new java.awt.Color(255, 255, 255));
+        LblCpfResponsavel.setText("CPF Res ");
 
-        TxtCpfResponsavel.setBackground(new java.awt.Color(231, 223, 221));
-        TxtCpfResponsavel.setForeground(new java.awt.Color(0, 0, 0));
-
-        LblTelefone1.setForeground(new java.awt.Color(255, 255, 255));
-        LblTelefone1.setText("Telefone Res");
-
-        TxtTelefoneResponsavel.setBackground(new java.awt.Color(231, 223, 221));
-        TxtTelefoneResponsavel.setForeground(new java.awt.Color(0, 0, 0));
+        LblTelefoneResponsavel.setForeground(new java.awt.Color(255, 255, 255));
+        LblTelefoneResponsavel.setText("Telefone Res");
 
         LblEmailResponsavel.setForeground(new java.awt.Color(255, 255, 255));
         LblEmailResponsavel.setText("Email Res ");
@@ -125,8 +564,8 @@ public class TelaAluno extends javax.swing.JInternalFrame {
         TxtEmailResposavel.setBackground(new java.awt.Color(231, 223, 221));
         TxtEmailResposavel.setForeground(new java.awt.Color(0, 0, 0));
 
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Endereço *");
+        LblEndereco.setForeground(new java.awt.Color(255, 255, 255));
+        LblEndereco.setText("Endereço *");
 
         TxtEndereco.setBackground(new java.awt.Color(231, 223, 221));
 
@@ -193,6 +632,29 @@ public class TelaAluno extends javax.swing.JInternalFrame {
         LblCamposObrigatorios.setForeground(new java.awt.Color(255, 255, 255));
         LblCamposObrigatorios.setText("Campos obrigatórios *");
 
+        ForNascimento.setBackground(new java.awt.Color(231, 223, 221));
+        ForNascimento.setForeground(new java.awt.Color(0, 0, 0));
+
+        ForCpfResposanvel.setBackground(new java.awt.Color(231, 223, 221));
+        ForCpfResposanvel.setForeground(new java.awt.Color(0, 0, 0));
+
+        ForCpf.setBackground(new java.awt.Color(231, 223, 221));
+        ForCpf.setForeground(new java.awt.Color(0, 0, 0));
+
+        ForTelefone.setBackground(new java.awt.Color(231, 223, 221));
+        ForTelefone.setForeground(new java.awt.Color(0, 0, 0));
+
+        ForTelefoneResposanvel.setBackground(new java.awt.Color(231, 223, 221));
+        ForTelefoneResposanvel.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel1.setText("--------------------------------------------  Área caso aluno seja menor de idade  --------------------------------------------");
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Res = Responsável");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -201,133 +663,136 @@ public class TelaAluno extends javax.swing.JInternalFrame {
                 .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LblResposavel)
-                            .addComponent(LblEmailResponsavel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TxtEmailResposavel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtResposavel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(BtnBuscar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(BtnCriar, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LblNome)
-                            .addComponent(LblTelefone)
-                            .addComponent(LblMatricula))
-                        .addGap(19, 19, 19)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TxtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(LblResposavel)
+                                    .addComponent(LblEmailResponsavel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TxtEmailResposavel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TxtResposavel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(BtnBuscar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(BtnCriar, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(LblNome)
+                                    .addComponent(LblTelefone)
+                                    .addComponent(LblMatricula))
+                                .addGap(19, 19, 19)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(TxtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TxtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                                    .addComponent(ForTelefone))))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(16, 16, 16)
-                                .addComponent(LblCpf1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(LblCpfResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 450, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel1)
+                                            .addComponent(LblNascimento)
                                             .addComponent(LblSituacao))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(18, 24, Short.MAX_VALUE)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(TxtNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                                            .addComponent(CbSituacao, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(CbSituacao, 0, 142, Short.MAX_VALUE)
+                                            .addComponent(ForNascimento))
                                         .addGap(36, 36, 36)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(LblCpf)
-                                                .addGap(27, 27, 27)
-                                                .addComponent(TxtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(LblEmail)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(TxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(LblEmail)
+                                            .addComponent(LblCpf))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(TxtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                                            .addComponent(ForCpf))
+                                        .addContainerGap(49, Short.MAX_VALUE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(LblTelefone1)
-                                            .addComponent(jLabel3))
+                                            .addComponent(LblTelefoneResponsavel)
+                                            .addComponent(LblEndereco))
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(TxtCpfResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(TxtTelefoneResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(ForCpfResposanvel, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                                                    .addComponent(ForTelefoneResposanvel))
                                                 .addGap(49, 49, 49)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(LblCamposObrigatorios)
-                                                    .addComponent(jLabel2)))
+                                                    .addComponent(jLabel2)
+                                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(LblCamposObrigatorios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(12, 12, 12)
-                                                .addComponent(TxtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                        .addGap(43, 43, 43))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BtnAlterar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BtnDeletar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BtnLimpar)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                                .addGap(19, 19, 19)
+                                                .addComponent(TxtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addContainerGap())))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(BtnAlterar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(BtnDeletar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(BtnLimpar)
+                                .addContainerGap())))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(LblMatricula)
-                            .addComponent(TxtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LblSituacao)
-                            .addComponent(CbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TxtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LblCpf))))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LblMatricula)
+                    .addComponent(TxtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblSituacao)
+                    .addComponent(CbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblCpf)
+                    .addComponent(ForCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(TxtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(LblEmail)
                         .addComponent(TxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1))
+                        .addComponent(LblNascimento)
+                        .addComponent(ForNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(TxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(LblNome)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LblTelefone)
-                    .addComponent(TxtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(TxtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(80, 80, 80)
+                    .addComponent(LblEndereco)
+                    .addComponent(TxtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ForTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addComponent(jLabel1)
+                .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(LblResposavel)
                             .addComponent(TxtResposavel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LblCpf1)
-                            .addComponent(TxtCpfResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                            .addComponent(LblCpfResponsavel)
+                            .addComponent(jLabel2)
+                            .addComponent(ForCpfResposanvel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(LblCamposObrigatorios)
                         .addGap(7, 7, 7))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(TxtEmailResposavel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(LblEmailResponsavel)
-                        .addComponent(LblTelefone1)
-                        .addComponent(TxtTelefoneResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                        .addComponent(LblTelefoneResponsavel)
+                        .addComponent(ForTelefoneResposanvel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnBuscar)
                     .addComponent(BtnCriar)
@@ -352,31 +817,27 @@ public class TelaAluno extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CbSituacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbSituacaoActionPerformed
-        
+
     }//GEN-LAST:event_CbSituacaoActionPerformed
 
-    private void TxtNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNascimentoActionPerformed
-       
-    }//GEN-LAST:event_TxtNascimentoActionPerformed
-
     private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
-        //Buscar();
+        Buscar();
     }//GEN-LAST:event_BtnBuscarActionPerformed
 
     private void BtnCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCriarActionPerformed
-        //Criar();
+        Criar();
     }//GEN-LAST:event_BtnCriarActionPerformed
 
     private void BtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAlterarActionPerformed
-        //Alterar();
+        Alterar();
     }//GEN-LAST:event_BtnAlterarActionPerformed
 
     private void BtnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDeletarActionPerformed
-        //Deletar();
+        Deletar();
     }//GEN-LAST:event_BtnDeletarActionPerformed
 
     private void BtnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimparActionPerformed
-        //limpar();
+        Limpar();
     }//GEN-LAST:event_BtnLimparActionPerformed
 
 
@@ -387,28 +848,30 @@ public class TelaAluno extends javax.swing.JInternalFrame {
     javax.swing.JButton BtnDeletar;
     javax.swing.JButton BtnLimpar;
     javax.swing.JComboBox<String> CbSituacao;
+    javax.swing.JFormattedTextField ForCpf;
+    javax.swing.JFormattedTextField ForCpfResposanvel;
+    javax.swing.JFormattedTextField ForNascimento;
+    javax.swing.JFormattedTextField ForTelefone;
+    javax.swing.JFormattedTextField ForTelefoneResposanvel;
     javax.swing.JLabel LblCamposObrigatorios;
     javax.swing.JLabel LblCpf;
-    javax.swing.JLabel LblCpf1;
+    javax.swing.JLabel LblCpfResponsavel;
     javax.swing.JLabel LblEmail;
     javax.swing.JLabel LblEmailResponsavel;
+    javax.swing.JLabel LblEndereco;
     javax.swing.JLabel LblMatricula;
+    javax.swing.JLabel LblNascimento;
     javax.swing.JLabel LblNome;
     javax.swing.JLabel LblResposavel;
     javax.swing.JLabel LblSituacao;
     javax.swing.JLabel LblTelefone;
-    javax.swing.JLabel LblTelefone1;
-    javax.swing.JTextField TxtCpf;
-    javax.swing.JTextField TxtCpfResponsavel;
+    javax.swing.JLabel LblTelefoneResponsavel;
     javax.swing.JTextField TxtEmail;
     javax.swing.JTextField TxtEmailResposavel;
     javax.swing.JTextField TxtEndereco;
     javax.swing.JTextField TxtMatricula;
-    javax.swing.JTextField TxtNascimento;
     javax.swing.JTextField TxtNome;
     javax.swing.JTextField TxtResposavel;
-    javax.swing.JTextField TxtTelefone;
-    javax.swing.JTextField TxtTelefoneResponsavel;
     javax.swing.JLabel jLabel1;
     javax.swing.JLabel jLabel2;
     javax.swing.JLabel jLabel3;
