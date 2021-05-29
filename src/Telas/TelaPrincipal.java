@@ -35,24 +35,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         horaAtual.start();
     }
-    
+
     JLabel lblHora = new JLabel();
-    
+
     Thread horaAtual = new Thread(new Runnable() { //cria uma thread
         public void run() {
-            while(true) { //roda indefinidamente
+            while (true) { //roda indefinidamente
                 Date data = Calendar.getInstance().getTime();
                 DateFormat d = DateFormat.getDateInstance();
                 DateFormat h = DateFormat.getTimeInstance();
-                LblHoraAtual.setText(h.format(data));     
+                LblHoraAtual.setText(h.format(data));
                 try {
                     Thread.sleep(1000); //espera 1 segundo para fazer a nova evolução
-                } catch(InterruptedException ex){
+                } catch (InterruptedException ex) {
                     System.out.println("Erro ao buscra hora atual");
                 }
             }
         }
-    }); 
+    });
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -78,8 +78,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         MenuUsuario = new javax.swing.JMenuItem();
         MenuAluno = new javax.swing.JMenuItem();
         MenuTurma = new javax.swing.JMenu();
-        MenuOpcoes = new javax.swing.JMenu();
-        MenuSobre = new javax.swing.JMenu();
+        MenuCriar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela principal");
@@ -185,13 +184,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
         MenuPrincipal.add(MenuCadastro);
 
         MenuTurma.setText("Turma");
+        MenuTurma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuTurmaActionPerformed(evt);
+            }
+        });
+
+        MenuCriar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        MenuCriar.setText("Criar");
+        MenuCriar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuCriarActionPerformed(evt);
+            }
+        });
+        MenuTurma.add(MenuCriar);
+
         MenuPrincipal.add(MenuTurma);
-
-        MenuOpcoes.setText("Opções");
-        MenuPrincipal.add(MenuOpcoes);
-
-        MenuSobre.setText("Sobre");
-        MenuPrincipal.add(MenuSobre);
 
         customizeMenuBar(MenuPrincipal);
 
@@ -213,17 +221,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void MenuUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuUsuarioActionPerformed
-      TelaUsuario tu = new TelaUsuario();
-      tu.setVisible(true);
-      AreaTrabalho.add(tu);
+        TelaUsuario tu = new TelaUsuario();
+        tu.setVisible(true);
+        AreaTrabalho.add(tu);
     }//GEN-LAST:event_MenuUsuarioActionPerformed
 
     private void MenuAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuAlunoActionPerformed
         TelaAluno ta = new TelaAluno();
         ta.setVisible(true);
         AreaTrabalho.add(ta);
-        
+
     }//GEN-LAST:event_MenuAlunoActionPerformed
+
+    private void MenuTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuTurmaActionPerformed
+
+    }//GEN-LAST:event_MenuTurmaActionPerformed
+
+    private void MenuCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCriarActionPerformed
+        TelaCriarTurma tct = new TelaCriarTurma();
+        tct.setVisible(true);
+        AreaTrabalho.add(tct);
+    }//GEN-LAST:event_MenuCriarActionPerformed
 
     private void customizeMenuBar(JMenuBar menuBar) {
 
@@ -276,7 +294,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -311,9 +329,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     javax.swing.JLabel LblHoraAtual;
     javax.swing.JMenuItem MenuAluno;
     javax.swing.JMenu MenuCadastro;
-    javax.swing.JMenu MenuOpcoes;
+    javax.swing.JMenuItem MenuCriar;
     javax.swing.JMenuBar MenuPrincipal;
-    javax.swing.JMenu MenuSobre;
     javax.swing.JMenu MenuTurma;
     javax.swing.JMenuItem MenuUsuario;
     javax.swing.JPanel PainelDeSaudacao;
