@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import javax.swing.JOptionPane;
+import javax.swing.text.MaskFormatter;
 
 public class TelaUsuario extends javax.swing.JInternalFrame {
 
@@ -17,8 +19,30 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     public TelaUsuario() {
         initComponents();
         conn = ConexaoBanco.abrirBanco();
+        formatarCpf();
+        formatarTelefone();
     }
 
+     private void formatarCpf() {
+
+        try {
+            MaskFormatter ms = new MaskFormatter("###.###.###-##");
+            ms.install(ForCpf);
+        } catch (ParseException e) {
+        }
+
+    }
+
+    private void formatarTelefone() {
+
+        try {
+            MaskFormatter ms = new MaskFormatter("##-#-####-####");
+            ms.install(ForTelefone);
+        } catch (ParseException e) {
+        }
+
+    }
+    
     private void Criar() {
 
         String criando = "insert into usuarios(usuario, cargo, email, CPF, telefone, login, senha)"
@@ -31,13 +55,13 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
             st.setString(1, TxtUsuario.getText().trim());
             st.setString(2, CbCargo.getSelectedItem().toString());
-            st.setString(3, TxtCpf.getText().trim());
+            st.setString(3, ForCpf.getText().trim());
             st.setString(4, TxtEmail.getText().trim());
-            st.setString(5, TxtTelefone.getText().trim());
+            st.setString(5, ForTelefone.getText().trim());
             st.setString(6, TxtLogin.getText().trim());
             st.setString(7, TxtSenha.getText().trim());
 
-            if ((TxtUsuario.getText().isEmpty()) || (TxtCpf.getText().isEmpty())
+            if ((TxtUsuario.getText().isEmpty()) || (ForCpf.getText().isEmpty())
                     || (TxtLogin.getText().isEmpty()) || (TxtSenha.getText().isEmpty())) {
 
                 String informacao2 = "Preencha os campos obrigatórios!";
@@ -51,9 +75,9 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 TxtId.setText(null);
                 TxtUsuario.setText(null);
                 CbCargo.setSelectedItem(null);
-                TxtCpf.setText(null);
+                ForCpf.setText(null);
                 TxtEmail.setText(null);
-                TxtTelefone.setText(null);
+                ForTelefone.setText(null);
                 TxtLogin.setText(null);
                 TxtSenha.setText(null);
 
@@ -65,9 +89,9 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             TxtId.setText(null);
             TxtUsuario.setText(null);
             CbCargo.setSelectedItem(null);
-            TxtCpf.setText(null);
+            ForCpf.setText(null);
             TxtEmail.setText(null);
-            TxtTelefone.setText(null);
+            ForTelefone.setText(null);
             TxtLogin.setText(null);
             TxtSenha.setText(null);
         }
@@ -90,9 +114,9 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 TxtId.setText(rs.getString(1));
                 TxtUsuario.setText(rs.getString(2));
                 CbCargo.setSelectedItem(rs.getString(3));
-                TxtCpf.setText(rs.getString(4));
+                ForCpf.setText(rs.getString(4));
                 TxtEmail.setText(rs.getString(5));
-                TxtTelefone.setText(rs.getString(6));
+                ForTelefone.setText(rs.getString(6));
                 TxtLogin.setText(rs.getString(7));
                 TxtSenha.setText(rs.getString(8));
                 BtnCriar.setEnabled(false);
@@ -105,9 +129,9 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 TxtId.setText(null);
                 TxtUsuario.setText(null);
                 CbCargo.setSelectedItem(null);
-                TxtCpf.setText(null);
+                ForCpf.setText(null);
                 TxtEmail.setText(null);
-                TxtTelefone.setText(null);
+                ForTelefone.setText(null);
                 TxtLogin.setText(null);
                 TxtSenha.setText(null);
 
@@ -120,7 +144,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
             TxtId.setText(null);
             TxtUsuario.setText(null);
-            TxtCpf.setText(null);
+            ForCpf.setText(null);
             TxtLogin.setText(null);
             TxtSenha.setText(null);
             CbCargo.setSelectedItem(null);
@@ -139,14 +163,14 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
             st.setString(1, TxtUsuario.getText().trim());
             st.setString(2, CbCargo.getSelectedItem().toString());
-            st.setString(3, TxtCpf.getText().trim());
+            st.setString(3, ForCpf.getText().trim());
             st.setString(4, TxtEmail.getText().trim());
-            st.setString(5, TxtTelefone.getText().trim());
+            st.setString(5, ForTelefone.getText().trim());
             st.setString(6, TxtLogin.getText().trim());
             st.setString(7, TxtSenha.getText().trim());
             st.setString(8, TxtId.getText().trim());
 
-            if ((TxtUsuario.getText().isEmpty()) || (TxtCpf.getText().isEmpty())
+            if ((TxtUsuario.getText().isEmpty()) || (ForCpf.getText().isEmpty())
                     || (TxtLogin.getText().isEmpty()) || (TxtSenha.getText().isEmpty())) {
 
                 String informacao2 = "Preencha os campos obrigatórios!!!!";
@@ -164,9 +188,9 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 TxtId.setText(null);
                 TxtUsuario.setText(null);
                 CbCargo.setSelectedItem(null);
-                TxtCpf.setText(null);
+                ForCpf.setText(null);
                 TxtEmail.setText(null);
-                TxtTelefone.setText(null);
+                ForTelefone.setText(null);
                 TxtLogin.setText(null);
                 TxtSenha.setText(null);
 
@@ -178,9 +202,9 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             TxtId.setText(null);
             TxtUsuario.setText(null);
             CbCargo.setSelectedItem(null);
-            TxtCpf.setText(null);
+            ForCpf.setText(null);
             TxtEmail.setText(null);
-            TxtTelefone.setText(null);
+            ForTelefone.setText(null);
             TxtLogin.setText(null);
             TxtSenha.setText(null);
         }
@@ -221,9 +245,9 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                     TxtId.setText(null);
                     TxtUsuario.setText(null);
                     CbCargo.setSelectedItem(null);
-                    TxtCpf.setText(null);
+                    ForCpf.setText(null);
                     TxtEmail.setText(null);
-                    TxtTelefone.setText(null);
+                    ForTelefone.setText(null);
                     TxtLogin.setText(null);
                     TxtSenha.setText(null);
 
@@ -235,9 +259,9 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 TxtId.setText(null);
                 TxtUsuario.setText(null);
                 CbCargo.setSelectedItem(null);
-                TxtCpf.setText(null);
+                ForCpf.setText(null);
                 TxtEmail.setText(null);
-                TxtTelefone.setText(null);
+                ForTelefone.setText(null);
                 TxtLogin.setText(null);
                 TxtSenha.setText(null);
             }
@@ -247,9 +271,9 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             TxtId.setText(null);
             TxtUsuario.setText(null);
             CbCargo.setSelectedItem(null);
-            TxtCpf.setText(null);
+            ForCpf.setText(null);
             TxtEmail.setText(null);
-            TxtTelefone.setText(null);
+            ForTelefone.setText(null);
             TxtLogin.setText(null);
             TxtSenha.setText(null);
         }
@@ -266,9 +290,9 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         TxtId.setText(null);
         TxtUsuario.setText(null);
         CbCargo.setSelectedItem(null);
-        TxtCpf.setText(null);
+        ForCpf.setText(null);
         TxtEmail.setText(null);
-        TxtTelefone.setText(null);
+        ForTelefone.setText(null);
         TxtLogin.setText(null);
         TxtSenha.setText(null);
 
@@ -284,11 +308,9 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         CbCargo = new javax.swing.JComboBox<>();
         LblCpf = new javax.swing.JLabel();
-        TxtCpf = new javax.swing.JTextField();
         LblEmail = new javax.swing.JLabel();
         TxtEmail = new javax.swing.JTextField();
         LblTelefone = new javax.swing.JLabel();
-        TxtTelefone = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         BtnCriar = new javax.swing.JButton();
         BtnAlterar = new javax.swing.JButton();
@@ -302,6 +324,8 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         LblCamposObrigatorios = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         BtnLimpar = new javax.swing.JButton();
+        ForTelefone = new javax.swing.JFormattedTextField();
+        ForCpf = new javax.swing.JFormattedTextField();
 
         setBorder(null);
         setClosable(true);
@@ -338,9 +362,6 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         LblCpf.setForeground(new java.awt.Color(255, 255, 255));
         LblCpf.setText("CPF");
 
-        TxtCpf.setBackground(new java.awt.Color(231, 223, 221));
-        TxtCpf.setForeground(new java.awt.Color(0, 0, 0));
-
         LblEmail.setForeground(new java.awt.Color(255, 255, 255));
         LblEmail.setText("Email *");
 
@@ -349,9 +370,6 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
         LblTelefone.setForeground(new java.awt.Color(255, 255, 255));
         LblTelefone.setText("Telefone");
-
-        TxtTelefone.setBackground(new java.awt.Color(231, 223, 221));
-        TxtTelefone.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Senha *");
@@ -440,6 +458,12 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             }
         });
 
+        ForTelefone.setBackground(new java.awt.Color(231, 223, 221));
+        ForTelefone.setForeground(new java.awt.Color(0, 0, 0));
+
+        ForCpf.setBackground(new java.awt.Color(231, 223, 221));
+        ForCpf.setForeground(new java.awt.Color(0, 0, 0));
+
         javax.swing.GroupLayout PainelUsuarioInternoLayout = new javax.swing.GroupLayout(PainelUsuarioInterno);
         PainelUsuarioInterno.setLayout(PainelUsuarioInternoLayout);
         PainelUsuarioInternoLayout.setHorizontalGroup(
@@ -456,9 +480,9 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                     .addGroup(PainelUsuarioInternoLayout.createSequentialGroup()
                         .addGroup(PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(TxtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(TxtCpf)
                             .addComponent(TxtEmail)
-                            .addComponent(TxtLogin))
+                            .addComponent(TxtLogin)
+                            .addComponent(ForCpf))
                         .addGap(18, 18, 18)
                         .addGroup(PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LblTelefone)
@@ -466,11 +490,11 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                             .addComponent(jLabel1)
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
-                        .addGroup(PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(TxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(CbCargo, 0, 150, Short.MAX_VALUE)
+                            .addComponent(TxtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(ForTelefone)))
                     .addGroup(PainelUsuarioInternoLayout.createSequentialGroup()
                         .addGroup(PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PainelUsuarioInternoLayout.createSequentialGroup()
@@ -500,16 +524,16 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                     .addComponent(TxtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LblCpf)
                     .addComponent(CbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(ForCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LblEmail)
-                    .addComponent(TxtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LblTelefone))
+                    .addComponent(LblTelefone)
+                    .addComponent(ForTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TxtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -584,6 +608,8 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     javax.swing.JButton BtnDeletar;
     javax.swing.JButton BtnLimpar;
     javax.swing.JComboBox<String> CbCargo;
+    javax.swing.JFormattedTextField ForCpf;
+    javax.swing.JFormattedTextField ForTelefone;
     javax.swing.JLabel LblCamposObrigatorios;
     javax.swing.JLabel LblCpf;
     javax.swing.JLabel LblEmail;
@@ -591,12 +617,10 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     javax.swing.JLabel LblNomeUsuario;
     javax.swing.JLabel LblTelefone;
     javax.swing.JPanel PainelUsuarioInterno;
-    javax.swing.JTextField TxtCpf;
     javax.swing.JTextField TxtEmail;
     javax.swing.JTextField TxtId;
     javax.swing.JTextField TxtLogin;
     javax.swing.JTextField TxtSenha;
-    javax.swing.JTextField TxtTelefone;
     javax.swing.JTextField TxtUsuario;
     javax.swing.JLabel jLabel1;
     javax.swing.JLabel jLabel2;
