@@ -78,7 +78,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
         MenuUsuario = new javax.swing.JMenuItem();
         MenuAluno = new javax.swing.JMenuItem();
         MenuTurma = new javax.swing.JMenu();
+        MenuAlterarDeletar = new javax.swing.JMenuItem();
+        MenuAssociar = new javax.swing.JMenuItem();
+        MenuBuscar = new javax.swing.JMenuItem();
         MenuCriar = new javax.swing.JMenuItem();
+        MenuProfessor = new javax.swing.JMenu();
+        MenuBuscarAluno = new javax.swing.JMenuItem();
+        MenuAdicionarNotas = new javax.swing.JMenuItem();
+        MenuSecretario = new javax.swing.JMenu();
+        MenuVerAlunos = new javax.swing.JMenuItem();
+        MenuVerNotas = new javax.swing.JMenuItem();
+        MenuOpcoes = new javax.swing.JMenu();
+        MenuSobre = new javax.swing.JMenuItem();
+        MenuSair = new javax.swing.JMenuItem();
+        MenuAjuda = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela principal");
@@ -163,7 +176,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         MenuCadastro.setText("Cadastro");
 
-        MenuUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
+        MenuUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         MenuUsuario.setText("Usuário");
         MenuUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,7 +185,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         MenuCadastro.add(MenuUsuario);
 
-        MenuAluno.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        MenuAluno.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
         MenuAluno.setText("Aluno");
         MenuAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -190,7 +203,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        MenuCriar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        MenuAlterarDeletar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        MenuAlterarDeletar.setText("Alterar e deletar");
+        MenuTurma.add(MenuAlterarDeletar);
+
+        MenuAssociar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
+        MenuAssociar.setText("Associar");
+        MenuAssociar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuAssociarActionPerformed(evt);
+            }
+        });
+        MenuTurma.add(MenuAssociar);
+
+        MenuBuscar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        MenuBuscar.setText("Buscar");
+        MenuTurma.add(MenuBuscar);
+
+        MenuCriar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
         MenuCriar.setText("Criar");
         MenuCriar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -200,6 +230,51 @@ public class TelaPrincipal extends javax.swing.JFrame {
         MenuTurma.add(MenuCriar);
 
         MenuPrincipal.add(MenuTurma);
+
+        MenuProfessor.setText("Professor");
+
+        MenuBuscarAluno.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
+        MenuBuscarAluno.setText("Buscar aluno");
+        MenuProfessor.add(MenuBuscarAluno);
+
+        MenuAdicionarNotas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
+        MenuAdicionarNotas.setText("Notas");
+        MenuProfessor.add(MenuAdicionarNotas);
+
+        MenuPrincipal.add(MenuProfessor);
+
+        MenuSecretario.setText("Secretário");
+
+        MenuVerAlunos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
+        MenuVerAlunos.setText("Ver alunos");
+        MenuSecretario.add(MenuVerAlunos);
+
+        MenuVerNotas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_J, java.awt.event.InputEvent.CTRL_MASK));
+        MenuVerNotas.setText("Ver notas");
+        MenuSecretario.add(MenuVerNotas);
+
+        MenuPrincipal.add(MenuSecretario);
+
+        MenuOpcoes.setText("Opções");
+
+        MenuSobre.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.CTRL_MASK));
+        MenuSobre.setText("Sobre");
+        MenuOpcoes.add(MenuSobre);
+
+        MenuSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        MenuSair.setText("Sair");
+        MenuSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuSairActionPerformed(evt);
+            }
+        });
+        MenuOpcoes.add(MenuSair);
+
+        MenuAjuda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
+        MenuAjuda.setText("Ajuda");
+        MenuOpcoes.add(MenuAjuda);
+
+        MenuPrincipal.add(MenuOpcoes);
 
         customizeMenuBar(MenuPrincipal);
 
@@ -242,6 +317,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         tct.setVisible(true);
         AreaTrabalho.add(tct);
     }//GEN-LAST:event_MenuCriarActionPerformed
+
+    private void MenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuSairActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuSairActionPerformed
+
+    private void MenuAssociarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuAssociarActionPerformed
+        TelaAssociar ta = new TelaAssociar();
+        ta.setVisible(true);
+        AreaTrabalho.add(ta);
+    }//GEN-LAST:event_MenuAssociarActionPerformed
 
     private void customizeMenuBar(JMenuBar menuBar) {
 
@@ -327,12 +412,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
     javax.swing.JLabel LblDataAtual;
     javax.swing.JLabel LblHora;
     javax.swing.JLabel LblHoraAtual;
+    javax.swing.JMenuItem MenuAdicionarNotas;
+    javax.swing.JMenuItem MenuAjuda;
+    javax.swing.JMenuItem MenuAlterarDeletar;
     javax.swing.JMenuItem MenuAluno;
+    javax.swing.JMenuItem MenuAssociar;
+    javax.swing.JMenuItem MenuBuscar;
+    javax.swing.JMenuItem MenuBuscarAluno;
     javax.swing.JMenu MenuCadastro;
     javax.swing.JMenuItem MenuCriar;
+    javax.swing.JMenu MenuOpcoes;
     javax.swing.JMenuBar MenuPrincipal;
+    javax.swing.JMenu MenuProfessor;
+    javax.swing.JMenuItem MenuSair;
+    javax.swing.JMenu MenuSecretario;
+    javax.swing.JMenuItem MenuSobre;
     javax.swing.JMenu MenuTurma;
     javax.swing.JMenuItem MenuUsuario;
+    javax.swing.JMenuItem MenuVerAlunos;
+    javax.swing.JMenuItem MenuVerNotas;
     javax.swing.JPanel PainelDeSaudacao;
     javax.swing.JPanel PainelPrincipal;
     // End of variables declaration//GEN-END:variables
