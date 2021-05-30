@@ -2,10 +2,8 @@ package Telas;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -18,7 +16,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.MenuElement;
-import javax.swing.Timer;
 import javax.swing.plaf.basic.BasicMenuBarUI;
 
 public class TelaPrincipal extends javax.swing.JFrame {
@@ -33,11 +30,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         String atual = df.format(data);
         LblDataAtual.setText(atual);
 
+        // faz jLabel horaAtual recber a hora, minutos e segundos em tempo real
         horaAtual.start();
     }
 
     JLabel lblHora = new JLabel();
 
+    //Metodo que pega a hora em tempo real
     Thread horaAtual = new Thread(new Runnable() { //cria uma thread
         public void run() {
             while (true) { //roda indefinidamente
@@ -328,6 +327,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         AreaTrabalho.add(ta);
     }//GEN-LAST:event_MenuAssociarActionPerformed
 
+    //Metodo que faz o Jmenu mudar de cor
     private void customizeMenuBar(JMenuBar menuBar) {
 
         menuBar.setUI(new BasicMenuBarUI() {
@@ -370,6 +370,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }
 
+    //Metodo auxiliar que ajuda a dar cor aop Jmenu
     private void changeComponentColors(Component comp) {
         comp.setBackground(new java.awt.Color(247, 195, 49));
         comp.setForeground(Color.WHITE);
@@ -422,7 +423,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     javax.swing.JMenu MenuCadastro;
     javax.swing.JMenuItem MenuCriar;
     javax.swing.JMenu MenuOpcoes;
-    javax.swing.JMenuBar MenuPrincipal;
+    private javax.swing.JMenuBar MenuPrincipal;
     javax.swing.JMenu MenuProfessor;
     javax.swing.JMenuItem MenuSair;
     javax.swing.JMenu MenuSecretario;

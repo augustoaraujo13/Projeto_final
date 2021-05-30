@@ -12,10 +12,10 @@ import javax.swing.JOptionPane;
 
 public class TelaCriarTurma extends javax.swing.JInternalFrame {
 
-    Connection conn = null;
-    PreparedStatement pst = null;
-    Statement st = null;
-    ResultSet rs = null;
+    private Connection conn = null;
+    private final PreparedStatement pst = null;
+    private Statement st = null;
+    private final ResultSet rs = null;
 
     public TelaCriarTurma() {
         initComponents();
@@ -54,7 +54,7 @@ public class TelaCriarTurma extends javax.swing.JInternalFrame {
                     TxtNovaTurma.setText(null);
 
                 } else {
-                    st.executeUpdate(sql1);
+                    st.executeUpdate(sql2);
                     st.executeBatch();
 
                     JOptionPane.showMessageDialog(this, comcluido);

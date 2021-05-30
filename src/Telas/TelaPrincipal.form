@@ -5,6 +5,7 @@
     <Menu class="javax.swing.JMenuBar" name="MenuPrincipal">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="customizeMenuBar(MenuPrincipal);"/>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="2"/>
       </AuxValues>
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="MenuCadastro">

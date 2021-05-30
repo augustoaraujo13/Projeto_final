@@ -9,16 +9,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 
 public class TelaAluno extends javax.swing.JInternalFrame {
 
-    Connection conn = null;
-    PreparedStatement st = null;
-    ResultSet rs = null;
+    private Connection conn = null;
+    private PreparedStatement st = null;
+    private ResultSet rs = null;
 
     public TelaAluno() {
         initComponents();
@@ -28,6 +26,7 @@ public class TelaAluno extends javax.swing.JInternalFrame {
         formatarTelefone();
     }
 
+    //Metedo para formar campo
     private void formatarNascimeto() {
 
         try {
@@ -38,6 +37,7 @@ public class TelaAluno extends javax.swing.JInternalFrame {
 
     }
 
+    //Metedo para formar campo
     private void formatarCpf() {
 
         try {
@@ -49,6 +49,7 @@ public class TelaAluno extends javax.swing.JInternalFrame {
 
     }
 
+    //Metedo para formar campo
     private void formatarTelefone() {
 
         try {
@@ -168,10 +169,6 @@ public class TelaAluno extends javax.swing.JInternalFrame {
         String busca = "select * from alunos where matricula =" + idRecebido;
 
         try {
-            /*SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-            String dataString = ForNascimento.getText();
-            Date data = sdf.parse(dataString);
-             */
 
             st = conn.prepareStatement(busca);
             rs = st.executeQuery();
@@ -258,7 +255,7 @@ public class TelaAluno extends javax.swing.JInternalFrame {
                 + "responsavel =?, CPF_responsavel = ?, email_responsavel =?,"
                 + " telefone_responsavel =?, endereco =? where matricula =?;";
 
-        String comcluido = "Dados do aluno alterados!";
+        String comcluido = "Dados do aluno foram alterados!";
 
         try {
 
@@ -446,7 +443,7 @@ public class TelaAluno extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(this, comcluido);
 
         BtnCriar.setEnabled(true);
-        
+
         TxtMatricula.setText(null);
         TxtNome.setText(null);
         ForNascimento.setText(null);

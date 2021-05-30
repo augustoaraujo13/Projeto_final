@@ -12,9 +12,9 @@ import javax.swing.text.MaskFormatter;
 
 public class TelaUsuario extends javax.swing.JInternalFrame {
 
-    Connection conn = null;
-    PreparedStatement st = null;
-    ResultSet rs = null;
+    private Connection conn = null;
+    private PreparedStatement st = null;
+    private ResultSet rs = null;
 
     public TelaUsuario() {
         initComponents();
@@ -23,7 +23,8 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         formatarTelefone();
     }
 
-     private void formatarCpf() {
+    //Metodo para formatar campo
+    private void formatarCpf() {
 
         try {
             MaskFormatter ms = new MaskFormatter("###.###.###-##");
@@ -33,6 +34,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
     }
 
+    //Metodo para formatar campo
     private void formatarTelefone() {
 
         try {
@@ -42,12 +44,12 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         }
 
     }
-    
+
     private void Criar() {
 
         String criando = "insert into usuarios(usuario, cargo, email, CPF, telefone, login, senha)"
                 + "values(?,?,?,?,?,?,?);";
-        String comcluido = "Novo usuário cadastrado!";
+        String comcluido = "Novo usuário foi cadastrado!";
 
         try {
 
@@ -122,7 +124,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 BtnCriar.setEnabled(false);
 
             } else {
-                String resposta = "O usuario que você pesquisou não existe.";
+                String resposta = "O usuário que você pesquisou não existe.";
 
                 JOptionPane.showMessageDialog(this, resposta);
 
@@ -177,7 +179,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, informacao2);
 
             } else {
-                String comcluido = "Dados alterados com sucesso!";
+                String comcluido = "Dados do usuário foram alterados com sucesso!";
 
                 st.executeUpdate();
 

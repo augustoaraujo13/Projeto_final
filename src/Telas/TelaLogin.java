@@ -10,20 +10,13 @@ import javax.swing.JOptionPane;
 
 public class TelaLogin extends javax.swing.JFrame {
 
-    Connection conn = null;
-    PreparedStatement st = null;
-    ResultSet rs = null;
+    private Connection conn = null;
+    private PreparedStatement st = null;
+    private ResultSet rs = null;
 
     public TelaLogin() {
         initComponents();
         conn = ConexaoBanco.abrirBanco();
-        /*
-        if (conn != null) {
-            System.out.println("Conectado");
-        } else {
-            System.out.println("Não conectado");
-        }
-         */
 
     }
 
@@ -37,9 +30,44 @@ public class TelaLogin extends javax.swing.JFrame {
             st.setString(2, PasSenha.getText());
             rs = st.executeQuery();
             if (rs.next()) {
-                TelaPrincipal tp = new TelaPrincipal();
-                tp.setVisible(true);
-                this.dispose();
+                String cargo = rs.getString(3);
+
+                if (cargo.equals("Coordenador")) {
+                    TelaPrincipal tp = new TelaPrincipal();
+                    tp.setVisible(true);
+                    this.dispose();
+                } else if (cargo.equals("Professor")) {
+                    TelaPrincipal tp = new TelaPrincipal();
+                    tp.setVisible(true);
+                    //Menu cadastro
+                    tp.MenuAluno.setEnabled(false);
+                    tp.MenuUsuario.setEnabled(false);
+                    //Menu turma
+                    tp.MenuAlterarDeletar.setEnabled(false);
+                    tp.MenuAssociar.setEnabled(false);
+                    tp.MenuBuscar.setEnabled(false);
+                    tp.MenuCriar.setEnabled(false);
+                    //Menu secretário
+                    tp.MenuVerAlunos.setEnabled(false);
+                    tp.MenuVerNotas.setEnabled(false);
+                    this.dispose();
+                } else {
+                    TelaPrincipal tp = new TelaPrincipal();
+                    tp.setVisible(true);
+
+                    //Menu cadastro
+                    tp.MenuAluno.setEnabled(false);
+                    tp.MenuUsuario.setEnabled(false);
+                    //Menu turma
+                    tp.MenuAlterarDeletar.setEnabled(false);
+                    tp.MenuAssociar.setEnabled(false);
+                    tp.MenuBuscar.setEnabled(false);
+                    tp.MenuCriar.setEnabled(false);
+                    //Menu professor
+                    tp.MenuBuscarAluno.setEnabled(false);
+                    tp.MenuAdicionarNotas.setEnabled(false);
+                }
+
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário ou senha Inválidos!");
             }
