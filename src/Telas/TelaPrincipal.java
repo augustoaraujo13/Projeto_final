@@ -67,7 +67,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         LblOla = new javax.swing.JLabel();
         LblNomeUsuario = new javax.swing.JLabel();
         LblLogoBranca = new javax.swing.JLabel();
-        ImageIcon icon = new ImageIcon(getClass().getResource("/Icones/Fundo2.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Icones/Fundo3.png"));
         Image image = icon.getImage();
         AreaTrabalho = new javax.swing.JDesktopPane(){
 
