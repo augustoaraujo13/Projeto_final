@@ -35,10 +35,20 @@ public class TelaLogin extends javax.swing.JFrame {
                 if (cargo.equals("Coordenador")) {
                     TelaPrincipal tp = new TelaPrincipal();
                     tp.setVisible(true);
+                    String funcionario = "coordenador(a) ";
+
+                    // Coloca o nome e o cargo do usuário na tela principal
+                    tp.LblNomeUsuario.setText(funcionario + rs.getString(2) + "!");
+
                     this.dispose();
                 } else if (cargo.equals("Professor")) {
                     TelaPrincipal tp = new TelaPrincipal();
                     tp.setVisible(true);
+
+                    String funcionario = "professor(a) ";
+
+                    // Coloca o nome e o cargo do usuário na tela principal
+                    tp.LblNomeUsuario.setText(funcionario + rs.getString(2) + "!");
                     //Menu cadastro
                     tp.MenuAluno.setEnabled(false);
                     tp.MenuUsuario.setEnabled(false);
@@ -55,6 +65,10 @@ public class TelaLogin extends javax.swing.JFrame {
                     TelaPrincipal tp = new TelaPrincipal();
                     tp.setVisible(true);
 
+                    String funcionario = "secretário(a) ";
+
+                    // Coloca o nome e o cargo do usuário na tela principal
+                    tp.LblNomeUsuario.setText(funcionario + rs.getString(2)+ "!");
                     //Menu cadastro
                     tp.MenuAluno.setEnabled(false);
                     tp.MenuUsuario.setEnabled(false);
@@ -89,6 +103,7 @@ public class TelaLogin extends javax.swing.JFrame {
         LblSenha = new javax.swing.JLabel();
         PasSenha = new javax.swing.JPasswordField();
         BtnLogar = new javax.swing.JButton();
+        LblLogoNormal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela de login");
@@ -157,6 +172,8 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
 
+        LblLogoNormal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/LogoNormal.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -164,8 +181,11 @@ public class TelaLogin extends javax.swing.JFrame {
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(66, 66, 66)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(BtnLogar)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(LblLogoNormal)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BtnLogar))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(PasSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(LblSenha)
@@ -186,7 +206,9 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(PasSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(BtnLogar)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnLogar)
+                    .addComponent(LblLogoNormal))
                 .addGap(0, 27, Short.MAX_VALUE))
         );
 
@@ -251,6 +273,7 @@ public class TelaLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JButton BtnLogar;
     javax.swing.JLabel LblBenVindo;
+    javax.swing.JLabel LblLogoNormal;
     javax.swing.JLabel LblSenha;
     javax.swing.JLabel LblSeusDados;
     javax.swing.JLabel LblUsuario;

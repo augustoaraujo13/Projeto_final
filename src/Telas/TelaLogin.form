@@ -50,8 +50,12 @@
               <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="BtnLogar" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="LblLogoNormal" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="BtnLogar" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="PasSenha" min="-2" pref="163" max="-2" attributes="0"/>
                           <Component id="LblSenha" min="-2" max="-2" attributes="0"/>
@@ -76,7 +80,10 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="PasSenha" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="BtnLogar" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="BtnLogar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="LblLogoNormal" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace min="0" pref="27" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -200,6 +207,13 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnLogarActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="LblLogoNormal">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Icones/LogoNormal.png"/>
+            </Property>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

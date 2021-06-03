@@ -328,6 +328,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         BtnLimpar = new javax.swing.JButton();
         ForTelefone = new javax.swing.JFormattedTextField();
         ForCpf = new javax.swing.JFormattedTextField();
+        LogoBranco = new javax.swing.JLabel();
 
         setBorder(null);
         setClosable(true);
@@ -466,6 +467,8 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         ForCpf.setBackground(new java.awt.Color(231, 223, 221));
         ForCpf.setForeground(new java.awt.Color(0, 0, 0));
 
+        LogoBranco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/LogoBranco.png"))); // NOI18N
+
         javax.swing.GroupLayout PainelUsuarioInternoLayout = new javax.swing.GroupLayout(PainelUsuarioInterno);
         PainelUsuarioInterno.setLayout(PainelUsuarioInternoLayout);
         PainelUsuarioInternoLayout.setHorizontalGroup(
@@ -506,14 +509,17 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                             .addComponent(LblCamposObrigatorios))
                         .addGap(18, 18, 18)
                         .addGroup(PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
                             .addGroup(PainelUsuarioInternoLayout.createSequentialGroup()
                                 .addComponent(BtnAlterar)
                                 .addGap(18, 18, 18)
                                 .addComponent(BtnDeletar)
                                 .addGap(18, 18, 18)
-                                .addComponent(BtnLimpar)))))
-                .addContainerGap(139, Short.MAX_VALUE))
+                                .addComponent(BtnLimpar))
+                            .addGroup(PainelUsuarioInternoLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+                                .addComponent(LogoBranco)))))
+                .addGap(20, 20, 20))
         );
         PainelUsuarioInternoLayout.setVerticalGroup(
             PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -550,10 +556,12 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                     .addComponent(BtnDeletar)
                     .addComponent(BtnLimpar))
                 .addGap(18, 18, 18)
-                .addGroup(PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LblCamposObrigatorios)
-                    .addComponent(jLabel2))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGroup(PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PainelUsuarioInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(LblCamposObrigatorios)
+                        .addComponent(jLabel2))
+                    .addComponent(LogoBranco))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -618,6 +626,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     javax.swing.JLabel LblLogin;
     javax.swing.JLabel LblNomeUsuario;
     javax.swing.JLabel LblTelefone;
+    javax.swing.JLabel LogoBranco;
     javax.swing.JPanel PainelUsuarioInterno;
     javax.swing.JTextField TxtEmail;
     javax.swing.JTextField TxtId;

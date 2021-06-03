@@ -13,7 +13,6 @@ import javax.swing.JOptionPane;
 public class TelaCriarTurma extends javax.swing.JInternalFrame {
 
     private Connection conn = null;
-    private final PreparedStatement pst = null;
     private Statement st = null;
     private final ResultSet rs = null;
 
@@ -82,6 +81,7 @@ public class TelaCriarTurma extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         CbBimestre = new javax.swing.JComboBox<>();
         LblBimestre = new javax.swing.JLabel();
+        LogoBranco = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -122,6 +122,8 @@ public class TelaCriarTurma extends javax.swing.JInternalFrame {
         LblBimestre.setForeground(new java.awt.Color(255, 255, 255));
         LblBimestre.setText("Bimestre");
 
+        LogoBranco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/LogoBranco.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -133,7 +135,8 @@ public class TelaCriarTurma extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LblNovaTurma)
-                            .addComponent(LblBimestre))
+                            .addComponent(LblBimestre)
+                            .addComponent(LogoBranco))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2)
@@ -156,7 +159,9 @@ public class TelaCriarTurma extends javax.swing.JInternalFrame {
                     .addComponent(LblBimestre))
                 .addGap(18, 18, 18)
                 .addComponent(BtnCriar)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LogoBranco)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -191,6 +196,7 @@ public class TelaCriarTurma extends javax.swing.JInternalFrame {
     javax.swing.JComboBox<String> CbBimestre;
     javax.swing.JLabel LblBimestre;
     javax.swing.JLabel LblNovaTurma;
+    javax.swing.JLabel LogoBranco;
     javax.swing.JTextField TxtNovaTurma;
     javax.swing.JLabel jLabel2;
     javax.swing.JPanel jPanel1;

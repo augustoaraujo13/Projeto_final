@@ -57,13 +57,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jComboBox1 = new javax.swing.JComboBox<>();
         PainelPrincipal = new javax.swing.JPanel();
         PainelDeSaudacao = new javax.swing.JPanel();
         LblData = new javax.swing.JLabel();
         LblDataAtual = new javax.swing.JLabel();
         LblHora = new javax.swing.JLabel();
         LblHoraAtual = new javax.swing.JLabel();
-        ImageIcon icon = new ImageIcon(getClass().getResource("/Icones/Fundo.png"));
+        LblOla = new javax.swing.JLabel();
+        LblNomeUsuario = new javax.swing.JLabel();
+        LblLogoBranca = new javax.swing.JLabel();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Icones/Fundo2.png"));
         Image image = icon.getImage();
         AreaTrabalho = new javax.swing.JDesktopPane(){
 
@@ -92,6 +96,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         MenuSair = new javax.swing.JMenuItem();
         MenuAjuda = new javax.swing.JMenuItem();
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela principal");
 
@@ -116,42 +122,62 @@ public class TelaPrincipal extends javax.swing.JFrame {
         LblHoraAtual.setForeground(new java.awt.Color(255, 255, 255));
         LblHoraAtual.setText("------");
 
+        LblOla.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        LblOla.setForeground(new java.awt.Color(255, 255, 255));
+        LblOla.setText(" Olá,");
+
+        LblNomeUsuario.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        LblNomeUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        LblNomeUsuario.setText("----------------");
+
+        LblLogoBranca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/LogoBranco2.png"))); // NOI18N
+
         javax.swing.GroupLayout PainelDeSaudacaoLayout = new javax.swing.GroupLayout(PainelDeSaudacao);
         PainelDeSaudacao.setLayout(PainelDeSaudacaoLayout);
         PainelDeSaudacaoLayout.setHorizontalGroup(
             PainelDeSaudacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelDeSaudacaoLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addGap(11, 11, 11)
                 .addComponent(LblData)
-                .addGap(18, 18, 18)
-                .addComponent(LblDataAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(LblDataAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LblHora)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(LblHoraAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(584, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(LblOla)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LblNomeUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                .addGap(89, 89, 89)
+                .addComponent(LblLogoBranca)
+                .addContainerGap())
         );
         PainelDeSaudacaoLayout.setVerticalGroup(
             PainelDeSaudacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelDeSaudacaoLayout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addGroup(PainelDeSaudacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LblData)
-                    .addComponent(LblDataAtual)
-                    .addComponent(LblHora)
-                    .addComponent(LblHoraAtual))
-                .addContainerGap())
+            .addGroup(PainelDeSaudacaoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PainelDeSaudacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(PainelDeSaudacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(LblData)
+                        .addComponent(LblDataAtual)
+                        .addComponent(LblHora)
+                        .addComponent(LblHoraAtual)
+                        .addComponent(LblOla)
+                        .addComponent(LblNomeUsuario))
+                    .addComponent(LblLogoBranca))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout AreaTrabalhoLayout = new javax.swing.GroupLayout(AreaTrabalho);
         AreaTrabalho.setLayout(AreaTrabalhoLayout);
         AreaTrabalhoLayout.setHorizontalGroup(
             AreaTrabalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 854, Short.MAX_VALUE)
         );
         AreaTrabalhoLayout.setVerticalGroup(
             AreaTrabalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGap(0, 428, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout PainelPrincipalLayout = new javax.swing.GroupLayout(PainelPrincipal);
@@ -167,7 +193,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         PainelPrincipalLayout.setVerticalGroup(
             PainelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelPrincipalLayout.createSequentialGroup()
-                .addComponent(PainelDeSaudacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PainelDeSaudacao, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(AreaTrabalho)
                 .addContainerGap())
@@ -413,6 +439,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     javax.swing.JLabel LblDataAtual;
     javax.swing.JLabel LblHora;
     javax.swing.JLabel LblHoraAtual;
+    javax.swing.JLabel LblLogoBranca;
+    javax.swing.JLabel LblNomeUsuario;
+    javax.swing.JLabel LblOla;
     javax.swing.JMenuItem MenuAdicionarNotas;
     javax.swing.JMenuItem MenuAjuda;
     javax.swing.JMenuItem MenuAlterarDeletar;
@@ -434,5 +463,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     javax.swing.JMenuItem MenuVerNotas;
     javax.swing.JPanel PainelDeSaudacao;
     javax.swing.JPanel PainelPrincipal;
+    javax.swing.JComboBox<String> jComboBox1;
     // End of variables declaration//GEN-END:variables
 }
