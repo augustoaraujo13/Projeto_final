@@ -24,17 +24,11 @@ public class TelaCriarTurma extends javax.swing.JInternalFrame {
     private void CriarTurma() throws SQLException {
 
         String novaTurma1 = "create table ";
-        String nomeTurma = TxtNovaTurma.getText().trim();
+        String nomeTurma = TxtNovaTurma.getText().trim().toLowerCase();
         String novaTurma2 = "(Id_aluno int not null,nota_bimestre1 decimal(2,2),nota_bimestre2 decimal(2,2),"
                 + "situacao varchar(10) not null, foreign key (Id_aluno) references alunos(matricula)"
                 + ");";
-        String novaTurma3 = "(Id_aluno int not null, "
-                + "nota_bimestre1 decimal(2,2), nota_bimestre2 decimal(2,2), "
-                + "nota_bimestre3 decimal(2,2), nota_bimestre4 decimal(2,2), "
-                + "situacao varchar(10) not null, foreign key (Id_aluno) references alunos(matricula)"
-                + ");";
         String sql1 = novaTurma1 + nomeTurma + novaTurma2;
-        String sql2 = novaTurma1 + nomeTurma + novaTurma3;
         String comcluido = "Nova turma cadastrada!";
 
         try {
@@ -44,23 +38,11 @@ public class TelaCriarTurma extends javax.swing.JInternalFrame {
                 String informacao2 = "Preencha o campo obrigatório!";
                 JOptionPane.showMessageDialog(this, informacao2);
             } else {
+                st.executeUpdate(sql1);
+                st.executeBatch();
 
-                if ("2 bimestres".equals(CbBimestre.toString())) {
-                    st.executeUpdate(sql1);
-                    st.executeBatch();
-
-                    JOptionPane.showMessageDialog(this, comcluido);
-                    TxtNovaTurma.setText(null);
-
-                } else {
-                    st.executeUpdate(sql2);
-                    st.executeBatch();
-
-                    JOptionPane.showMessageDialog(this, comcluido);
-                    TxtNovaTurma.setText(null);
-
-                }
-
+                JOptionPane.showMessageDialog(this, comcluido);
+                TxtNovaTurma.setText(null);
             }
 
         } catch (SQLException e) {
@@ -79,8 +61,6 @@ public class TelaCriarTurma extends javax.swing.JInternalFrame {
         TxtNovaTurma = new javax.swing.JTextField();
         BtnCriar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        CbBimestre = new javax.swing.JComboBox<>();
-        LblBimestre = new javax.swing.JLabel();
         LogoBranco = new javax.swing.JLabel();
 
         setClosable(true);
@@ -115,13 +95,6 @@ public class TelaCriarTurma extends javax.swing.JInternalFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 0));
         jLabel2.setText("EX: Informatica_2022.2");
 
-        CbBimestre.setBackground(new java.awt.Color(204, 0, 204));
-        CbBimestre.setForeground(new java.awt.Color(0, 0, 0));
-        CbBimestre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2 bimestres", "4 bimestres" }));
-
-        LblBimestre.setForeground(new java.awt.Color(255, 255, 255));
-        LblBimestre.setText("Bimestre");
-
         LogoBranco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/LogoBranco.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -135,13 +108,11 @@ public class TelaCriarTurma extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LblNovaTurma)
-                            .addComponent(LblBimestre)
                             .addComponent(LogoBranco))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(TxtNovaTurma, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                            .addComponent(CbBimestre, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(TxtNovaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(71, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -152,16 +123,13 @@ public class TelaCriarTurma extends javax.swing.JInternalFrame {
                     .addComponent(TxtNovaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LblNovaTurma))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CbBimestre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LblBimestre))
-                .addGap(18, 18, 18)
-                .addComponent(BtnCriar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LogoBranco)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(52, 52, 52)
+                        .addComponent(BtnCriar))
+                    .addComponent(LogoBranco))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -193,8 +161,6 @@ public class TelaCriarTurma extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JButton BtnCriar;
-    javax.swing.JComboBox<String> CbBimestre;
-    javax.swing.JLabel LblBimestre;
     javax.swing.JLabel LblNovaTurma;
     javax.swing.JLabel LogoBranco;
     javax.swing.JTextField TxtNovaTurma;

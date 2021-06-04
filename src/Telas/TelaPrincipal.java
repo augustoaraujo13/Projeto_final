@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.MenuElement;
 import javax.swing.plaf.basic.BasicMenuBarUI;
@@ -92,9 +93,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         MenuVerAlunos = new javax.swing.JMenuItem();
         MenuVerNotas = new javax.swing.JMenuItem();
         MenuOpcoes = new javax.swing.JMenu();
-        MenuSobre = new javax.swing.JMenuItem();
-        MenuSair = new javax.swing.JMenuItem();
         MenuAjuda = new javax.swing.JMenuItem();
+        MenuSair = new javax.swing.JMenuItem();
+        MenuSobre = new javax.swing.JMenuItem();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -243,6 +244,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         MenuBuscar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         MenuBuscar.setText("Buscar");
+        MenuBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuBuscarActionPerformed(evt);
+            }
+        });
         MenuTurma.add(MenuBuscar);
 
         MenuCriar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
@@ -282,9 +288,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         MenuOpcoes.setText("Opções");
 
-        MenuSobre.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.CTRL_MASK));
-        MenuSobre.setText("Sobre");
-        MenuOpcoes.add(MenuSobre);
+        MenuAjuda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.CTRL_MASK));
+        MenuAjuda.setText("Ajuda");
+        MenuOpcoes.add(MenuAjuda);
 
         MenuSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
         MenuSair.setText("Sair");
@@ -295,9 +301,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         MenuOpcoes.add(MenuSair);
 
-        MenuAjuda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
-        MenuAjuda.setText("Ajuda");
-        MenuOpcoes.add(MenuAjuda);
+        MenuSobre.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
+        MenuSobre.setText("Sobre");
+        MenuOpcoes.add(MenuSobre);
 
         MenuPrincipal.add(MenuOpcoes);
 
@@ -344,7 +350,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuCriarActionPerformed
 
     private void MenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuSairActionPerformed
-        // TODO add your handling code here:
+       
+        String saindo = "Tem certeza que deseja sair?";
+        String titulo = "Atenção!";
+        int sair = JOptionPane.showConfirmDialog(null, saindo, titulo, JOptionPane.YES_NO_OPTION);
+
+        if (sair == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        } else {
+        }
     }//GEN-LAST:event_MenuSairActionPerformed
 
     private void MenuAssociarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuAssociarActionPerformed
@@ -352,6 +366,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         ta.setVisible(true);
         AreaTrabalho.add(ta);
     }//GEN-LAST:event_MenuAssociarActionPerformed
+
+    private void MenuBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBuscarActionPerformed
+        TelaBuscarTurmas tbt = new TelaBuscarTurmas();
+        tbt.setVisible(true);
+        AreaTrabalho.add(tbt);
+    }//GEN-LAST:event_MenuBuscarActionPerformed
 
     //Metodo que faz o Jmenu mudar de cor
     private void customizeMenuBar(JMenuBar menuBar) {
