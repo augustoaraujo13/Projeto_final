@@ -53,7 +53,7 @@ public class TelaAluno extends javax.swing.JInternalFrame {
     private void formatarTelefone() {
 
         try {
-            MaskFormatter ms = new MaskFormatter("##-#-####-####");
+            MaskFormatter ms = new MaskFormatter("##-#####-####");
             ms.install(ForTelefone);
             ms.install(ForTelefoneResposanvel);
         } catch (ParseException e) {
@@ -213,7 +213,7 @@ public class TelaAluno extends javax.swing.JInternalFrame {
             }
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, e);
+            JOptionPane.showMessageDialog(this, "Matrícula Inválida!");
             //System.out.println(e);
 
             TxtMatricula.setText(null);

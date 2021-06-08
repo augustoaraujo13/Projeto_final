@@ -29,62 +29,70 @@ public class TelaLogin extends javax.swing.JFrame {
             st.setString(1, TxtUsuario.getText());
             st.setString(2, PasSenha.getText());
             rs = st.executeQuery();
-            if (rs.next()) {
-                String cargo = rs.getString(3);
 
-                if (cargo.equals("Coordenador")) {
-                    TelaPrincipal tp = new TelaPrincipal();
-                    tp.setVisible(true);
-                    String funcionario = "coordenador(a) ";
-
-                    // Coloca o nome e o cargo do usuário na tela principal
-                    tp.LblNomeUsuario.setText(funcionario + rs.getString(2) + "!");
-
-                    this.dispose();
-                } else if (cargo.equals("Professor")) {
-                    TelaPrincipal tp = new TelaPrincipal();
-                    tp.setVisible(true);
-
-                    String funcionario = "professor(a) ";
-
-                    // Coloca o nome e o cargo do usuário na tela principal
-                    tp.LblNomeUsuario.setText(funcionario + rs.getString(2) + "!");
-                    //Menu cadastro
-                    tp.MenuAluno.setEnabled(false);
-                    tp.MenuUsuario.setEnabled(false);
-                    //Menu turma
-                    tp.MenuAlterarDeletar.setEnabled(false);
-                    tp.MenuAssociar.setEnabled(false);
-                    tp.MenuBuscar.setEnabled(false);
-                    tp.MenuCriar.setEnabled(false);
-                    //Menu secretário
-                    tp.MenuVerAlunos.setEnabled(false);
-                    tp.MenuVerNotas.setEnabled(false);
-                    this.dispose();
-                } else {
-                    TelaPrincipal tp = new TelaPrincipal();
-                    tp.setVisible(true);
-
-                    String funcionario = "secretário(a) ";
-
-                    // Coloca o nome e o cargo do usuário na tela principal
-                    tp.LblNomeUsuario.setText(funcionario + rs.getString(2)+ "!");
-                    //Menu cadastro
-                    tp.MenuAluno.setEnabled(false);
-                    tp.MenuUsuario.setEnabled(false);
-                    //Menu turma
-                    tp.MenuAlterarDeletar.setEnabled(false);
-                    tp.MenuAssociar.setEnabled(false);
-                    tp.MenuBuscar.setEnabled(false);
-                    tp.MenuCriar.setEnabled(false);
-                    //Menu professor
-                    tp.MenuBuscarAluno.setEnabled(false);
-                    tp.MenuAdicionarNotas.setEnabled(false);
-                }
-
+            if ((TxtUsuario.getText().trim().isEmpty())
+                    || (PasSenha.getText().trim().isEmpty())) {
+                String informacao2 = "Preencha todos os campos";
+                JOptionPane.showMessageDialog(this, informacao2);
             } else {
-                JOptionPane.showMessageDialog(null, "Usuário ou senha Inválidos!");
+                if (rs.next()) {
+                    String cargo = rs.getString(3);
+
+                    if (cargo.equals("Coordenador")) {
+                        TelaPrincipal tp = new TelaPrincipal();
+                        tp.setVisible(true);
+                        String funcionario = "coordenador(a) ";
+
+                        // Coloca o nome e o cargo do usuário na tela principal
+                        tp.LblNomeUsuario.setText(funcionario + rs.getString(2) + "!");
+
+                        this.dispose();
+                    } else if (cargo.equals("Professor")) {
+                        TelaPrincipal tp = new TelaPrincipal();
+                        tp.setVisible(true);
+
+                        String funcionario = "professor(a) ";
+
+                        // Coloca o nome e o cargo do usuário na tela principal
+                        tp.LblNomeUsuario.setText(funcionario + rs.getString(2) + "!");
+                        //Menu cadastro
+                        tp.MenuAluno.setEnabled(false);
+                        tp.MenuUsuario.setEnabled(false);
+                        //Menu turma
+                        tp.MenuAlterarDeletar.setEnabled(false);
+                        tp.MenuAssociar.setEnabled(false);
+                        tp.MenuBuscar.setEnabled(false);
+                        tp.MenuCriar.setEnabled(false);
+                        //Menu secretário
+                        tp.MenuVerAlunos.setEnabled(false);
+                        tp.MenuVerNotas.setEnabled(false);
+                        this.dispose();
+                    } else {
+                        TelaPrincipal tp = new TelaPrincipal();
+                        tp.setVisible(true);
+
+                        String funcionario = "secretário(a) ";
+
+                        // Coloca o nome e o cargo do usuário na tela principal
+                        tp.LblNomeUsuario.setText(funcionario + rs.getString(2) + "!");
+                        //Menu cadastro
+                        tp.MenuAluno.setEnabled(false);
+                        tp.MenuUsuario.setEnabled(false);
+                        //Menu turma
+                        tp.MenuAlterarDeletar.setEnabled(false);
+                        tp.MenuAssociar.setEnabled(false);
+                        tp.MenuBuscar.setEnabled(false);
+                        tp.MenuCriar.setEnabled(false);
+                        //Menu professor
+                        tp.MenuBuscarAluno.setEnabled(false);
+                        tp.MenuAdicionarNotas.setEnabled(false);
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuário ou senha Inválidos!");
+                }
             }
+
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         }

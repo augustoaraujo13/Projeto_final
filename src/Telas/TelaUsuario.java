@@ -63,8 +63,10 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             st.setString(6, TxtLogin.getText().trim());
             st.setString(7, TxtSenha.getText().trim());
 
-            if ((TxtUsuario.getText().isEmpty()) || (ForCpf.getText().isEmpty())
-                    || (TxtLogin.getText().isEmpty()) || (TxtSenha.getText().isEmpty())) {
+            if ((TxtUsuario.getText().isEmpty())
+                    || (TxtLogin.getText().isEmpty())
+                    || (TxtSenha.getText().isEmpty())
+                    || (TxtEmail.getText().isEmpty())) {
 
                 String informacao2 = "Preencha os campos obrigatórios!";
                 JOptionPane.showMessageDialog(this, informacao2);
@@ -116,8 +118,8 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 TxtId.setText(rs.getString(1));
                 TxtUsuario.setText(rs.getString(2));
                 CbCargo.setSelectedItem(rs.getString(3));
-                ForCpf.setText(rs.getString(4));
-                TxtEmail.setText(rs.getString(5));
+                TxtEmail.setText(rs.getString(4));
+                ForCpf.setText(rs.getString(5));
                 ForTelefone.setText(rs.getString(6));
                 TxtLogin.setText(rs.getString(7));
                 TxtSenha.setText(rs.getString(8));
@@ -136,13 +138,14 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 ForTelefone.setText(null);
                 TxtLogin.setText(null);
                 TxtSenha.setText(null);
+                BtnCriar.setEnabled(true);
 
             }
 
         } catch (HeadlessException | SQLException e) {
 
-            JOptionPane.showMessageDialog(this, "Id Inválida!");
-            // System.out.println(e);
+            JOptionPane.showMessageDialog(this, "Id Inválido!");
+            //System.out.println(e);
 
             TxtId.setText(null);
             TxtUsuario.setText(null);
@@ -150,6 +153,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             TxtLogin.setText(null);
             TxtSenha.setText(null);
             CbCargo.setSelectedItem(null);
+            BtnCriar.setEnabled(true);
 
         }
 
@@ -165,15 +169,17 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
             st.setString(1, TxtUsuario.getText().trim());
             st.setString(2, CbCargo.getSelectedItem().toString());
-            st.setString(3, ForCpf.getText().trim());
-            st.setString(4, TxtEmail.getText().trim());
+            st.setString(3, TxtEmail.getText().trim());
+            st.setString(4, ForCpf.getText().trim());
             st.setString(5, ForTelefone.getText().trim());
             st.setString(6, TxtLogin.getText().trim());
             st.setString(7, TxtSenha.getText().trim());
             st.setString(8, TxtId.getText().trim());
 
-            if ((TxtUsuario.getText().isEmpty()) || (ForCpf.getText().isEmpty())
-                    || (TxtLogin.getText().isEmpty()) || (TxtSenha.getText().isEmpty())) {
+            if ((TxtUsuario.getText().isEmpty())
+                    || (TxtLogin.getText().isEmpty())
+                    || (TxtSenha.getText().isEmpty())
+                    || (TxtEmail.getText().isEmpty())) {
 
                 String informacao2 = "Preencha os campos obrigatórios!!!!";
                 JOptionPane.showMessageDialog(this, informacao2);

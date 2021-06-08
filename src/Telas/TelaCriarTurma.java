@@ -25,7 +25,7 @@ public class TelaCriarTurma extends javax.swing.JInternalFrame {
 
         String novaTurma1 = "create table ";
         String nomeTurma = TxtNovaTurma.getText().trim().toLowerCase();
-        String novaTurma2 = "(Id_aluno int not null,nota_bimestre1 decimal(2,2),nota_bimestre2 decimal(2,2),"
+        String novaTurma2 = "(Id_aluno int not null,nota_bimestre1 decimal(4,2),nota_bimestre2 decimal(4,2),"
                 + "situacao varchar(10) not null, foreign key (Id_aluno) references alunos(matricula)"
                 + ");";
         String sql1 = novaTurma1 + nomeTurma + novaTurma2;

@@ -266,6 +266,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         MenuBuscarAluno.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
         MenuBuscarAluno.setText("Buscar aluno");
+        MenuBuscarAluno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuBuscarAlunoActionPerformed(evt);
+            }
+        });
         MenuProfessor.add(MenuBuscarAluno);
 
         MenuAdicionarNotas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
@@ -350,7 +355,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuCriarActionPerformed
 
     private void MenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuSairActionPerformed
-       
+
         String saindo = "Tem certeza que deseja sair?";
         String titulo = "Atenção!";
         int sair = JOptionPane.showConfirmDialog(null, saindo, titulo, JOptionPane.YES_NO_OPTION);
@@ -372,6 +377,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         tbt.setVisible(true);
         AreaTrabalho.add(tbt);
     }//GEN-LAST:event_MenuBuscarActionPerformed
+
+    private void MenuBuscarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBuscarAlunoActionPerformed
+        TelaBuscarAlunos tba = new TelaBuscarAlunos();
+        tba.setVisible(true);
+        AreaTrabalho.add(tba);
+    }//GEN-LAST:event_MenuBuscarAlunoActionPerformed
 
     //Metodo que faz o Jmenu mudar de cor
     private void customizeMenuBar(JMenuBar menuBar) {
