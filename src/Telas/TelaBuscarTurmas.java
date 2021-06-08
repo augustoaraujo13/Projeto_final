@@ -1,10 +1,12 @@
 package Telas;
 
 import Conexao.ConexaoBanco;
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
 public class TelaBuscarTurmas extends javax.swing.JInternalFrame {
@@ -31,6 +33,48 @@ public class TelaBuscarTurmas extends javax.swing.JInternalFrame {
 
     }
 
+    private void MostrarTurma() {
+
+        int setar = TabTurmas.getSelectedRow();
+
+        TxtNomeDaTurma.setText(TabTurmas.getModel().getValueAt(setar, 0).toString().trim());
+
+    }
+
+    private void Dados() {
+
+        try {
+
+            String turma = TxtNomeDaTurma.getText().trim();
+            String dados = "select * from "+ turma+";";
+            st = conn.prepareStatement(dados);
+            
+            if ("usuarios".equals(turma)) {
+                JOptionPane.showMessageDialog(this, "O que você escolheu não é uma turma");
+                TxtNomeDaTurma.setText(null);
+            } else if("alunos".equals(turma)) {
+                JOptionPane.showMessageDialog(this, "O que você escolheu não é uma turma");
+                TxtNomeDaTurma.setText(null);
+            } else{
+            
+                if (turma.isEmpty()) {
+                    String informacao2 = "Selecione uma turma.";
+                    JOptionPane.showMessageDialog(this, informacao2);
+                } else {
+                    String comcluido = "Busca realizada.";
+                    rs = st.executeQuery();
+                    JOptionPane.showMessageDialog(this, comcluido);
+                    TabAlunoDaTurma.setModel(DbUtils.resultSetToTableModel(rs));
+                }
+                
+            }
+            
+        } catch (HeadlessException | SQLException e) {
+            System.out.println(e);
+        }
+
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -41,6 +85,11 @@ public class TelaBuscarTurmas extends javax.swing.JInternalFrame {
         BtnBuscar2 = new javax.swing.JButton();
         LogoBranco = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TabAlunoDaTurma = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        TxtNomeDaTurma = new javax.swing.JTextField();
+        BtnBuscarDados = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -71,6 +120,11 @@ public class TelaBuscarTurmas extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        TabTurmas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabTurmasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TabTurmas);
 
         BtnBuscar2.setBackground(new java.awt.Color(0, 153, 255));
@@ -90,6 +144,48 @@ public class TelaBuscarTurmas extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 0));
         jLabel1.setText("Tabelas aluno e usuario não são turmas!");
 
+        TabAlunoDaTurma.setForeground(new java.awt.Color(0, 0, 0));
+        TabAlunoDaTurma.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Id aluno", "Nota 1°B", "Nota 2°B", "Situação"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(TabAlunoDaTurma);
+
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Nome da turma");
+
+        TxtNomeDaTurma.setEditable(false);
+        TxtNomeDaTurma.setBackground(new java.awt.Color(231, 223, 221));
+        TxtNomeDaTurma.setForeground(new java.awt.Color(0, 0, 0));
+
+        BtnBuscarDados.setBackground(new java.awt.Color(0, 153, 255));
+        BtnBuscarDados.setForeground(new java.awt.Color(0, 0, 0));
+        BtnBuscarDados.setText("Buscar");
+        BtnBuscarDados.setToolTipText("Busca o usuário.");
+        BtnBuscarDados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnBuscarDados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBuscarDadosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -97,30 +193,46 @@ public class TelaBuscarTurmas extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(LogoBranco)
                                 .addGap(148, 148, 148)
-                                .addComponent(BtnBuscar2))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(42, Short.MAX_VALUE))))
+                                .addComponent(BtnBuscar2)))
+                        .addGap(42, 42, 42)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(TxtNomeDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(BtnBuscarDados))))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(LogoBranco)
-                    .addComponent(BtnBuscar2))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(LogoBranco)
+                            .addComponent(BtnBuscar2)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(TxtNomeDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(BtnBuscarDados)))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -141,13 +253,26 @@ public class TelaBuscarTurmas extends javax.swing.JInternalFrame {
         Buscar();
     }//GEN-LAST:event_BtnBuscar2ActionPerformed
 
+    private void BtnBuscarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarDadosActionPerformed
+        Dados();
+    }//GEN-LAST:event_BtnBuscarDadosActionPerformed
+
+    private void TabTurmasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabTurmasMouseClicked
+        MostrarTurma();
+    }//GEN-LAST:event_TabTurmasMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JButton BtnBuscar2;
+    javax.swing.JButton BtnBuscarDados;
     javax.swing.JLabel LogoBranco;
+    javax.swing.JTable TabAlunoDaTurma;
     javax.swing.JTable TabTurmas;
+    javax.swing.JTextField TxtNomeDaTurma;
     javax.swing.JLabel jLabel1;
+    javax.swing.JLabel jLabel2;
     javax.swing.JPanel jPanel1;
     javax.swing.JScrollPane jScrollPane1;
+    javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
