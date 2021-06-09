@@ -40,6 +40,7 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
             rs = st.executeQuery();
             TabTurmas.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (SQLException e) {
+            System.out.println(e);
         }
 
     }
@@ -48,9 +49,14 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
 
         int setar = TabAlunos.getSelectedRow();
 
-        TxtMatricula.setText(TabAlunos.getModel().getValueAt(setar, 0).toString().trim());
-        TxtAluno.setText(TabAlunos.getModel().getValueAt(setar, 1).toString().trim());
-        TxtCpf.setText(TabAlunos.getModel().getValueAt(setar, 2).toString().trim());
+        try {
+            TxtMatricula.setText(TabAlunos.getModel().getValueAt(setar, 0).toString().trim());
+            TxtAluno.setText(TabAlunos.getModel().getValueAt(setar, 1).toString().trim());
+            TxtCpf.setText(TabAlunos.getModel().getValueAt(setar, 2).toString().trim());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Campo vazio");
+            //System.out.println(e);
+        }
 
     }
 
@@ -58,7 +64,12 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
 
         int setar = TabTurmas.getSelectedRow();
 
-        TxtNomeDaTurma.setText(TabTurmas.getModel().getValueAt(setar, 0).toString().trim());
+        try {
+            TxtNomeDaTurma.setText(TabTurmas.getModel().getValueAt(setar, 0).toString().trim());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Campo vazio");
+            //System.out.println(e);
+        }
 
     }
 
@@ -66,7 +77,9 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
 
         try {
             String turma = TxtNomeDaTurma.getText().trim();
-            String associando = "insert into " + turma + "(id_aluno) values (?);";
+            String associando = "insert into " + turma + "(id_aluno, nota_bimestre1, "
+                    + "nota_bimestre2, situacao)"
+                    + " values (?, '0.00', '0.00', 'Estudando');";
             st = conn.prepareStatement(associando);
 
             if ("usuarios".equals(turma)) {
@@ -87,12 +100,23 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
                     st.executeUpdate();
 
                     JOptionPane.showMessageDialog(this, comcluido);
+
+                    TxtAluno.setText(null);
+                    TxtMatricula.setText(null);
+                    TxtNomeDaTurma.setText(null);
+                    TxtCpf.setText(null);
                 }
 
             }
 
         } catch (SQLException e) {
-            System.out.println(e);
+            //System.out.println(e);
+            JOptionPane.showMessageDialog(this, e);
+            TxtAluno.setText(null);
+            TxtMatricula.setText(null);
+            TxtNomeDaTurma.setText(null);
+            TxtCpf.setText(null);
+
         }
 
     }
@@ -151,6 +175,8 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
             }
         });
         TabAlunos.setToolTipText("");
+        TabAlunos.setSelectionBackground(new java.awt.Color(204, 0, 204));
+        TabAlunos.setSelectionForeground(new java.awt.Color(255, 255, 255));
         TabAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TabAlunosMouseClicked(evt);
@@ -205,6 +231,8 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        TabTurmas.setSelectionBackground(new java.awt.Color(204, 0, 204));
+        TabTurmas.setSelectionForeground(new java.awt.Color(255, 255, 255));
         TabTurmas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TabTurmasMouseClicked(evt);

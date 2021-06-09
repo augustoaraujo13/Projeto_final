@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
 public class TelaBuscarAlunos extends javax.swing.JInternalFrame {
@@ -28,7 +29,8 @@ public class TelaBuscarAlunos extends javax.swing.JInternalFrame {
             rs = st.executeQuery();
             TabAlunos.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (SQLException e) {
-            System.out.println(e);
+            JOptionPane.showMessageDialog(this, "Houve um erro");
+            //System.out.println(e);
         }
     }
 
@@ -36,11 +38,17 @@ public class TelaBuscarAlunos extends javax.swing.JInternalFrame {
 
         int setar = TabAlunos.getSelectedRow();
 
-        TxtMatricula.setText(TabAlunos.getModel().getValueAt(setar, 0).toString().trim());
-        TxtSituacao.setText(TabAlunos.getModel().getValueAt(setar, 1).toString().trim());
-        TxtNome.setText(TabAlunos.getModel().getValueAt(setar, 2).toString().trim());
-        TxtEmail.setText(TabAlunos.getModel().getValueAt(setar, 3).toString().trim());
-        TxtTelefone.setText(TabAlunos.getModel().getValueAt(setar, 4).toString().trim());
+        try {
+            TxtMatricula.setText(TabAlunos.getModel().getValueAt(setar, 0).toString().trim());
+            TxtSituacao.setText(TabAlunos.getModel().getValueAt(setar, 1).toString().trim());
+            TxtNome.setText(TabAlunos.getModel().getValueAt(setar, 2).toString().trim());
+            TxtEmail.setText(TabAlunos.getModel().getValueAt(setar, 3).toString().trim());
+            TxtTelefone.setText(TabAlunos.getModel().getValueAt(setar, 4).toString().trim());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Campo vazio");
+            //System.out.println(e);
+        }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -94,6 +102,8 @@ public class TelaBuscarAlunos extends javax.swing.JInternalFrame {
             }
         });
         TabAlunos.setToolTipText("");
+        TabAlunos.setSelectionBackground(new java.awt.Color(204, 0, 204));
+        TabAlunos.setSelectionForeground(new java.awt.Color(255, 255, 255));
         TabAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TabAlunosMouseClicked(evt);

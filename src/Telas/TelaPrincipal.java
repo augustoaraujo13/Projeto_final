@@ -87,8 +87,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         MenuBuscar = new javax.swing.JMenuItem();
         MenuCriar = new javax.swing.JMenuItem();
         MenuProfessor = new javax.swing.JMenu();
-        MenuBuscarAluno = new javax.swing.JMenuItem();
         MenuAdicionarNotas = new javax.swing.JMenuItem();
+        MenuBuscarAluno = new javax.swing.JMenuItem();
         MenuSecretario = new javax.swing.JMenu();
         MenuVerAlunos = new javax.swing.JMenuItem();
         MenuVerNotas = new javax.swing.JMenuItem();
@@ -264,7 +264,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         MenuProfessor.setText("Professor");
 
-        MenuBuscarAluno.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
+        MenuAdicionarNotas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
+        MenuAdicionarNotas.setText("Adiconar nota");
+        MenuAdicionarNotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuAdicionarNotasActionPerformed(evt);
+            }
+        });
+        MenuProfessor.add(MenuAdicionarNotas);
+
+        MenuBuscarAluno.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
         MenuBuscarAluno.setText("Buscar aluno");
         MenuBuscarAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -273,16 +282,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         MenuProfessor.add(MenuBuscarAluno);
 
-        MenuAdicionarNotas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
-        MenuAdicionarNotas.setText("Notas");
-        MenuProfessor.add(MenuAdicionarNotas);
-
         MenuPrincipal.add(MenuProfessor);
 
         MenuSecretario.setText("Secretário");
 
         MenuVerAlunos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
         MenuVerAlunos.setText("Ver alunos");
+        MenuVerAlunos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuVerAlunosActionPerformed(evt);
+            }
+        });
         MenuSecretario.add(MenuVerAlunos);
 
         MenuVerNotas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_J, java.awt.event.InputEvent.CTRL_MASK));
@@ -383,6 +393,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
         tba.setVisible(true);
         AreaTrabalho.add(tba);
     }//GEN-LAST:event_MenuBuscarAlunoActionPerformed
+
+    private void MenuAdicionarNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuAdicionarNotasActionPerformed
+        TelaAdcionarNotas tan = new TelaAdcionarNotas();
+        tan.setVisible(true);
+        AreaTrabalho.add(tan);
+    }//GEN-LAST:event_MenuAdicionarNotasActionPerformed
+
+    private void MenuVerAlunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuVerAlunosActionPerformed
+        TelaVerAlunos tva = new TelaVerAlunos();
+        tva.setVisible(true);
+        AreaTrabalho.add(tva);
+    }//GEN-LAST:event_MenuVerAlunosActionPerformed
 
     //Metodo que faz o Jmenu mudar de cor
     private void customizeMenuBar(JMenuBar menuBar) {

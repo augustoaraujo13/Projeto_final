@@ -29,6 +29,8 @@ public class TelaBuscarTurmas extends javax.swing.JInternalFrame {
             rs = st.executeQuery();
             TabTurmas.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, e);
+            //System.out.println(e);
         }
 
     }
@@ -37,7 +39,12 @@ public class TelaBuscarTurmas extends javax.swing.JInternalFrame {
 
         int setar = TabTurmas.getSelectedRow();
 
-        TxtNomeDaTurma.setText(TabTurmas.getModel().getValueAt(setar, 0).toString().trim());
+        try {
+            TxtNomeDaTurma.setText(TabTurmas.getModel().getValueAt(setar, 0).toString().trim());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Campo vazio");
+            //System.out.println(e);
+        }
 
     }
 
@@ -46,17 +53,17 @@ public class TelaBuscarTurmas extends javax.swing.JInternalFrame {
         try {
 
             String turma = TxtNomeDaTurma.getText().trim();
-            String dados = "select * from "+ turma+";";
+            String dados = "select * from " + turma + ";";
             st = conn.prepareStatement(dados);
-            
+
             if ("usuarios".equals(turma)) {
                 JOptionPane.showMessageDialog(this, "O que você escolheu não é uma turma");
                 TxtNomeDaTurma.setText(null);
-            } else if("alunos".equals(turma)) {
+            } else if ("alunos".equals(turma)) {
                 JOptionPane.showMessageDialog(this, "O que você escolheu não é uma turma");
                 TxtNomeDaTurma.setText(null);
-            } else{
-            
+            } else {
+
                 if (turma.isEmpty()) {
                     String informacao2 = "Selecione uma turma.";
                     JOptionPane.showMessageDialog(this, informacao2);
@@ -66,11 +73,12 @@ public class TelaBuscarTurmas extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, comcluido);
                     TabAlunoDaTurma.setModel(DbUtils.resultSetToTableModel(rs));
                 }
-                
+
             }
-            
+
         } catch (HeadlessException | SQLException e) {
-            System.out.println(e);
+            JOptionPane.showMessageDialog(this, "Campo vazio");
+            //System.out.println(e);
         }
 
     }
@@ -120,6 +128,8 @@ public class TelaBuscarTurmas extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        TabTurmas.setSelectionBackground(new java.awt.Color(204, 0, 204));
+        TabTurmas.setSelectionForeground(new java.awt.Color(255, 255, 255));
         TabTurmas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TabTurmasMouseClicked(evt);
@@ -140,7 +150,7 @@ public class TelaBuscarTurmas extends javax.swing.JInternalFrame {
 
         LogoBranco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/LogoBranco.png"))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 0));
         jLabel1.setText("Tabelas aluno e usuario não são turmas!");
 
@@ -193,46 +203,48 @@ public class TelaBuscarTurmas extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(LogoBranco)
-                                .addGap(148, 148, 148)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(BtnBuscar2)))
-                        .addGap(42, 42, 42)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(210, 210, 210)
+                                .addComponent(BtnBuscarDados))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
                                 .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(TxtNomeDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(BtnBuscarDados))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(TxtNomeDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(97, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(LogoBranco)
+                .addGap(16, 16, 16))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(LogoBranco)
-                            .addComponent(BtnBuscar2)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(TxtNomeDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(BtnBuscarDados)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(TxtNomeDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnBuscar2)
+                    .addComponent(jLabel1)
+                    .addComponent(BtnBuscarDados))
+                .addGap(50, 50, 50)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(LogoBranco)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
