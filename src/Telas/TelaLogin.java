@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class TelaLogin extends javax.swing.JFrame {
-
     private Connection conn = null;
     private PreparedStatement st = null;
     private ResultSet rs = null;
@@ -17,11 +16,10 @@ public class TelaLogin extends javax.swing.JFrame {
     public TelaLogin() {
         initComponents();
         conn = ConexaoBanco.abrirBanco();
-
     }
 
+    //Esse metedo faz login no sistema.
     private void Logar() {
-
         String comando = "select * from usuarios where login = ? and senha = ?;";
 
         try {
@@ -29,30 +27,25 @@ public class TelaLogin extends javax.swing.JFrame {
             st.setString(1, TxtUsuario.getText());
             st.setString(2, PasSenha.getText());
             rs = st.executeQuery();
-
             if ((TxtUsuario.getText().trim().isEmpty())
                     || (PasSenha.getText().trim().isEmpty())) {
-                String informacao2 = "Preencha todos os campos";
+                String informacao2 = "Preencha todos os campos.";
                 JOptionPane.showMessageDialog(this, informacao2);
             } else {
                 if (rs.next()) {
                     String cargo = rs.getString(3);
-
+                    
                     if (cargo.equals("Coordenador")) {
                         TelaPrincipal tp = new TelaPrincipal();
                         tp.setVisible(true);
                         String funcionario = "coordenador(a) ";
-
                         // Coloca o nome e o cargo do usuário na tela principal
                         tp.LblNomeUsuario.setText(funcionario + rs.getString(2) + "!");
-
                         this.dispose();
                     } else if (cargo.equals("Professor")) {
                         TelaPrincipal tp = new TelaPrincipal();
                         tp.setVisible(true);
-
                         String funcionario = "professor(a) ";
-
                         // Coloca o nome e o cargo do usuário na tela principal
                         tp.LblNomeUsuario.setText(funcionario + rs.getString(2) + "!");
                         //Menu cadastro
@@ -70,9 +63,7 @@ public class TelaLogin extends javax.swing.JFrame {
                     } else {
                         TelaPrincipal tp = new TelaPrincipal();
                         tp.setVisible(true);
-
                         String funcionario = "secretário(a) ";
-
                         // Coloca o nome e o cargo do usuário na tela principal
                         tp.LblNomeUsuario.setText(funcionario + rs.getString(2) + "!");
                         //Menu cadastro
@@ -97,7 +88,6 @@ public class TelaLogin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
