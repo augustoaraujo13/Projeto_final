@@ -23,9 +23,8 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         formatarTelefone();
     }
 
-    //Metodo para formatar campo
+    //Metodo para formatar campo CPF
     private void formatarCpf() {
-
         try {
             MaskFormatter ms = new MaskFormatter("###.###.###-##");
             ms.install(ForCpf);
@@ -34,9 +33,8 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
     }
 
-    //Metodo para formatar campo
+    //Metodo para formatar campo Telefone
     private void formatarTelefone() {
-
         try {
             MaskFormatter ms = new MaskFormatter("##-#-####-####");
             ms.install(ForTelefone);
@@ -45,16 +43,14 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
     }
 
+    //Esse metodo cria um novo usuário
     private void Criar() {
-
         String criando = "insert into usuarios(usuario, cargo, email, CPF, telefone, login, senha)"
                 + "values(?,?,?,?,?,?,?);";
-        String comcluido = "Novo usuário foi cadastrado!";
+        String comcluido = "O usuário foi cadastrado!";
 
         try {
-
             st = conn.prepareStatement(criando);
-
             st.setString(1, TxtUsuario.getText().trim());
             st.setString(2, CbCargo.getSelectedItem().toString());
             st.setString(3, ForCpf.getText().trim());
@@ -73,7 +69,6 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
             } else {
                 st.executeUpdate();
-
                 JOptionPane.showMessageDialog(this, comcluido);
 
                 TxtId.setText(null);
@@ -84,7 +79,6 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 ForTelefone.setText(null);
                 TxtLogin.setText(null);
                 TxtSenha.setText(null);
-
             }
 
         } catch (SQLException e) {
@@ -102,19 +96,17 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
     }
 
+    //Esse metodo busca um usuário.
     private void Buscar() {
-
-        String mensagem = "Informe Id do usuário.";
+        String mensagem = "Informe o Id do usuário.";
         String idRecebido = JOptionPane.showInputDialog(mensagem);
-        String busca = "select * from usuarios where id_user =" + idRecebido;
+        String busca = "select * from usuarios where id_user =" +idRecebido+ " ;";
 
         try {
-
             st = conn.prepareStatement(busca);
             rs = st.executeQuery();
 
             if (rs.next()) {
-
                 TxtId.setText(rs.getString(1));
                 TxtUsuario.setText(rs.getString(2));
                 CbCargo.setSelectedItem(rs.getString(3));
@@ -124,10 +116,8 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 TxtLogin.setText(rs.getString(7));
                 TxtSenha.setText(rs.getString(8));
                 BtnCriar.setEnabled(false);
-
             } else {
                 String resposta = "O usuário que você pesquisou não existe.";
-
                 JOptionPane.showMessageDialog(this, resposta);
 
                 TxtId.setText(null);
@@ -139,14 +129,11 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 TxtLogin.setText(null);
                 TxtSenha.setText(null);
                 BtnCriar.setEnabled(true);
-
             }
 
         } catch (HeadlessException | SQLException e) {
-
             JOptionPane.showMessageDialog(this, "Id Inválido!");
             //System.out.println(e);
-
             TxtId.setText(null);
             TxtUsuario.setText(null);
             ForCpf.setText(null);
@@ -154,19 +141,17 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             TxtSenha.setText(null);
             CbCargo.setSelectedItem(null);
             BtnCriar.setEnabled(true);
-
         }
 
     }
 
+    //Metedo altera dados do usuário
     private void Alterar() {
-
         String alterando = "update usuarios set usuario =?, cargo =?, email =?, CPF =?,"
                 + "telefone =?, login =?, senha =? where id_user =?;";
 
         try {
             st = conn.prepareStatement(alterando);
-
             st.setString(1, TxtUsuario.getText().trim());
             st.setString(2, CbCargo.getSelectedItem().toString());
             st.setString(3, TxtEmail.getText().trim());
@@ -180,17 +165,12 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                     || (TxtLogin.getText().isEmpty())
                     || (TxtSenha.getText().isEmpty())
                     || (TxtEmail.getText().isEmpty())) {
-
                 String informacao2 = "Preencha os campos obrigatórios!!!!";
                 JOptionPane.showMessageDialog(this, informacao2);
-
             } else {
                 String comcluido = "Dados do usuário foram alterados com sucesso!";
-
                 st.executeUpdate();
-
                 JOptionPane.showMessageDialog(this, comcluido);
-
                 BtnCriar.setEnabled(true);
 
                 TxtId.setText(null);
@@ -201,7 +181,6 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 ForTelefone.setText(null);
                 TxtLogin.setText(null);
                 TxtSenha.setText(null);
-
             }
 
         } catch (HeadlessException | SQLException e) {
@@ -219,37 +198,28 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
     }
 
+    //Esse Metodo deleta o usuário.
     private void Deletar() {
-
         String confirmando = "Deseja deletar esse usuário?";
         String confirmando2 = "Atenção";
-
-        int confirmar = JOptionPane.showConfirmDialog(null, confirmando, confirmando, JOptionPane.YES_NO_OPTION);
+        int confirmar = JOptionPane.showConfirmDialog(null, confirmando, confirmando2, JOptionPane.YES_NO_OPTION);
 
         if (confirmar == JOptionPane.YES_OPTION) {
-
             String deletando = "delete from usuarios where id_user=?;";
 
             try {
-
                 st = conn.prepareStatement(deletando);
                 st.setString(1, TxtId.getText().trim());
 
                 if (TxtId.getText().isEmpty()) {
-
                     String informacao = "Preencha o campo Id, para excluir usuario!";
                     JOptionPane.showMessageDialog(this, informacao);
-
                 } else {
-
-                    String comcluido = "Usuário excluído com sucesso!";
-
+                    String comcluido = "Usuário foi excluído com sucesso!";
                     st.executeUpdate();
-
                     JOptionPane.showMessageDialog(this, comcluido);
 
                     BtnCriar.setEnabled(true);
-
                     TxtId.setText(null);
                     TxtUsuario.setText(null);
                     CbCargo.setSelectedItem(null);
@@ -258,7 +228,6 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                     ForTelefone.setText(null);
                     TxtLogin.setText(null);
                     TxtSenha.setText(null);
-
                 }
 
             } catch (HeadlessException | SQLException e) {
@@ -275,7 +244,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "Houve um erro, tente novamente");
+            JOptionPane.showMessageDialog(null, "O usuário não foi excluído.");
             TxtId.setText(null);
             TxtUsuario.setText(null);
             CbCargo.setSelectedItem(null);
@@ -287,14 +256,12 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         }
     }
 
+    //Esse metedo limpa todos os campos.
     private void Limpar() {
-
         String comcluido = "Os campos foram limpos!!";
-
         JOptionPane.showMessageDialog(this, comcluido);
 
         BtnCriar.setEnabled(true);
-
         TxtId.setText(null);
         TxtUsuario.setText(null);
         CbCargo.setSelectedItem(null);
@@ -303,7 +270,6 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         ForTelefone.setText(null);
         TxtLogin.setText(null);
         TxtSenha.setText(null);
-
     }
 
     @SuppressWarnings("unchecked")
