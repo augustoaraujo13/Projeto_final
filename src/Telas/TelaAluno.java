@@ -23,12 +23,13 @@ public class TelaAluno extends javax.swing.JInternalFrame {
         conn = ConexaoBanco.abrirBanco();
         formatarNascimeto();
         formatarCpf();
+        formatarCpf2();
         formatarTelefone();
+        formatarTelefone2();
     }
 
     //Metedo para formar campo
     private void formatarNascimeto() {
-
         try {
             MaskFormatter ms = new MaskFormatter("####/##/##");
             ms.install(ForNascimento);
@@ -39,11 +40,18 @@ public class TelaAluno extends javax.swing.JInternalFrame {
 
     //Metedo para formar campo
     private void formatarCpf() {
+        try {
+            MaskFormatter ms = new MaskFormatter("###.###.###-##");
+            ms.install(ForCpf1);
+        } catch (ParseException e) {
+        }
 
+    }
+
+    private void formatarCpf2() {
         try {
             MaskFormatter ms = new MaskFormatter("###.###.###-##");
             ms.install(ForCpfResposanvel);
-            ms.install(ForCpf);
         } catch (ParseException e) {
         }
 
@@ -51,37 +59,45 @@ public class TelaAluno extends javax.swing.JInternalFrame {
 
     //Metedo para formar campo
     private void formatarTelefone() {
-
         try {
             MaskFormatter ms = new MaskFormatter("##-#####-####");
-            ms.install(ForTelefone);
             ms.install(ForTelefoneResposanvel);
         } catch (ParseException e) {
+            System.out.println(e);
         }
 
     }
 
-    private void Criar() {
+    private void formatarTelefone2() {
+        try {
+            MaskFormatter ms = new MaskFormatter("##-#####-####");
+            ms.install(ForTelefone1);
+        } catch (ParseException e) {
+            System.out.println(e);
+        }
 
+    }
+
+    // Esse metedo cadastra um novo aluno.
+    private void Criar() {
         String criando = "insert into alunos(situacao, nome, nascimento, CPF, email,"
                 + " telefone, responsavel, CPF_responsavel, email_responsavel,"
                 + " telefone_responsavel, endereco)"
                 + "values(?,?,?,?,?,?,?,?,?,?,?)";
-        String comcluido = "Novo aluno cadastrado!";
+        String comcluido = "O aluno foi cadastrado!";
 
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             String dataString = ForNascimento.getText();
             Date data = sdf.parse(dataString);
-
             st = conn.prepareStatement(criando);
 
             st.setString(1, CbSituacao.getSelectedItem().toString());
             st.setString(2, TxtNome.getText().trim());
             st.setDate(3, new java.sql.Date(data.getTime()));
-            st.setString(4, ForCpf.getText().trim());
+            st.setString(4, ForCpf1.getText().trim());
             st.setString(5, TxtEmail.getText().trim());
-            st.setString(6, ForTelefone.getText().trim());
+            st.setString(6, ForTelefone1.getText().trim());
             st.setString(7, TxtResposavel.getText().trim());
             st.setString(8, ForCpfResposanvel.getText().trim());
             st.setString(9, TxtEmailResposavel.getText().trim());
@@ -89,39 +105,38 @@ public class TelaAluno extends javax.swing.JInternalFrame {
             st.setString(11, TxtEndereco.getText().trim());
 
             if ((TxtNome.getText().isEmpty())
-                    || (ForNascimento.getText().isEmpty()) || (ForCpf.getText().isEmpty())
+                    || (ForNascimento.getText().isEmpty()) || (ForCpf1.getText().isEmpty())
                     || (TxtEmail.getText().isEmpty()) || (TxtEndereco.getText().isEmpty())) {
-
                 String informacao2 = "Preencha os campos obrigatórios!";
                 JOptionPane.showMessageDialog(this, informacao2);
 
             } else {
                 st.executeUpdate();
-
                 JOptionPane.showMessageDialog(this, comcluido);
 
+                CbSituacao.setSelectedItem(null);
                 TxtNome.setText(null);
                 ForNascimento.setText(null);
-                ForCpf.setText(null);
+                ForCpf1.setText(null);
                 TxtEmail.setText(null);
-                ForTelefone.setText(null);
+                ForTelefone1.setText(null);
                 TxtResposavel.setText(null);
                 ForCpfResposanvel.setText(null);
                 TxtEmailResposavel.setText(null);
                 ForTelefoneResposanvel.setText(null);
                 TxtEndereco.setText(null);
-
             }
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, e);
             //System.out.println(e);
 
+            CbSituacao.setSelectedItem(null);
             TxtNome.setText(null);
             ForNascimento.setText(null);
-            ForCpf.setText(null);
+            ForCpf1.setText(null);
             TxtEmail.setText(null);
-            ForTelefone.setText(null);
+            ForTelefone1.setText(null);
             TxtResposavel.setText(null);
             ForCpfResposanvel.setText(null);
             TxtEmailResposavel.setText(null);
@@ -132,26 +147,27 @@ public class TelaAluno extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, e2);
             //System.out.println(e2);
 
+            CbSituacao.setSelectedItem(null);
             TxtNome.setText(null);
             ForNascimento.setText(null);
-            ForCpf.setText(null);
+            ForCpf1.setText(null);
             TxtEmail.setText(null);
-            ForTelefone.setText(null);
+            ForTelefone1.setText(null);
             TxtResposavel.setText(null);
             ForCpfResposanvel.setText(null);
             TxtEmailResposavel.setText(null);
             ForTelefoneResposanvel.setText(null);
             TxtEndereco.setText(null);
         } catch (ParseException e3) {
-
-            JOptionPane.showMessageDialog(this, e3);
+            JOptionPane.showMessageDialog(this, "Os campos estão vazios.");
             //System.out.println(e2);
 
+            CbSituacao.setSelectedItem(null);
             TxtNome.setText(null);
             ForNascimento.setText(null);
-            ForCpf.setText(null);
+            ForCpf1.setText(null);
             TxtEmail.setText(null);
-            ForTelefone.setText(null);
+            ForTelefone1.setText(null);
             TxtResposavel.setText(null);
             ForCpfResposanvel.setText(null);
             TxtEmailResposavel.setText(null);
@@ -162,19 +178,17 @@ public class TelaAluno extends javax.swing.JInternalFrame {
 
     }
 
+    // Esse metedo busca um aluno.
     private void Buscar() {
-
         String mensagem = "Informe a matrícula do aluno.";
         String idRecebido = JOptionPane.showInputDialog(mensagem);
         String busca = "select * from alunos where matricula =" + idRecebido;
 
         try {
-
             st = conn.prepareStatement(busca);
             rs = st.executeQuery();
 
             if (rs.next()) {
-
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
                 Date dataBanco = rs.getDate(4);
                 String dataRecebida = sdf.format(dataBanco);
@@ -183,9 +197,9 @@ public class TelaAluno extends javax.swing.JInternalFrame {
                 CbSituacao.setSelectedItem(rs.getString(2));
                 TxtNome.setText(rs.getString(3));
                 ForNascimento.setText(dataRecebida);
-                ForCpf.setText(rs.getString(5));
+                ForCpf1.setText(rs.getString(5));
                 TxtEmail.setText(rs.getString(6));
-                ForTelefone.setText(rs.getString(7));
+                ForTelefone1.setText(rs.getString(7));
                 TxtResposavel.setText(rs.getString(8));
                 ForCpfResposanvel.setText(rs.getString(9));
                 TxtEmailResposavel.setText(rs.getString(10));
@@ -195,15 +209,15 @@ public class TelaAluno extends javax.swing.JInternalFrame {
 
             } else {
                 String resposta = "O aluno que você pesquisou não existe.";
-
                 JOptionPane.showMessageDialog(this, resposta);
 
                 TxtMatricula.setText(null);
+                CbSituacao.setSelectedItem(null);
                 TxtNome.setText(null);
                 ForNascimento.setText(null);
-                ForCpf.setText(null);
+                ForCpf1.setText(null);
                 TxtEmail.setText(null);
-                ForTelefone.setText(null);
+                ForTelefone1.setText(null);
                 TxtResposavel.setText(null);
                 ForCpfResposanvel.setText(null);
                 TxtEmailResposavel.setText(null);
@@ -217,11 +231,12 @@ public class TelaAluno extends javax.swing.JInternalFrame {
             //System.out.println(e);
 
             TxtMatricula.setText(null);
+            CbSituacao.setSelectedItem(null);
             TxtNome.setText(null);
             ForNascimento.setText(null);
-            ForCpf.setText(null);
+            ForCpf1.setText(null);
             TxtEmail.setText(null);
-            ForTelefone.setText(null);
+            ForTelefone1.setText(null);
             TxtResposavel.setText(null);
             ForCpfResposanvel.setText(null);
             TxtEmailResposavel.setText(null);
@@ -233,11 +248,12 @@ public class TelaAluno extends javax.swing.JInternalFrame {
             //System.out.println(e2);
 
             TxtMatricula.setText(null);
+            CbSituacao.setSelectedItem(null);
             TxtNome.setText(null);
             ForNascimento.setText(null);
-            ForCpf.setText(null);
+            ForCpf1.setText(null);
             TxtEmail.setText(null);
-            ForTelefone.setText(null);
+            ForTelefone1.setText(null);
             TxtResposavel.setText(null);
             ForCpfResposanvel.setText(null);
             TxtEmailResposavel.setText(null);
@@ -248,29 +264,26 @@ public class TelaAluno extends javax.swing.JInternalFrame {
 
     }
 
+    //Esse metedo altera os dados de um aluno.
     private void Alterar() {
-
         String alterando = "update alunos set situacao =?, nome = ?, nascimento =?,"
                 + " cpf =?, email =?, telefone =?,"
                 + "responsavel =?, CPF_responsavel = ?, email_responsavel =?,"
                 + " telefone_responsavel =?, endereco =? where matricula =?;";
-
         String comcluido = "Dados do aluno foram alterados!";
 
         try {
-
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             String dataString = ForNascimento.getText();
             Date data = sdf.parse(dataString);
-
             st = conn.prepareStatement(alterando);
 
             st.setString(1, CbSituacao.getSelectedItem().toString());
             st.setString(2, TxtNome.getText().trim());
             st.setDate(3, new java.sql.Date(data.getTime()));
-            st.setString(4, ForCpf.getText().trim());
+            st.setString(4, ForCpf1.getText().trim());
             st.setString(5, TxtEmail.getText().trim());
-            st.setString(6, ForTelefone.getText().trim());
+            st.setString(6, ForTelefone1.getText().trim());
             st.setString(7, TxtResposavel.getText().trim());
             st.setString(8, ForCpfResposanvel.getText().trim());
             st.setString(9, TxtEmailResposavel.getText().trim());
@@ -279,23 +292,22 @@ public class TelaAluno extends javax.swing.JInternalFrame {
             st.setString(12, TxtMatricula.getText().trim());
 
             if ((TxtNome.getText().isEmpty())
-                    || (ForNascimento.getText().isEmpty()) || (ForCpf.getText().isEmpty())
+                    || (ForNascimento.getText().isEmpty()) || (ForCpf1.getText().isEmpty())
                     || (TxtEmail.getText().isEmpty()) || (TxtEndereco.getText().isEmpty())) {
-
                 String informacao2 = "Preencha os campos obrigatórios!";
                 JOptionPane.showMessageDialog(this, informacao2);
 
             } else {
                 st.executeUpdate();
-
                 JOptionPane.showMessageDialog(this, comcluido);
 
                 TxtMatricula.setText(null);
+                CbSituacao.setSelectedItem(null);
                 TxtNome.setText(null);
                 ForNascimento.setText(null);
-                ForCpf.setText(null);
+                ForCpf1.setText(null);
                 TxtEmail.setText(null);
-                ForTelefone.setText(null);
+                ForTelefone1.setText(null);
                 TxtResposavel.setText(null);
                 ForCpfResposanvel.setText(null);
                 TxtEmailResposavel.setText(null);
@@ -309,11 +321,12 @@ public class TelaAluno extends javax.swing.JInternalFrame {
             //System.out.println(e);
 
             TxtMatricula.setText(null);
+            CbSituacao.setSelectedItem(null);
             TxtNome.setText(null);
             ForNascimento.setText(null);
-            ForCpf.setText(null);
+            ForCpf1.setText(null);
             TxtEmail.setText(null);
-            ForTelefone.setText(null);
+            ForTelefone1.setText(null);
             TxtResposavel.setText(null);
             ForCpfResposanvel.setText(null);
             TxtEmailResposavel.setText(null);
@@ -325,73 +338,66 @@ public class TelaAluno extends javax.swing.JInternalFrame {
             //System.out.println(e2);
 
             TxtMatricula.setText(null);
+            CbSituacao.setSelectedItem(null);
             TxtNome.setText(null);
             ForNascimento.setText(null);
-            ForCpf.setText(null);
+            ForCpf1.setText(null);
             TxtEmail.setText(null);
-            ForTelefone.setText(null);
+            ForTelefone1.setText(null);
             TxtResposavel.setText(null);
             ForCpfResposanvel.setText(null);
             TxtEmailResposavel.setText(null);
             ForTelefoneResposanvel.setText(null);
             TxtEndereco.setText(null);
         } catch (ParseException e3) {
-
-            JOptionPane.showMessageDialog(this, e3);
+            JOptionPane.showMessageDialog(this, "Os campos estão vazios.");
             //System.out.println(e3);
+            CbSituacao.setSelectedItem(null);
             TxtMatricula.setText(null);
             TxtNome.setText(null);
             ForNascimento.setText(null);
-            ForCpf.setText(null);
+            ForCpf1.setText(null);
             TxtEmail.setText(null);
-            ForTelefone.setText(null);
+            ForTelefone1.setText(null);
             TxtResposavel.setText(null);
             ForCpfResposanvel.setText(null);
             TxtEmailResposavel.setText(null);
             ForTelefoneResposanvel.setText(null);
             TxtEndereco.setText(null);
-
         }
 
     }
 
+    //Esse metedo deleta o aluno.
     private void Deletar() {
-
         String confirmando = "Deseja deletar esse Aluno?";
         String confirmando2 = "Atenção";
-
-        int confirmar = JOptionPane.showConfirmDialog(null, confirmando, confirmando, JOptionPane.YES_NO_OPTION);
+        int confirmar = JOptionPane.showConfirmDialog(null, confirmando, confirmando2, JOptionPane.YES_NO_OPTION);
 
         if (confirmar == JOptionPane.YES_OPTION) {
-
             String deletando = "delete from alunos where matricula=?;";
 
             try {
-
                 st = conn.prepareStatement(deletando);
                 st.setString(1, TxtMatricula.getText().trim());
 
                 if (TxtMatricula.getText().isEmpty()) {
-
                     String informacao = "Preencha o campo matrícula, para excluir o aluno!";
                     JOptionPane.showMessageDialog(this, informacao);
 
                 } else {
-
                     String comcluido = "Aluno excluído com sucesso!";
-
                     st.executeUpdate();
-
                     JOptionPane.showMessageDialog(this, comcluido);
 
                     BtnCriar.setEnabled(true);
-
+                    CbSituacao.setSelectedItem(null);
                     TxtMatricula.setText(null);
                     TxtNome.setText(null);
                     ForNascimento.setText(null);
-                    ForCpf.setText(null);
+                    ForCpf1.setText(null);
                     TxtEmail.setText(null);
-                    ForTelefone.setText(null);
+                    ForTelefone1.setText(null);
                     TxtResposavel.setText(null);
                     ForCpfResposanvel.setText(null);
                     TxtEmailResposavel.setText(null);
@@ -403,12 +409,13 @@ public class TelaAluno extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, e);
                 //System.out.println(e);
 
+                CbSituacao.setSelectedItem(null);
                 TxtMatricula.setText(null);
                 TxtNome.setText(null);
                 ForNascimento.setText(null);
-                ForCpf.setText(null);
+                ForCpf1.setText(null);
                 TxtEmail.setText(null);
-                ForTelefone.setText(null);
+                ForTelefone1.setText(null);
                 TxtResposavel.setText(null);
                 ForCpfResposanvel.setText(null);
                 TxtEmailResposavel.setText(null);
@@ -420,12 +427,13 @@ public class TelaAluno extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Houve um erro, tente novamente");
 
+            CbSituacao.setSelectedItem(null);
             TxtMatricula.setText(null);
             TxtNome.setText(null);
             ForNascimento.setText(null);
-            ForCpf.setText(null);
+            ForCpf1.setText(null);
             TxtEmail.setText(null);
-            ForTelefone.setText(null);
+            ForTelefone1.setText(null);
             TxtResposavel.setText(null);
             ForCpfResposanvel.setText(null);
             TxtEmailResposavel.setText(null);
@@ -436,26 +444,24 @@ public class TelaAluno extends javax.swing.JInternalFrame {
 
     }
 
+    //Esse metedo limpa os campos.
     private void Limpar() {
-
         String comcluido = "Os campos foram limpos!!";
-
         JOptionPane.showMessageDialog(this, comcluido);
 
         BtnCriar.setEnabled(true);
-
         TxtMatricula.setText(null);
         TxtNome.setText(null);
+        CbSituacao.setSelectedItem(null);
         ForNascimento.setText(null);
-        ForCpf.setText(null);
+        ForCpf1.setText(null);
         TxtEmail.setText(null);
-        ForTelefone.setText(null);
+        ForTelefone1.setText(null);
         TxtResposavel.setText(null);
         ForCpfResposanvel.setText(null);
         TxtEmailResposavel.setText(null);
         ForTelefoneResposanvel.setText(null);
         TxtEndereco.setText(null);
-
     }
 
     @SuppressWarnings("unchecked")
@@ -467,7 +473,6 @@ public class TelaAluno extends javax.swing.JInternalFrame {
         TxtMatricula = new javax.swing.JTextField();
         LblSituacao = new javax.swing.JLabel();
         CbSituacao = new javax.swing.JComboBox<>();
-        LblCpf = new javax.swing.JLabel();
         LblNascimento = new javax.swing.JLabel();
         LblEmail = new javax.swing.JLabel();
         TxtEmail = new javax.swing.JTextField();
@@ -491,12 +496,13 @@ public class TelaAluno extends javax.swing.JInternalFrame {
         LblCamposObrigatorios = new javax.swing.JLabel();
         ForNascimento = new javax.swing.JFormattedTextField();
         ForCpfResposanvel = new javax.swing.JFormattedTextField();
-        ForCpf = new javax.swing.JFormattedTextField();
-        ForTelefone = new javax.swing.JFormattedTextField();
         ForTelefoneResposanvel = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         LogoBranco = new javax.swing.JLabel();
+        ForTelefone1 = new javax.swing.JFormattedTextField();
+        jLabel4 = new javax.swing.JLabel();
+        ForCpf1 = new javax.swing.JFormattedTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -524,9 +530,6 @@ public class TelaAluno extends javax.swing.JInternalFrame {
                 CbSituacaoActionPerformed(evt);
             }
         });
-
-        LblCpf.setForeground(new java.awt.Color(255, 255, 255));
-        LblCpf.setText("CPF *");
 
         LblNascimento.setForeground(new java.awt.Color(255, 255, 255));
         LblNascimento.setText("Nascimeto *");
@@ -638,14 +641,13 @@ public class TelaAluno extends javax.swing.JInternalFrame {
         ForCpfResposanvel.setBackground(new java.awt.Color(231, 223, 221));
         ForCpfResposanvel.setForeground(new java.awt.Color(0, 0, 0));
 
-        ForCpf.setBackground(new java.awt.Color(231, 223, 221));
-        ForCpf.setForeground(new java.awt.Color(0, 0, 0));
-
-        ForTelefone.setBackground(new java.awt.Color(231, 223, 221));
-        ForTelefone.setForeground(new java.awt.Color(0, 0, 0));
-
         ForTelefoneResposanvel.setBackground(new java.awt.Color(231, 223, 221));
         ForTelefoneResposanvel.setForeground(new java.awt.Color(0, 0, 0));
+        ForTelefoneResposanvel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ForTelefoneResposanvelActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 0));
@@ -657,6 +659,14 @@ public class TelaAluno extends javax.swing.JInternalFrame {
 
         LogoBranco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/LogoBranco.png"))); // NOI18N
 
+        ForTelefone1.setBackground(new java.awt.Color(231, 223, 221));
+        ForTelefone1.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("CPF*");
+
+        ForCpf1.setBackground(new java.awt.Color(231, 223, 221));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -664,9 +674,6 @@ public class TelaAluno extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -691,32 +698,22 @@ public class TelaAluno extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(TxtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(TxtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                                    .addComponent(ForTelefone))))
+                                    .addComponent(ForTelefone1))))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(16, 16, 16)
                                 .addComponent(LblCpfResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 450, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(LblNascimento)
                                             .addComponent(LblSituacao))
-                                        .addGap(18, 24, Short.MAX_VALUE)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(CbSituacao, 0, 142, Short.MAX_VALUE)
-                                            .addComponent(ForNascimento))
-                                        .addGap(36, 36, 36)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(LblEmail)
-                                            .addComponent(LblCpf))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(TxtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                                            .addComponent(ForCpf))
-                                        .addContainerGap(49, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel4)
+                                        .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(LblTelefoneResponsavel)
@@ -735,8 +732,19 @@ public class TelaAluno extends javax.swing.JInternalFrame {
                                                         .addComponent(LblCamposObrigatorios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGap(19, 19, 19)
-                                                .addComponent(TxtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addContainerGap())))
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(TxtEndereco)
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                                .addComponent(ForNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(LblEmail))
+                                                            .addComponent(CbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                            .addComponent(TxtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                                                            .addComponent(ForCpf1)))))))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(BtnAlterar)
@@ -744,37 +752,46 @@ public class TelaAluno extends javax.swing.JInternalFrame {
                                 .addComponent(BtnDeletar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(BtnLimpar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
                                 .addComponent(LogoBranco)
-                                .addGap(15, 15, 15))))))
+                                .addGap(15, 15, 15))))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LblMatricula)
-                    .addComponent(TxtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LblSituacao)
-                    .addComponent(CbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LblCpf)
-                    .addComponent(ForCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LblMatricula)
+                            .addComponent(TxtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LblSituacao)
+                            .addComponent(jLabel4)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ForCpf1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LblNascimento)
+                            .addComponent(ForNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LblNome)))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(LblEmail)
                         .addComponent(TxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(LblNascimento)
-                        .addComponent(ForNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(TxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(LblNome)))
+                        .addComponent(LblEmail)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LblTelefone)
                     .addComponent(LblEndereco)
                     .addComponent(TxtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ForTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ForTelefone1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(jLabel1)
                 .addGap(34, 34, 34)
@@ -795,7 +812,7 @@ public class TelaAluno extends javax.swing.JInternalFrame {
                         .addComponent(LblTelefoneResponsavel)
                         .addComponent(ForTelefoneResposanvel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(BtnBuscar)
@@ -845,6 +862,10 @@ public class TelaAluno extends javax.swing.JInternalFrame {
         Limpar();
     }//GEN-LAST:event_BtnLimparActionPerformed
 
+    private void ForTelefoneResposanvelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ForTelefoneResposanvelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ForTelefoneResposanvelActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JButton BtnAlterar;
@@ -853,13 +874,12 @@ public class TelaAluno extends javax.swing.JInternalFrame {
     javax.swing.JButton BtnDeletar;
     javax.swing.JButton BtnLimpar;
     javax.swing.JComboBox<String> CbSituacao;
-    javax.swing.JFormattedTextField ForCpf;
+    javax.swing.JFormattedTextField ForCpf1;
     javax.swing.JFormattedTextField ForCpfResposanvel;
     javax.swing.JFormattedTextField ForNascimento;
-    javax.swing.JFormattedTextField ForTelefone;
+    javax.swing.JFormattedTextField ForTelefone1;
     javax.swing.JFormattedTextField ForTelefoneResposanvel;
     javax.swing.JLabel LblCamposObrigatorios;
-    javax.swing.JLabel LblCpf;
     javax.swing.JLabel LblCpfResponsavel;
     javax.swing.JLabel LblEmail;
     javax.swing.JLabel LblEmailResponsavel;
@@ -881,6 +901,7 @@ public class TelaAluno extends javax.swing.JInternalFrame {
     javax.swing.JLabel jLabel1;
     javax.swing.JLabel jLabel2;
     javax.swing.JLabel jLabel3;
+    javax.swing.JLabel jLabel4;
     javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
