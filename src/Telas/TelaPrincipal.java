@@ -101,6 +101,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela principal");
+        setResizable(false);
 
         PainelPrincipal.setBackground(new java.awt.Color(220, 199, 170));
         PainelPrincipal.setToolTipText("Tela principal");
@@ -149,7 +150,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(LblOla)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LblNomeUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                .addComponent(LblNomeUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
                 .addGap(89, 89, 89)
                 .addComponent(LblLogoBranca)
                 .addContainerGap())
@@ -174,7 +175,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         AreaTrabalho.setLayout(AreaTrabalhoLayout);
         AreaTrabalhoLayout.setHorizontalGroup(
             AreaTrabalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 854, Short.MAX_VALUE)
+            .addGap(0, 923, Short.MAX_VALUE)
         );
         AreaTrabalhoLayout.setVerticalGroup(
             AreaTrabalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,6 +232,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         MenuAlterarDeletar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         MenuAlterarDeletar.setText("Alterar e deletar");
+        MenuAlterarDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuAlterarDeletarActionPerformed(evt);
+            }
+        });
         MenuTurma.add(MenuAlterarDeletar);
 
         MenuAssociar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
@@ -297,6 +303,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         MenuVerNotas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_J, java.awt.event.InputEvent.CTRL_MASK));
         MenuVerNotas.setText("Ver notas");
+        MenuVerNotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuVerNotasActionPerformed(evt);
+            }
+        });
         MenuSecretario.add(MenuVerNotas);
 
         MenuPrincipal.add(MenuSecretario);
@@ -318,6 +329,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         MenuSobre.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
         MenuSobre.setText("Sobre");
+        MenuSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuSobreActionPerformed(evt);
+            }
+        });
         MenuOpcoes.add(MenuSobre);
 
         MenuPrincipal.add(MenuOpcoes);
@@ -337,7 +353,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addComponent(PainelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(882, 539));
+        setSize(new java.awt.Dimension(951, 539));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -405,6 +421,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
         tva.setVisible(true);
         AreaTrabalho.add(tva);
     }//GEN-LAST:event_MenuVerAlunosActionPerformed
+
+    private void MenuVerNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuVerNotasActionPerformed
+        TelaVerNotas tvn = new TelaVerNotas();
+        tvn.setVisible(true);
+        AreaTrabalho.add(tvn);
+    }//GEN-LAST:event_MenuVerNotasActionPerformed
+
+    private void MenuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuSobreActionPerformed
+        TelaSobre ts = new TelaSobre();
+        ts.setVisible(true);
+        AreaTrabalho.add(ts);
+    }//GEN-LAST:event_MenuSobreActionPerformed
+
+    private void MenuAlterarDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuAlterarDeletarActionPerformed
+        TelaAlterarDeletar tad = new TelaAlterarDeletar();
+        tad.setVisible(true);
+        AreaTrabalho.add(tad);
+    }//GEN-LAST:event_MenuAlterarDeletarActionPerformed
 
     //Metodo que faz o Jmenu mudar de cor
     private void customizeMenuBar(JMenuBar menuBar) {

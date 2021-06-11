@@ -113,7 +113,6 @@ public class TelaLogin extends javax.swing.JFrame {
         BtnLogar = new javax.swing.JButton();
         LblLogoNormal = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela de login");
         setResizable(false);
 
@@ -140,7 +139,7 @@ public class TelaLogin extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(LblBenVindo)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,7 +216,7 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnLogar)
                     .addComponent(LblLogoNormal))
-                .addGap(0, 27, Short.MAX_VALUE))
+                .addGap(0, 20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -231,7 +230,7 @@ public class TelaLogin extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(307, 368));
+        setSize(new java.awt.Dimension(304, 361));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

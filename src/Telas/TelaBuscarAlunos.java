@@ -75,6 +75,8 @@ public class TelaBuscarAlunos extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setTitle("Buscar alunos.");
+        setToolTipText("");
 
         jPanel1.setBackground(new java.awt.Color(6, 47, 79));
         jPanel1.setToolTipText("Painel buscar alunos");
@@ -114,7 +116,7 @@ public class TelaBuscarAlunos extends javax.swing.JInternalFrame {
         BtnBuscar4.setBackground(new java.awt.Color(0, 153, 255));
         BtnBuscar4.setForeground(new java.awt.Color(0, 0, 0));
         BtnBuscar4.setText("Buscar");
-        BtnBuscar4.setToolTipText("Busca o usuário.");
+        BtnBuscar4.setToolTipText("Busca os alunos.");
         BtnBuscar4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnBuscar4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

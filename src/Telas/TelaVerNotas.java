@@ -9,13 +9,13 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
-public class TelaBuscarTurmas extends javax.swing.JInternalFrame {
+public class TelaVerNotas extends javax.swing.JInternalFrame {
 
     private Connection conn = null;
     private PreparedStatement st = null;
     private ResultSet rs = null;
 
-    public TelaBuscarTurmas() {
+    public TelaVerNotas() {
         initComponents();
         conn = ConexaoBanco.abrirBanco();
     }
