@@ -1,5 +1,4 @@
 package Telas;
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -23,20 +22,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     public TelaPrincipal() {
         initComponents();
-
         // para chamar a hora HH:mm:ss
         // Esse codigo exibe a data do sistema
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         Date data = new Date();
         String atual = df.format(data);
         LblDataAtual.setText(atual);
-
         // faz jLabel horaAtual recber a hora, minutos e segundos em tempo real
         horaAtual.start();
     }
 
     JLabel lblHora = new JLabel();
-
     //Metodo que pega a hora em tempo real
     Thread horaAtual = new Thread(new Runnable() { //cria uma thread
         public void run() {
@@ -367,7 +363,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         TelaAluno ta = new TelaAluno();
         ta.setVisible(true);
         AreaTrabalho.add(ta);
-
     }//GEN-LAST:event_MenuAlunoActionPerformed
 
     private void MenuTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuTurmaActionPerformed
@@ -381,7 +376,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuCriarActionPerformed
 
     private void MenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuSairActionPerformed
-
         String saindo = "Tem certeza que deseja sair?";
         String titulo = "Atenção!";
         int sair = JOptionPane.showConfirmDialog(null, saindo, titulo, JOptionPane.YES_NO_OPTION);
@@ -442,9 +436,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     //Metodo que faz o Jmenu mudar de cor
     private void customizeMenuBar(JMenuBar menuBar) {
-
         menuBar.setUI(new BasicMenuBarUI() {
-
+            
             public void paint(Graphics g, JComponent c) {
                 //[220,199,170]
                 //[107,122,143]
@@ -458,7 +451,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         MenuElement[] menus = menuBar.getSubElements();
 
         for (MenuElement menuElement : menus) {
-
             JMenu menu = (JMenu) menuElement.getComponent();
             changeComponentColors(menu);
             menu.setOpaque(false);
@@ -466,14 +458,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
             MenuElement[] menuElements = menu.getSubElements();
 
             for (MenuElement popupMenuElement : menuElements) {
-
                 JPopupMenu popupMenu = (JPopupMenu) popupMenuElement.getComponent();
                 popupMenu.setBorder(null);
-
                 MenuElement[] menuItens = popupMenuElement.getSubElements();
 
                 for (MenuElement menuItemElement : menuItens) {
-
                     JMenuItem menuItem = (JMenuItem) menuItemElement.getComponent();
                     changeComponentColors(menuItem);
                     menuItem.setOpaque(true);
