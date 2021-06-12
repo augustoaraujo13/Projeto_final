@@ -508,7 +508,7 @@ public class TelaAluno extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Painel de aluno.");
+        setTitle("Tela de alunos.");
 
         jPanel1.setBackground(new java.awt.Color(6, 47, 79));
 
@@ -575,7 +575,7 @@ public class TelaAluno extends javax.swing.JInternalFrame {
         BtnBuscar.setBackground(new java.awt.Color(0, 153, 255));
         BtnBuscar.setForeground(new java.awt.Color(0, 0, 0));
         BtnBuscar.setText("Buscar");
-        BtnBuscar.setToolTipText("Busca o usuário.");
+        BtnBuscar.setToolTipText("Busca um aluno.");
         BtnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -586,7 +586,7 @@ public class TelaAluno extends javax.swing.JInternalFrame {
         BtnCriar.setBackground(new java.awt.Color(0, 204, 0));
         BtnCriar.setForeground(new java.awt.Color(0, 0, 0));
         BtnCriar.setText("Criar");
-        BtnCriar.setToolTipText("Cria um novo usuário.");
+        BtnCriar.setToolTipText("Cadastra um novo aluno.");
         BtnCriar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnCriar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -597,7 +597,7 @@ public class TelaAluno extends javax.swing.JInternalFrame {
         BtnAlterar.setBackground(new java.awt.Color(255, 153, 0));
         BtnAlterar.setForeground(new java.awt.Color(0, 0, 0));
         BtnAlterar.setText("Alterar");
-        BtnAlterar.setToolTipText("Altera os dados do usuário.");
+        BtnAlterar.setToolTipText("Altera os dados de um aluno.");
         BtnAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -608,7 +608,7 @@ public class TelaAluno extends javax.swing.JInternalFrame {
         BtnDeletar.setBackground(new java.awt.Color(255, 0, 0));
         BtnDeletar.setForeground(new java.awt.Color(0, 0, 0));
         BtnDeletar.setText("Deletar");
-        BtnDeletar.setToolTipText("Cuidado!! Deleta o usuário.");
+        BtnDeletar.setToolTipText("Cuidado!! Deleta o aluno.");
         BtnDeletar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnDeletar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

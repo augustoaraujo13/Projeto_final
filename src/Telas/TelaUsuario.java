@@ -71,6 +71,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 st.executeUpdate();
                 JOptionPane.showMessageDialog(this, comcluido);
 
+                CbCargo.setSelectedItem(null);
                 TxtId.setText(null);
                 TxtUsuario.setText(null);
                 CbCargo.setSelectedItem(null);
@@ -307,7 +308,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Painel de usuários.");
+        setTitle("Tela de usuários.");
 
         PainelUsuarioInterno.setBackground(new java.awt.Color(6, 47, 79));
 
@@ -352,7 +353,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         BtnCriar.setBackground(new java.awt.Color(0, 204, 0));
         BtnCriar.setForeground(new java.awt.Color(0, 0, 0));
         BtnCriar.setText("Criar");
-        BtnCriar.setToolTipText("Cria um novo usuário.");
+        BtnCriar.setToolTipText("Cadastra um novo usuário.");
         BtnCriar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnCriar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -396,7 +397,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         BtnBuscar.setBackground(new java.awt.Color(0, 153, 255));
         BtnBuscar.setForeground(new java.awt.Color(0, 0, 0));
         BtnBuscar.setText("Buscar");
-        BtnBuscar.setToolTipText("Busca o usuário.");
+        BtnBuscar.setToolTipText("Busca um usuário.");
         BtnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

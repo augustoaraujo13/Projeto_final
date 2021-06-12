@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
 public class TelaBuscarTurmas extends javax.swing.JInternalFrame {
-
     private Connection conn = null;
     private PreparedStatement st = null;
     private ResultSet rs = null;
@@ -20,8 +19,8 @@ public class TelaBuscarTurmas extends javax.swing.JInternalFrame {
         conn = ConexaoBanco.abrirBanco();
     }
 
+    //Esse metodo busca todas as tabelas do banco.
     private void Buscar() {
-
         String pesquisa = "show tables from projeto_final;";
 
         try {
@@ -35,8 +34,8 @@ public class TelaBuscarTurmas extends javax.swing.JInternalFrame {
 
     }
 
+    //Esse metodo inseri uma turma no TxtNomeDaTurma.
     private void MostrarTurma() {
-
         int setar = TabTurmas.getSelectedRow();
 
         try {
@@ -48,27 +47,26 @@ public class TelaBuscarTurmas extends javax.swing.JInternalFrame {
 
     }
 
+    // Esse metedo mostra todos os dados da tabela.
     private void Dados() {
 
         try {
-
             String turma = TxtNomeDaTurma.getText().trim();
             String dados = "select * from " + turma + ";";
             st = conn.prepareStatement(dados);
 
             if ("usuarios".equals(turma)) {
-                JOptionPane.showMessageDialog(this, "O que você escolheu não é uma turma");
+                JOptionPane.showMessageDialog(this, "O que você escolheu não é uma turma.");
                 TxtNomeDaTurma.setText(null);
             } else if ("alunos".equals(turma)) {
-                JOptionPane.showMessageDialog(this, "O que você escolheu não é uma turma");
+                JOptionPane.showMessageDialog(this, "O que você escolheu não é uma turma.");
                 TxtNomeDaTurma.setText(null);
             } else {
-
                 if (turma.isEmpty()) {
                     String informacao2 = "Selecione uma turma.";
                     JOptionPane.showMessageDialog(this, informacao2);
                 } else {
-                    String comcluido = "Busca realizada.";
+                    String comcluido = "Sua busca foi realizada.";
                     rs = st.executeQuery();
                     JOptionPane.showMessageDialog(this, comcluido);
                     TabAlunoDaTurma.setModel(DbUtils.resultSetToTableModel(rs));
@@ -140,7 +138,7 @@ public class TelaBuscarTurmas extends javax.swing.JInternalFrame {
         BtnBuscar2.setBackground(new java.awt.Color(0, 153, 255));
         BtnBuscar2.setForeground(new java.awt.Color(0, 0, 0));
         BtnBuscar2.setText("Buscar");
-        BtnBuscar2.setToolTipText("Busca as tabelas");
+        BtnBuscar2.setToolTipText("Busca as turmas.");
         BtnBuscar2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnBuscar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,6 +174,8 @@ public class TelaBuscarTurmas extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        TabAlunoDaTurma.setSelectionBackground(new java.awt.Color(204, 0, 204));
+        TabAlunoDaTurma.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(TabAlunoDaTurma);
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -185,10 +185,10 @@ public class TelaBuscarTurmas extends javax.swing.JInternalFrame {
         TxtNomeDaTurma.setBackground(new java.awt.Color(231, 223, 221));
         TxtNomeDaTurma.setForeground(new java.awt.Color(0, 0, 0));
 
-        BtnBuscarDados.setBackground(new java.awt.Color(0, 153, 255));
+        BtnBuscarDados.setBackground(new java.awt.Color(255, 255, 0));
         BtnBuscarDados.setForeground(new java.awt.Color(0, 0, 0));
-        BtnBuscarDados.setText("Buscar");
-        BtnBuscarDados.setToolTipText("Busca os alunos da turma.");
+        BtnBuscarDados.setText("Alunos");
+        BtnBuscarDados.setToolTipText("Mostra os aluno da turma.");
         BtnBuscarDados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnBuscarDados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,7 +203,6 @@ public class TelaBuscarTurmas extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -219,12 +218,15 @@ public class TelaBuscarTurmas extends javax.swing.JInternalFrame {
                                 .addGap(37, 37, 37)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(TxtNomeDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(97, Short.MAX_VALUE))
+                                .addComponent(TxtNomeDaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(99, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(LogoBranco)
-                .addGap(16, 16, 16))
+                .addGap(15, 15, 15))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,11 +242,11 @@ public class TelaBuscarTurmas extends javax.swing.JInternalFrame {
                     .addComponent(BtnBuscar2)
                     .addComponent(jLabel1)
                     .addComponent(BtnBuscarDados))
-                .addGap(50, 50, 50)
+                .addGap(27, 27, 27)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LogoBranco)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
 public class TelaAssociar extends javax.swing.JInternalFrame {
-
     private Connection conn = null;
     private PreparedStatement st = null;
     private ResultSet rs = null;
@@ -19,6 +18,7 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
         conn = ConexaoBanco.abrirBanco();
     }
 
+    //Esse metedo busca os alunos.
     private void BuscarAluno() {
         String pesquisa = "select matricula, nome, "
                 + "CPF from alunos order by matricula;";
@@ -31,8 +31,8 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
         }
     }
 
+    // Esse metodo busca todas as tabelas do banco.
     private void BuscarTurma() {
-
         String pesquisa = "show tables from projeto_final;";
 
         try {
@@ -45,8 +45,8 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
 
     }
 
+    //Esse metodo seta as informações da pesquisa nos campos.
     private void MostrarAluno() {
-
         int setar = TabAlunos.getSelectedRow();
 
         try {
@@ -60,8 +60,8 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
 
     }
 
+    //Esse metedo seta o campoo com nome da turma escolhido.
     private void MostrarTurma() {
-
         int setar = TabTurmas.getSelectedRow();
 
         try {
@@ -73,8 +73,8 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
 
     }
 
+    // Esse metodo associa o aluno a turma escolhida.
     private void Associar() {
-
         try {
             String turma = TxtNomeDaTurma.getText().trim();
             String associando = "insert into " + turma + "(id_aluno, nota_bimestre1, "
@@ -83,19 +83,17 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
             st = conn.prepareStatement(associando);
 
             if ("usuarios".equals(turma)) {
-                JOptionPane.showMessageDialog(this, "O que você escolheu não é uma turma");
+                JOptionPane.showMessageDialog(this, "O que você escolheu não é uma turma.");
                 TxtNomeDaTurma.setText(null);
             } else if ("alunos".equals(turma)) {
-                JOptionPane.showMessageDialog(this, "O que você escolheu não é uma turma");
+                JOptionPane.showMessageDialog(this, "O que você escolheu não é uma turma.");
                 TxtNomeDaTurma.setText(null);
             } else {
-
                 if (turma.isEmpty()) {
                     String informacao2 = "Selecione uma turma.";
                     JOptionPane.showMessageDialog(this, informacao2);
                 } else {
-
-                    String comcluido = "Aluno foi associado a turma";
+                    String comcluido = "Aluno foi associado a turma.";
                     st.setString(1, TxtMatricula.getText().trim());
                     st.executeUpdate();
 
@@ -116,7 +114,6 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
             TxtMatricula.setText(null);
             TxtNomeDaTurma.setText(null);
             TxtCpf.setText(null);
-
         }
 
     }
@@ -148,7 +145,7 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Painel de assocair aluno a uma turma");
+        setTitle("Tela associar");
 
         jPanel1.setBackground(new java.awt.Color(6, 47, 79));
 
@@ -184,10 +181,10 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(TabAlunos);
 
-        BtnBuscarAluno.setBackground(new java.awt.Color(0, 153, 255));
+        BtnBuscarAluno.setBackground(new java.awt.Color(255, 255, 0));
         BtnBuscarAluno.setForeground(new java.awt.Color(0, 0, 0));
-        BtnBuscarAluno.setText("Buscar");
-        BtnBuscarAluno.setToolTipText("Buscar aluno.");
+        BtnBuscarAluno.setText("Alunos");
+        BtnBuscarAluno.setToolTipText("Busca os alunos.");
         BtnBuscarAluno.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnBuscarAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,10 +237,10 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(TabTurmas);
 
-        BtnBuscarTurma.setBackground(new java.awt.Color(0, 153, 255));
+        BtnBuscarTurma.setBackground(new java.awt.Color(0, 255, 204));
         BtnBuscarTurma.setForeground(new java.awt.Color(0, 0, 0));
-        BtnBuscarTurma.setText("Buscar");
-        BtnBuscarTurma.setToolTipText("Buscar turmas.");
+        BtnBuscarTurma.setText("Turmas");
+        BtnBuscarTurma.setToolTipText("Mostra todas as turmas.");
         BtnBuscarTurma.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnBuscarTurma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,10 +255,10 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
         TxtNomeDaTurma.setBackground(new java.awt.Color(231, 223, 221));
         TxtNomeDaTurma.setForeground(new java.awt.Color(0, 0, 0));
 
-        BtnAssociar.setBackground(new java.awt.Color(255, 255, 0));
+        BtnAssociar.setBackground(new java.awt.Color(255, 0, 255));
         BtnAssociar.setForeground(new java.awt.Color(0, 0, 0));
         BtnAssociar.setText("Associar");
-        BtnAssociar.setToolTipText("Associar aluno a turma.");
+        BtnAssociar.setToolTipText("Associar o aluno a turma.");
         BtnAssociar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnAssociar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -324,7 +321,7 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(TxtAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(TxtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(77, Short.MAX_VALUE))))
+                        .addContainerGap(74, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

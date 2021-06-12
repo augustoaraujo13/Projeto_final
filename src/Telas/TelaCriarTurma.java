@@ -1,5 +1,4 @@
 package Telas;
-
 import Conexao.ConexaoBanco;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -20,8 +19,8 @@ public class TelaCriarTurma extends javax.swing.JInternalFrame {
         conn = ConexaoBanco.abrirBanco();
     }
 
+    //Esse metodo cria uma nova turma.
     private void CriarTurma() throws SQLException {
-
         String novaTurma1 = "create table ";
         String nomeTurma = TxtNovaTurma.getText().trim().toLowerCase();
         String novaTurma2 = "(Id_aluno int not null,nota_bimestre1 decimal(4,2),nota_bimestre2 decimal(4,2),"
@@ -46,7 +45,8 @@ public class TelaCriarTurma extends javax.swing.JInternalFrame {
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, e);
-            System.out.println(e);
+            ///System.out.println(e);
+            TxtNovaTurma.setText(null);
         }
 
     }
@@ -83,7 +83,7 @@ public class TelaCriarTurma extends javax.swing.JInternalFrame {
         BtnCriar.setBackground(new java.awt.Color(0, 204, 0));
         BtnCriar.setForeground(new java.awt.Color(0, 0, 0));
         BtnCriar.setText("Criar");
-        BtnCriar.setToolTipText("Cria um novo usuário.");
+        BtnCriar.setToolTipText("Cria uma nova turma.");
         BtnCriar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnCriar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,33 +102,36 @@ public class TelaCriarTurma extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(BtnCriar, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LblNovaTurma)
-                            .addComponent(LogoBranco))
+                        .addComponent(LogoBranco)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BtnCriar, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(LblNovaTurma)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(TxtNovaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxtNovaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LblNovaTurma))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(BtnCriar)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(52, 52, 52)
-                        .addComponent(BtnCriar))
-                    .addComponent(LogoBranco))
-                .addContainerGap(56, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TxtNovaTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LblNovaTurma))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addComponent(LogoBranco)))))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
