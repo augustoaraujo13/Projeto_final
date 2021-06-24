@@ -46,42 +46,42 @@ public class TelaSobre extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Tela sobre");
+        setTitle("Sobre");
 
-        jPanel1.setBackground(new java.awt.Color(109, 121, 147));
+        jPanel1.setBackground(new java.awt.Color(231, 223, 221));
 
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Esse projeto é de fins acadêmicos e faz parte de um TCC do curo técnico em");
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Esse projeto é de fins acadêmicos e faz parte de um TCC do curso técnico em");
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Informática da FAETEC de Paracambi – RJ.");
 
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Membros do projeto:");
 
-        jLabel4.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Alex Fonseca Ramos ");
 
-        jLabel5.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Augusto da Silva Araújo");
 
-        jLabel6.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Maria Eduarda Pereira da Silva");
 
-        jLabel7.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Monique Zenferino Aquino");
 
-        jLabel8.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Richardson de Araújo Amaral ");
 
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Professor | Orientador do projeto.");
 
-        jLabel10.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Professor Josimar Ribeiro");
 
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Data 13 / 07 / 2021");
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/faetec.png"))); // NOI18N

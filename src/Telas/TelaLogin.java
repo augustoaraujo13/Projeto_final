@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class TelaLogin extends javax.swing.JFrame {
+
     private Connection conn = null;
     private PreparedStatement st = null;
     private ResultSet rs = null;
@@ -27,14 +28,16 @@ public class TelaLogin extends javax.swing.JFrame {
             st.setString(1, TxtUsuario.getText());
             st.setString(2, PasSenha.getText());
             rs = st.executeQuery();
+
             if ((TxtUsuario.getText().trim().isEmpty())
                     || (PasSenha.getText().trim().isEmpty())) {
-                String informacao2 = "Preencha todos os campos.";
-                JOptionPane.showMessageDialog(this, informacao2);
+                String informacao1 = "Preencha todos os campos.";
+                JOptionPane.showMessageDialog(this, informacao1);
+                
             } else {
                 if (rs.next()) {
                     String cargo = rs.getString(3);
-                    
+
                     if (cargo.equals("Coordenador")) {
                         TelaPrincipal tp = new TelaPrincipal();
                         tp.setVisible(true);
@@ -42,6 +45,7 @@ public class TelaLogin extends javax.swing.JFrame {
                         // Coloca o nome e o cargo do usuário na tela principal
                         tp.LblNomeUsuario.setText(funcionario + rs.getString(2) + "!");
                         this.dispose();
+
                     } else if (cargo.equals("Professor")) {
                         TelaPrincipal tp = new TelaPrincipal();
                         tp.setVisible(true);
@@ -60,6 +64,7 @@ public class TelaLogin extends javax.swing.JFrame {
                         tp.MenuVerAlunos.setEnabled(false);
                         tp.MenuVerNotas.setEnabled(false);
                         this.dispose();
+
                     } else {
                         TelaPrincipal tp = new TelaPrincipal();
                         tp.setVisible(true);
@@ -88,6 +93,7 @@ public class TelaLogin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -103,7 +109,7 @@ public class TelaLogin extends javax.swing.JFrame {
         BtnLogar = new javax.swing.JButton();
         LblLogoNormal = new javax.swing.JLabel();
 
-        setTitle("Tela de login");
+        setTitle("Login.");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(220, 199, 170));
@@ -147,6 +153,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
         TxtUsuario.setBackground(new java.awt.Color(231, 223, 221));
         TxtUsuario.setForeground(new java.awt.Color(0, 0, 0));
+        TxtUsuario.setToolTipText("Campo usuário.");
 
         LblSenha.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         LblSenha.setForeground(new java.awt.Color(6, 47, 79));
@@ -154,6 +161,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
         PasSenha.setBackground(new java.awt.Color(231, 223, 221));
         PasSenha.setForeground(new java.awt.Color(0, 0, 0));
+        PasSenha.setToolTipText("Campo senha.");
         PasSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PasSenhaActionPerformed(evt);
@@ -163,6 +171,7 @@ public class TelaLogin extends javax.swing.JFrame {
         BtnLogar.setBackground(new java.awt.Color(247, 195, 49));
         BtnLogar.setForeground(new java.awt.Color(0, 0, 0));
         BtnLogar.setText("Logar");
+        BtnLogar.setToolTipText("Clique aqui para fazer o login.");
         BtnLogar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnLogarActionPerformed(evt);
@@ -170,6 +179,7 @@ public class TelaLogin extends javax.swing.JFrame {
         });
 
         LblLogoNormal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/LogoAzul.png"))); // NOI18N
+        LblLogoNormal.setToolTipText("Logomarca.");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -246,16 +256,24 @@ public class TelaLogin extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLogin.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLogin.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLogin.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLogin.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

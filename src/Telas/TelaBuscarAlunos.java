@@ -19,8 +19,8 @@ public class TelaBuscarAlunos extends javax.swing.JInternalFrame {
         conn = ConexaoBanco.abrirBanco();
     }
 
+    //Esse metodo busca os alunos.
     private void Buscar() {
-
         String pesquisa = "select matricula, situacao,"
                 + " nome, email, telefone from alunos "
                 + "order by matricula;";
@@ -34,10 +34,9 @@ public class TelaBuscarAlunos extends javax.swing.JInternalFrame {
         }
     }
 
+    //Esse metedo mostra os alunos.
     private void Mostrar() {
-
         int setar = TabAlunos.getSelectedRow();
-
         try {
             TxtMatricula.setText(TabAlunos.getModel().getValueAt(setar, 0).toString().trim());
             TxtSituacao.setText(TabAlunos.getModel().getValueAt(setar, 1).toString().trim());
@@ -75,7 +74,7 @@ public class TelaBuscarAlunos extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Buscar alunos.");
+        setTitle("Buscar aluno");
         setToolTipText("");
 
         jPanel1.setBackground(new java.awt.Color(6, 47, 79));
@@ -113,9 +112,9 @@ public class TelaBuscarAlunos extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(TabAlunos);
 
-        BtnBuscar4.setBackground(new java.awt.Color(0, 153, 255));
+        BtnBuscar4.setBackground(new java.awt.Color(255, 255, 0));
         BtnBuscar4.setForeground(new java.awt.Color(0, 0, 0));
-        BtnBuscar4.setText("Buscar");
+        BtnBuscar4.setText("Alunos");
         BtnBuscar4.setToolTipText("Busca os alunos.");
         BtnBuscar4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnBuscar4.addActionListener(new java.awt.event.ActionListener() {
@@ -127,26 +126,31 @@ public class TelaBuscarAlunos extends javax.swing.JInternalFrame {
         LblMatricula.setForeground(new java.awt.Color(255, 255, 255));
         LblMatricula.setText("Matricula");
 
+        TxtMatricula.setEditable(false);
         TxtMatricula.setBackground(new java.awt.Color(231, 223, 221));
 
         LblSituacao.setForeground(new java.awt.Color(255, 255, 255));
         LblSituacao.setText("Situação");
 
+        TxtSituacao.setEditable(false);
         TxtSituacao.setBackground(new java.awt.Color(231, 223, 221));
 
         LblNome.setForeground(new java.awt.Color(255, 255, 255));
         LblNome.setText("Nome");
 
+        TxtNome.setEditable(false);
         TxtNome.setBackground(new java.awt.Color(231, 223, 221));
 
         LblTelefone.setForeground(new java.awt.Color(255, 255, 255));
         LblTelefone.setText("Telefone");
 
+        TxtTelefone.setEditable(false);
         TxtTelefone.setBackground(new java.awt.Color(231, 223, 221));
 
         LblEmail.setForeground(new java.awt.Color(255, 255, 255));
         LblEmail.setText("Email");
 
+        TxtEmail.setEditable(false);
         TxtEmail.setBackground(new java.awt.Color(231, 223, 221));
 
         LogoBranco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/LogoBranco.png"))); // NOI18N

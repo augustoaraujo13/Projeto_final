@@ -425,7 +425,7 @@ public class TelaAluno extends javax.swing.JInternalFrame {
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "Houve um erro, tente novamente");
+            JOptionPane.showMessageDialog(null, "O aluno não foi excluído.");
 
             CbSituacao.setSelectedItem(null);
             TxtMatricula.setText(null);
@@ -508,7 +508,7 @@ public class TelaAluno extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Tela de alunos.");
+        setTitle("Aluno");
 
         jPanel1.setBackground(new java.awt.Color(6, 47, 79));
 
@@ -541,7 +541,7 @@ public class TelaAluno extends javax.swing.JInternalFrame {
         TxtEmail.setForeground(new java.awt.Color(0, 0, 0));
 
         LblNome.setForeground(new java.awt.Color(255, 255, 255));
-        LblNome.setText("Nome *");
+        LblNome.setText("Aluno *");
 
         TxtNome.setBackground(new java.awt.Color(231, 223, 221));
         TxtNome.setForeground(new java.awt.Color(0, 0, 0));
@@ -640,6 +640,11 @@ public class TelaAluno extends javax.swing.JInternalFrame {
 
         ForCpfResposanvel.setBackground(new java.awt.Color(231, 223, 221));
         ForCpfResposanvel.setForeground(new java.awt.Color(0, 0, 0));
+        ForCpfResposanvel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ForCpfResposanvelActionPerformed(evt);
+            }
+        });
 
         ForTelefoneResposanvel.setBackground(new java.awt.Color(231, 223, 221));
         ForTelefoneResposanvel.setForeground(new java.awt.Color(0, 0, 0));
@@ -736,11 +741,10 @@ public class TelaAluno extends javax.swing.JInternalFrame {
                                                     .addComponent(TxtEndereco)
                                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                                .addComponent(ForNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(18, 18, 18)
-                                                                .addComponent(LblEmail))
+                                                            .addComponent(ForNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                             .addComponent(CbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGap(28, 28, 28)
+                                                        .addComponent(LblEmail)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                             .addComponent(TxtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
@@ -865,6 +869,10 @@ public class TelaAluno extends javax.swing.JInternalFrame {
     private void ForTelefoneResposanvelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ForTelefoneResposanvelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ForTelefoneResposanvelActionPerformed
+
+    private void ForCpfResposanvelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ForCpfResposanvelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ForCpfResposanvelActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

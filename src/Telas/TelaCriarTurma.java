@@ -66,7 +66,7 @@ public class TelaCriarTurma extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Painel de criação de turma");
+        setTitle("Criar turma");
 
         jPanel1.setBackground(new java.awt.Color(6, 47, 79));
 

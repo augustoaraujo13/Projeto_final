@@ -70,7 +70,7 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
                     String informacao2 = "Selecione uma turma.";
                     JOptionPane.showMessageDialog(this, informacao2);
                 } else {
-                    String comcluido = "Nome da turma foi alterado";
+                    String comcluido = "Nome da turma foi alterado.";
                     st.executeUpdate();
 
                     JOptionPane.showMessageDialog(this, comcluido);
@@ -79,7 +79,7 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
             }
 
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(this, "Houve um erro");
+            JOptionPane.showMessageDialog(this, "Nome da turma não foi alterado.");
             //System.out.println(e);
         }
 
@@ -89,7 +89,7 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
         String confirmando = "Deseja deletar essa turma?";
         String confirmando2 = "Atenção";
 
-        int confirmar = JOptionPane.showConfirmDialog(null, confirmando2, confirmando, JOptionPane.YES_NO_OPTION);
+        int confirmar = JOptionPane.showConfirmDialog(null, confirmando, confirmando2, JOptionPane.YES_NO_OPTION);
 
         if (confirmar == JOptionPane.YES_OPTION) {
 
@@ -99,10 +99,10 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
                 st = conn.prepareStatement(deletando);
 
                 if ("usuarios".equals(turma)) {
-                    JOptionPane.showMessageDialog(this, "O que você escolheu não é uma turma");
+                    JOptionPane.showMessageDialog(this, "O que você escolheu não é uma turma.");
                     TxtNomeDaTurma.setText(null);
                 } else if ("alunos".equals(turma)) {
-                    JOptionPane.showMessageDialog(this, "O que você escolheu não é uma turma");
+                    JOptionPane.showMessageDialog(this, "O que você escolheu não é uma turma.");
                     TxtNomeDaTurma.setText(null);
                 } else {
                     String comcluido = "Turma foi deletada.";
@@ -113,12 +113,12 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
 
                 }
             } catch (HeadlessException | SQLException e) {
-                JOptionPane.showMessageDialog(this, e);
+                JOptionPane.showMessageDialog(this, "A turma não foi deletada.");
                 System.out.println(e);
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "Houve um erro, tente novamente");
+            JOptionPane.showMessageDialog(this, "A turma não foi deletada.");
             TxtNomeDaTurma.setText(null);
         }
 
@@ -176,7 +176,7 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
 
     private void DeletarAluno() {
 
-        String confirmando = "Deseja deletar essa turma?";
+        String confirmando = "Deseja deletar esse aluno da turma?";
         String confirmando2 = "Atenção";
 
         int confirmar = JOptionPane.showConfirmDialog(null, confirmando, confirmando2, JOptionPane.YES_NO_OPTION);
@@ -192,17 +192,17 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
                 st = conn.prepareStatement(deletando);
 
                 if ("usuarios".equals(turma)) {
-                    JOptionPane.showMessageDialog(this, "O que você escolheu não é uma turma");
+                    JOptionPane.showMessageDialog(this, "O que você escolheu não é uma turma.");
                     TxtNomeDaTurma.setText(null);
                 } else if ("alunos".equals(turma)) {
-                    JOptionPane.showMessageDialog(this, "O que você escolheu não é uma turma");
+                    JOptionPane.showMessageDialog(this, "O que você escolheu não é uma turma.");
                     TxtNomeDaTurma.setText(null);
                 } else {
                     if (id.isEmpty()) {
-                        String informacao = "Preencha o campo id, para excluir o aluno da turma!";
+                        String informacao = "Selecione um aluno para poder excluir.";
                         JOptionPane.showMessageDialog(this, informacao);
                     } else {
-                        String comcluido = "Aluno excluído da turma com sucesso!";
+                        String comcluido = "Aluno foi excluído da turma com sucesso!";
                         st.executeUpdate();
 
                         JOptionPane.showMessageDialog(this, comcluido);
@@ -220,7 +220,7 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
                 TxtMatricula.setText(null);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Houve um erro, tente novamente");
+            JOptionPane.showMessageDialog(null, "O aluno não foi excluído da turma.");
             TxtNomeDaTurma.setText(null);
             TxtMatricula.setText(null);
         }
@@ -256,7 +256,7 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Tela alterar e deletar");
+        setTitle("Alterar e deletar");
 
         jPanel1.setBackground(new java.awt.Color(6, 47, 79));
 
@@ -291,11 +291,11 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 0));
-        jLabel1.setText("Tabelas aluno e usuario não são turmas!");
+        jLabel1.setText("Tabelas alunos e usuario não são turmas!");
 
-        BtnBuscarTurma.setBackground(new java.awt.Color(0, 153, 255));
+        BtnBuscarTurma.setBackground(new java.awt.Color(0, 255, 204));
         BtnBuscarTurma.setForeground(new java.awt.Color(0, 0, 0));
-        BtnBuscarTurma.setText("Buscar");
+        BtnBuscarTurma.setText("Turmas");
         BtnBuscarTurma.setToolTipText("Busca as tabelas");
         BtnBuscarTurma.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnBuscarTurma.addActionListener(new java.awt.event.ActionListener() {
@@ -359,6 +359,8 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        TabAlunoDaTurma.setSelectionBackground(new java.awt.Color(204, 0, 204));
+        TabAlunoDaTurma.setSelectionForeground(new java.awt.Color(255, 255, 255));
         TabAlunoDaTurma.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TabAlunoDaTurmaMouseClicked(evt);
@@ -368,7 +370,7 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
 
         BtnBuscarAlunos.setBackground(new java.awt.Color(255, 255, 0));
         BtnBuscarAlunos.setForeground(new java.awt.Color(0, 0, 0));
-        BtnBuscarAlunos.setText("Mais");
+        BtnBuscarAlunos.setText("Alunos");
         BtnBuscarAlunos.setToolTipText("Busca os alunos da turma.");
         BtnBuscarAlunos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnBuscarAlunos.addActionListener(new java.awt.event.ActionListener() {
@@ -378,7 +380,7 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
         });
 
         LblMatricula.setForeground(new java.awt.Color(255, 255, 255));
-        LblMatricula.setText("Matricula");
+        LblMatricula.setText("Matrícula");
 
         TxtMatricula.setBackground(new java.awt.Color(231, 223, 221));
 
@@ -433,28 +435,25 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(39, 39, 39)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LblMatricula)
+                            .addComponent(LblNome))
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TxtNome)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(LblNome)
-                                .addGap(46, 46, 46)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TxtNome)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(TxtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(BtnBuscarAlunos)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(BtnDeletarAluno)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                                        .addComponent(LogoBranco))))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(LblMatricula)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                                .addComponent(TxtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(BtnBuscarAlunos)
+                                .addGap(18, 18, 18)
+                                .addComponent(BtnDeletarAluno)
+                                .addGap(27, 27, 27)
+                                .addComponent(LogoBranco)))))
+                .addContainerGap(46, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(104, 104, 104)
                 .addComponent(jLabel4)
@@ -483,8 +482,8 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
                         .addComponent(BtnDeletarTurmas)
                         .addComponent(LblMatricula)
                         .addComponent(TxtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BtnBuscarAlunos)
-                        .addComponent(BtnDeletarAluno))
+                        .addComponent(BtnDeletarAluno)
+                        .addComponent(BtnBuscarAlunos))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)

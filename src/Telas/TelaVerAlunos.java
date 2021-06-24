@@ -29,7 +29,6 @@ public class TelaVerAlunos extends javax.swing.JInternalFrame {
 
     //Metedo para formar campo
     private void formatarNascimeto() {
-
         try {
             MaskFormatter ms = new MaskFormatter("####/##/##");
             ms.install(ForNascimento);
@@ -40,7 +39,6 @@ public class TelaVerAlunos extends javax.swing.JInternalFrame {
 
     //Metedo para formar campo
     private void formatarCpf() {
-
         try {
             MaskFormatter ms = new MaskFormatter("###.###.###-##");
             ms.install(ForCpfResposanvel);
@@ -52,7 +50,6 @@ public class TelaVerAlunos extends javax.swing.JInternalFrame {
 
     //Metedo para formar campo
     private void formatarTelefone() {
-
         try {
             MaskFormatter ms = new MaskFormatter("##-#####-####");
             ms.install(ForTelefone);
@@ -62,14 +59,13 @@ public class TelaVerAlunos extends javax.swing.JInternalFrame {
 
     }
 
+    //Mostra informações do alunos.
     private void Buscar() {
-
         try {
             String busca = "select * from alunos where matricula = "
                     + TxtMatricula.getText().trim();
             st = conn.prepareStatement(busca);
             rs = st.executeQuery();
-
             if (rs.next()) {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
                 Date dataBanco = rs.getDate(4);
@@ -90,7 +86,7 @@ public class TelaVerAlunos extends javax.swing.JInternalFrame {
             } else {
                 String resposta = "O aluno que você pesquisou não existe.";
                 JOptionPane.showMessageDialog(this, resposta);
-
+                
                 TxtMatricula.setText(null);
                 TxtNome.setText(null);
                 ForNascimento.setText(null);
@@ -105,10 +101,8 @@ public class TelaVerAlunos extends javax.swing.JInternalFrame {
             }
 
         } catch (SQLException e) {
-
             JOptionPane.showMessageDialog(this, "Matrícula Inválida!");
             //System.out.println(e);
-
             TxtMatricula.setText(null);
             TxtNome.setText(null);
             ForNascimento.setText(null);
@@ -124,8 +118,8 @@ public class TelaVerAlunos extends javax.swing.JInternalFrame {
 
     }
 
+    //Busca os alunos.
     private void BuscarAlunos() {
-
         try {
             String buscando = "select matricula, nome from alunos order by matricula;";
             st = conn.prepareStatement(buscando);
@@ -133,15 +127,14 @@ public class TelaVerAlunos extends javax.swing.JInternalFrame {
             rs = st.executeQuery();
             JOptionPane.showMessageDialog(this, comcluido);
             TabAlunos.setModel(DbUtils.resultSetToTableModel(rs));
-
         } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(this, "Campo vazio!");
             //System.out.println(e);
         }
     }
 
+    //Mostra o aluno na tabela.
     private void Mostrar() {
-
         int setar = TabAlunos.getSelectedRow();
 
         try {
@@ -153,9 +146,9 @@ public class TelaVerAlunos extends javax.swing.JInternalFrame {
 
     }
 
+    // Limpa os campos.
     private void Limpar() {
         String comcluido = "Os campos foram limpos.";
-
         JOptionPane.showMessageDialog(this, comcluido);
 
         TxtMatricula.setText(null);
@@ -213,7 +206,7 @@ public class TelaVerAlunos extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Painel de aluno.");
+        setTitle("Ver alunos");
 
         jPanel1.setBackground(new java.awt.Color(6, 47, 79));
 
@@ -276,9 +269,9 @@ public class TelaVerAlunos extends javax.swing.JInternalFrame {
         TxtEndereco.setEditable(false);
         TxtEndereco.setBackground(new java.awt.Color(231, 223, 221));
 
-        BtnBuscar.setBackground(new java.awt.Color(255, 255, 0));
+        BtnBuscar.setBackground(new java.awt.Color(0, 204, 204));
         BtnBuscar.setForeground(new java.awt.Color(0, 0, 0));
-        BtnBuscar.setText("Mais ");
+        BtnBuscar.setText("Mais");
         BtnBuscar.setToolTipText("Mais informações sobre o aluno.");
         BtnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -350,9 +343,9 @@ public class TelaVerAlunos extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(TabAlunos);
 
-        BtnBuscarAlunos.setBackground(new java.awt.Color(0, 153, 255));
+        BtnBuscarAlunos.setBackground(new java.awt.Color(255, 255, 0));
         BtnBuscarAlunos.setForeground(new java.awt.Color(0, 0, 0));
-        BtnBuscarAlunos.setText("Buscar");
+        BtnBuscarAlunos.setText("Alunos");
         BtnBuscarAlunos.setToolTipText("Busca o aluno");
         BtnBuscarAlunos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnBuscarAlunos.addActionListener(new java.awt.event.ActionListener() {
@@ -363,8 +356,14 @@ public class TelaVerAlunos extends javax.swing.JInternalFrame {
 
         LogoBranco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/LogoBranco.png"))); // NOI18N
 
+        TxtSituacao.setEditable(false);
         TxtSituacao.setBackground(new java.awt.Color(231, 223, 221));
         TxtSituacao.setForeground(new java.awt.Color(0, 0, 0));
+        TxtSituacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtSituacaoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -379,9 +378,10 @@ public class TelaVerAlunos extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(LblResposavel)
-                            .addComponent(LblEmailResponsavel)
-                            .addComponent(LblCpfResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LblTelefoneResponsavel))
+                            .addComponent(LblEmailResponsavel, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(LblCpfResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(LblTelefoneResponsavel)))
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -533,6 +533,10 @@ public class TelaVerAlunos extends javax.swing.JInternalFrame {
     private void BtnBuscarAlunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarAlunosActionPerformed
         BuscarAlunos();
     }//GEN-LAST:event_BtnBuscarAlunosActionPerformed
+
+    private void TxtSituacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtSituacaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtSituacaoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -308,7 +308,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Tela de usuários.");
+        setTitle("Usuário");
 
         PainelUsuarioInterno.setBackground(new java.awt.Color(6, 47, 79));
 

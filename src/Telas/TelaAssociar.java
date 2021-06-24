@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
 public class TelaAssociar extends javax.swing.JInternalFrame {
+
     private Connection conn = null;
     private PreparedStatement st = null;
     private ResultSet rs = null;
@@ -93,23 +94,24 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
                     String informacao2 = "Selecione uma turma.";
                     JOptionPane.showMessageDialog(this, informacao2);
                 } else {
-                    String comcluido = "Aluno foi associado a turma.";
-                    st.setString(1, TxtMatricula.getText().trim());
-                    st.executeUpdate();
+                        String comcluido = "Aluno foi associado a turma.";
+                        st.setString(1, TxtMatricula.getText().trim());
+                        st.executeUpdate();
 
-                    JOptionPane.showMessageDialog(this, comcluido);
+                        JOptionPane.showMessageDialog(this, comcluido);
 
-                    TxtAluno.setText(null);
-                    TxtMatricula.setText(null);
-                    TxtNomeDaTurma.setText(null);
-                    TxtCpf.setText(null);
+                        TxtAluno.setText(null);
+                        TxtMatricula.setText(null);
+                        //TxtNomeDaTurma.setText(null);
+                        TxtCpf.setText(null);
+
                 }
 
             }
 
         } catch (SQLException e) {
             //System.out.println(e);
-            JOptionPane.showMessageDialog(this, e);
+            JOptionPane.showMessageDialog(this, "Selecione um aluno.");
             TxtAluno.setText(null);
             TxtMatricula.setText(null);
             TxtNomeDaTurma.setText(null);
@@ -145,7 +147,7 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Tela associar");
+        setTitle("Associar");
 
         jPanel1.setBackground(new java.awt.Color(6, 47, 79));
 
@@ -171,7 +173,6 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        TabAlunos.setToolTipText("");
         TabAlunos.setSelectionBackground(new java.awt.Color(204, 0, 204));
         TabAlunos.setSelectionForeground(new java.awt.Color(255, 255, 255));
         TabAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -193,7 +194,7 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
         });
 
         LblMatricula.setForeground(new java.awt.Color(255, 255, 255));
-        LblMatricula.setText("Matricula");
+        LblMatricula.setText("Matrícula");
 
         TxtMatricula.setEditable(false);
         TxtMatricula.setBackground(new java.awt.Color(231, 223, 221));
@@ -217,7 +218,7 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
                 {null}
             },
             new String [] {
-                "Tabelas"
+                "Turmas"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -276,7 +277,7 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
         TxtCpf.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 0));
-        jLabel1.setText("Tabelas aluno e usuario não são turmas!");
+        jLabel1.setText("Tabelas alunos e usuario não são turmas!");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -321,7 +322,7 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(TxtAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(TxtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(74, Short.MAX_VALUE))))
+                        .addContainerGap(67, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -89,7 +89,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         MenuVerAlunos = new javax.swing.JMenuItem();
         MenuVerNotas = new javax.swing.JMenuItem();
         MenuOpcoes = new javax.swing.JMenu();
-        MenuAjuda = new javax.swing.JMenuItem();
         MenuSair = new javax.swing.JMenuItem();
         MenuSobre = new javax.swing.JMenuItem();
 
@@ -310,11 +309,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         MenuOpcoes.setText("Opções");
 
-        MenuAjuda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.CTRL_MASK));
-        MenuAjuda.setText("Ajuda");
-        MenuOpcoes.add(MenuAjuda);
-
-        MenuSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        MenuSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.CTRL_MASK));
         MenuSair.setText("Sair");
         MenuSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -323,7 +318,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         MenuOpcoes.add(MenuSair);
 
-        MenuSobre.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
+        MenuSobre.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
         MenuSobre.setText("Sobre");
         MenuSobre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -519,7 +514,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     javax.swing.JLabel LblNomeUsuario;
     javax.swing.JLabel LblOla;
     javax.swing.JMenuItem MenuAdicionarNotas;
-    javax.swing.JMenuItem MenuAjuda;
     javax.swing.JMenuItem MenuAlterarDeletar;
     javax.swing.JMenuItem MenuAluno;
     javax.swing.JMenuItem MenuAssociar;
