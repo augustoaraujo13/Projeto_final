@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import javax.swing.table.TableModel;
 import net.proteanit.sql.DbUtils;
 
 public class TelaVerNotas extends javax.swing.JInternalFrame {
@@ -54,7 +53,9 @@ public class TelaVerNotas extends javax.swing.JInternalFrame {
 
         try {
             String turma = TxtNomeDaTurma.getText().trim();
-            String dados = "select * from " + turma + ";";
+            String dados = "select Id_aluno as Id, nota_bimestre1 as 1°Bimestre,"
+                    + " nota_bimestre2 as 2°Bimestre, situacao as Situação"
+                    + " from " + turma + ";";
             st = conn.prepareStatement(dados);
 
             if ("usuarios".equals(turma)) {
@@ -90,12 +91,24 @@ public class TelaVerNotas extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TabTurmas = new javax.swing.JTable();
+        TabTurmas = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+
+                return false;
+
+            }
+        };
         BtnBuscar2 = new javax.swing.JButton();
         LogoBranco = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        TabAlunoDaTurma = new javax.swing.JTable();
+        TabAlunoDaTurma = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+
+                return false;
+
+            }
+        };
         jLabel2 = new javax.swing.JLabel();
         TxtNomeDaTurma = new javax.swing.JTextField();
         BtnBuscarDados = new javax.swing.JButton();
@@ -136,8 +149,11 @@ public class TelaVerNotas extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        TabTurmas.setFocusable(false);
         TabTurmas.setSelectionBackground(new java.awt.Color(204, 0, 204));
         TabTurmas.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        TabTurmas.getTableHeader().setResizingAllowed(false);
+        TabTurmas.getTableHeader().setReorderingAllowed(false);
         TabTurmas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TabTurmasMouseClicked(evt);
@@ -176,11 +192,14 @@ public class TelaVerNotas extends javax.swing.JInternalFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Id aluno", "Nota 1°B", "Nota 2°B", "Situação"
+                "Id", "1°Bimestre", "2°Bimestre", "Situação"
             }
         ));
+        TabAlunoDaTurma.setFocusable(false);
         TabAlunoDaTurma.setSelectionBackground(new java.awt.Color(204, 0, 204));
         TabAlunoDaTurma.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        TabAlunoDaTurma.getTableHeader().setResizingAllowed(false);
+        TabAlunoDaTurma.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(TabAlunoDaTurma);
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));

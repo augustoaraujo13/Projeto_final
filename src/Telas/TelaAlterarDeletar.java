@@ -129,7 +129,9 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
         try {
 
             String turma = TxtNomeDaTurma.getText().trim();
-            String dados = "select * from " + turma + ";";
+            String dados = "select Id_aluno as Id, nota_bimestre1 as 1°Bimestre,"
+                    + " nota_bimestre2 as 2°Bimestre, situacao as Situação"
+                    + " from " + turma + ";";
             st = conn.prepareStatement(dados);
 
             if ("usuarios".equals(turma)) {
@@ -233,7 +235,13 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TabTurmas = new javax.swing.JTable();
+        TabTurmas = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+
+                return false;
+
+            }
+        };
         jLabel1 = new javax.swing.JLabel();
         BtnBuscarTurma = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -241,7 +249,13 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
         BtnAlterarTurmas = new javax.swing.JButton();
         BtnDeletarTurmas = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        TabAlunoDaTurma = new javax.swing.JTable();
+        TabAlunoDaTurma = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+
+                return false;
+
+            }
+        };
         BtnBuscarAlunos = new javax.swing.JButton();
         LblMatricula = new javax.swing.JLabel();
         TxtMatricula = new javax.swing.JTextField();
@@ -280,8 +294,11 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        TabTurmas.setFocusable(false);
         TabTurmas.setSelectionBackground(new java.awt.Color(204, 0, 204));
         TabTurmas.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        TabTurmas.getTableHeader().setResizingAllowed(false);
+        TabTurmas.getTableHeader().setReorderingAllowed(false);
         TabTurmas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TabTurmasMouseClicked(evt);
@@ -348,7 +365,7 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Id aluno", "Nota 1°B", "Nota 2°B", "Situação"
+                "Id", "1°Bimestre", "2°Bimestre", "Situação"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -359,8 +376,11 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        TabAlunoDaTurma.setFocusable(false);
         TabAlunoDaTurma.setSelectionBackground(new java.awt.Color(204, 0, 204));
         TabAlunoDaTurma.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        TabAlunoDaTurma.getTableHeader().setResizingAllowed(false);
+        TabAlunoDaTurma.getTableHeader().setReorderingAllowed(false);
         TabAlunoDaTurma.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TabAlunoDaTurmaMouseClicked(evt);

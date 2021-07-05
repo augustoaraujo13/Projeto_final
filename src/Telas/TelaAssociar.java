@@ -21,8 +21,8 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
 
     //Esse metedo busca os alunos.
     private void BuscarAluno() {
-        String pesquisa = "select matricula, nome, "
-                + "CPF from alunos order by matricula;";
+        String pesquisa = "select matricula as Matrícula, nome as Nome, "
+                + "CPF as CPF from alunos order by matricula;";
         try {
             st = conn.prepareStatement(pesquisa);
             rs = st.executeQuery();
@@ -126,14 +126,26 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TabAlunos = new javax.swing.JTable();
+        TabAlunos = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+
+                return false;
+
+            }
+        };
         BtnBuscarAluno = new javax.swing.JButton();
         LblMatricula = new javax.swing.JLabel();
         TxtMatricula = new javax.swing.JTextField();
         LblAluno = new javax.swing.JLabel();
         TxtAluno = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        TabTurmas = new javax.swing.JTable();
+        TabTurmas = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+
+                return false;
+
+            }
+        };
         BtnBuscarTurma = new javax.swing.JButton();
         LblNomeDaTurma = new javax.swing.JLabel();
         TxtNomeDaTurma = new javax.swing.JTextField();
@@ -173,8 +185,11 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        TabAlunos.setFocusable(false);
         TabAlunos.setSelectionBackground(new java.awt.Color(204, 0, 204));
         TabAlunos.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        TabAlunos.getTableHeader().setResizingAllowed(false);
+        TabAlunos.getTableHeader().setReorderingAllowed(false);
         TabAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TabAlunosMouseClicked(evt);
@@ -229,8 +244,11 @@ public class TelaAssociar extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        TabTurmas.setFocusable(false);
         TabTurmas.setSelectionBackground(new java.awt.Color(204, 0, 204));
         TabTurmas.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        TabTurmas.getTableHeader().setResizingAllowed(false);
+        TabTurmas.getTableHeader().setReorderingAllowed(false);
         TabTurmas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TabTurmasMouseClicked(evt);

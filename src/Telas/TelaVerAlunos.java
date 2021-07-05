@@ -197,7 +197,13 @@ public class TelaVerAlunos extends javax.swing.JInternalFrame {
         ForTelefoneResposanvel = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TabAlunos = new javax.swing.JTable();
+        TabAlunos = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+
+                return false;
+
+            }
+        };
         BtnBuscarAlunos = new javax.swing.JButton();
         LogoBranco = new javax.swing.JLabel();
         TxtSituacao = new javax.swing.JTextField();
@@ -334,8 +340,11 @@ public class TelaVerAlunos extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        TabAlunos.setFocusable(false);
         TabAlunos.setSelectionBackground(new java.awt.Color(204, 0, 204));
         TabAlunos.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        TabAlunos.getTableHeader().setResizingAllowed(false);
+        TabAlunos.getTableHeader().setReorderingAllowed(false);
         TabAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TabAlunosMouseClicked(evt);

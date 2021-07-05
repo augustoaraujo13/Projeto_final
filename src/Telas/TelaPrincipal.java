@@ -1,8 +1,10 @@
 package Telas;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -22,6 +24,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     public TelaPrincipal() {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icones/logo1.png")));
         // para chamar a hora HH:mm:ss
         // Esse codigo exibe a data do sistema
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -432,7 +435,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     //Metodo que faz o Jmenu mudar de cor
     private void customizeMenuBar(JMenuBar menuBar) {
         menuBar.setUI(new BasicMenuBarUI() {
-            
+
             public void paint(Graphics g, JComponent c) {
                 //[220,199,170]
                 //[107,122,143]

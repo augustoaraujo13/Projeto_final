@@ -21,8 +21,8 @@ public class TelaBuscarAlunos extends javax.swing.JInternalFrame {
 
     //Esse metodo busca os alunos.
     private void Buscar() {
-        String pesquisa = "select matricula, situacao,"
-                + " nome, email, telefone from alunos "
+        String pesquisa = "select matricula as Matrícula, situacao as Situação,"
+                + " nome as Nome, email as Email, telefone as Telefone from alunos "
                 + "order by matricula;";
         try {
             st = conn.prepareStatement(pesquisa);
@@ -56,7 +56,13 @@ public class TelaBuscarAlunos extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TabAlunos = new javax.swing.JTable();
+        TabAlunos = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+
+                return false;
+
+            }
+        };
         BtnBuscar4 = new javax.swing.JButton();
         LblMatricula = new javax.swing.JLabel();
         TxtMatricula = new javax.swing.JTextField();
@@ -103,8 +109,11 @@ public class TelaBuscarAlunos extends javax.swing.JInternalFrame {
             }
         });
         TabAlunos.setToolTipText("");
+        TabAlunos.setFocusable(false);
         TabAlunos.setSelectionBackground(new java.awt.Color(204, 0, 204));
         TabAlunos.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        TabAlunos.getTableHeader().setResizingAllowed(false);
+        TabAlunos.getTableHeader().setReorderingAllowed(false);
         TabAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TabAlunosMouseClicked(evt);

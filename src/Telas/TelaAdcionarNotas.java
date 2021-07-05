@@ -86,7 +86,9 @@ public class TelaAdcionarNotas extends javax.swing.JInternalFrame {
     private void Dados() {
         try {
             String turma = TxtNomeDaTurma.getText().trim();
-            String dados = "select * from " + turma + ";";
+            String dados = "select Id_aluno as Id, nota_bimestre1 as 1°Bimestre,"
+                    + " nota_bimestre2 as 2°Bimestre, situacao as Situação"
+                    + " from " + turma + ";";
             st = conn.prepareStatement(dados);
 
             if ("usuarios".equals(turma)) {
@@ -142,19 +144,32 @@ public class TelaAdcionarNotas extends javax.swing.JInternalFrame {
         }
 
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        TabTurmas = new javax.swing.JTable();
+        TabTurmas = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+
+                return false;
+
+            }
+        };
         BtnBuscarTurma = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         LblNomeDaTurma = new javax.swing.JLabel();
         TxtNomeDaTurma = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        TabAlunosDaTurma = new javax.swing.JTable();
+        TabAlunosDaTurma = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+
+                return false;
+
+            }
+        };
         BtnBuscarDados = new javax.swing.JButton();
         LblId = new javax.swing.JLabel();
         TxtId = new javax.swing.JTextField();
@@ -165,7 +180,6 @@ public class TelaAdcionarNotas extends javax.swing.JInternalFrame {
         CbNota1 = new javax.swing.JComboBox<>();
         CbNota2 = new javax.swing.JComboBox<>();
         BtnAdicionar = new javax.swing.JButton();
-        LogoBranco = new javax.swing.JLabel();
         LogoBranco1 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -196,8 +210,11 @@ public class TelaAdcionarNotas extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        TabTurmas.setFocusable(false);
         TabTurmas.setSelectionBackground(new java.awt.Color(204, 0, 204));
         TabTurmas.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        TabTurmas.getTableHeader().setResizingAllowed(false);
+        TabTurmas.getTableHeader().setReorderingAllowed(false);
         TabTurmas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TabTurmasMouseClicked(evt);
@@ -238,7 +255,7 @@ public class TelaAdcionarNotas extends javax.swing.JInternalFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Id aluno", "Nota 1°B", "Nota 2°B", "Situação"
+                "Id", "1°Bimestre", "2°Bimestre", "Situação"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -249,8 +266,11 @@ public class TelaAdcionarNotas extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        TabAlunosDaTurma.setFocusable(false);
         TabAlunosDaTurma.setSelectionBackground(new java.awt.Color(204, 0, 204));
         TabAlunosDaTurma.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        TabAlunosDaTurma.getTableHeader().setResizingAllowed(false);
+        TabAlunosDaTurma.getTableHeader().setReorderingAllowed(false);
         TabAlunosDaTurma.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TabAlunosDaTurmaMouseClicked(evt);
@@ -310,8 +330,6 @@ public class TelaAdcionarNotas extends javax.swing.JInternalFrame {
             }
         });
 
-        LogoBranco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/LogoBranco.png"))); // NOI18N
-
         LogoBranco1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/LogoBranco.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -366,11 +384,6 @@ public class TelaAdcionarNotas extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(BtnAdicionar)
                         .addContainerGap(36, Short.MAX_VALUE))))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(250, 250, 250)
-                    .addComponent(LogoBranco)
-                    .addContainerGap(251, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -411,11 +424,6 @@ public class TelaAdcionarNotas extends javax.swing.JInternalFrame {
                         .addGap(29, 29, 29)
                         .addComponent(BtnAdicionar)))
                 .addContainerGap(23, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(200, 200, 200)
-                    .addComponent(LogoBranco)
-                    .addContainerGap(148, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -455,7 +463,7 @@ public class TelaAdcionarNotas extends javax.swing.JInternalFrame {
     private void BtnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAdicionarActionPerformed
         AdcionarNotas();
         Dados();
-        
+
     }//GEN-LAST:event_BtnAdicionarActionPerformed
 
 
@@ -470,7 +478,6 @@ public class TelaAdcionarNotas extends javax.swing.JInternalFrame {
     javax.swing.JLabel LblNomeDaTurma;
     javax.swing.JLabel LblNota1;
     javax.swing.JLabel LblNota2;
-    javax.swing.JLabel LogoBranco;
     javax.swing.JLabel LogoBranco1;
     javax.swing.JTable TabAlunosDaTurma;
     javax.swing.JTable TabTurmas;

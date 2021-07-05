@@ -1,6 +1,7 @@
 package Telas;
 
 import Conexao.ConexaoBanco;
+import java.awt.Toolkit;
 //import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +18,14 @@ public class TelaLogin extends javax.swing.JFrame {
     public TelaLogin() {
         initComponents();
         conn = ConexaoBanco.abrirBanco();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icones/logo1.png")));
     }
+    /*
+    private void setIcone() {
+        
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icones/logo.ico")));
+    }
+    */
 
     //Esse metedo faz login no sistema.
     private void Logar() {
@@ -297,4 +305,5 @@ public class TelaLogin extends javax.swing.JFrame {
     javax.swing.JPanel jPanel1;
     javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
+
 }
