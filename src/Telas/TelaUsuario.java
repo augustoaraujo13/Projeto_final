@@ -101,7 +101,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     private void Buscar() {
         String mensagem = "Informe o Id do usuário.";
         String idRecebido = JOptionPane.showInputDialog(mensagem);
-        String busca = "select * from usuarios where id_user =" +idRecebido+ " ;";
+        String busca = "select * from usuarios where id_user =" + idRecebido + " ;";
 
         try {
             st = conn.prepareStatement(busca);

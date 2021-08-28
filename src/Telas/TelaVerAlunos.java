@@ -59,13 +59,32 @@ public class TelaVerAlunos extends javax.swing.JInternalFrame {
 
     }
 
-    //Mostra informações do alunos.
-    private void Buscar() {
+    //Busca os alunos.
+    private void BuscarAlunos() {
         try {
-            String busca = "select * from alunos where matricula = "
-                    + TxtMatricula.getText().trim();
+            String buscando = "select matricula as Matrícula, nome as Nome from alunos order by matricula;";
+            st = conn.prepareStatement(buscando);
+            String comcluido = "Sua busca foi realizada.";
+            rs = st.executeQuery();
+            JOptionPane.showMessageDialog(this, comcluido);
+            TabAlunos.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(this, "Campo vazio!");
+            //System.out.println(e);
+        }
+    }
+
+    //Mostra o aluno na tabela.
+    private void Mostrar(){
+    
+         int setar = TabAlunos.getSelectedRow();
+        try {
+             String id = TabAlunos.getModel().getValueAt(setar, 0).toString().trim();
+            String busca = "select * from alunos where matricula =" + id;
+
             st = conn.prepareStatement(busca);
             rs = st.executeQuery();
+
             if (rs.next()) {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
                 Date dataBanco = rs.getDate(4);
@@ -83,67 +102,14 @@ public class TelaVerAlunos extends javax.swing.JInternalFrame {
                 TxtEmailResposavel.setText(rs.getString(10));
                 ForTelefoneResposanvel.setText(rs.getString(11));
                 TxtEndereco.setText(rs.getString(12));
-            } else {
-                String resposta = "O aluno que você pesquisou não existe.";
-                JOptionPane.showMessageDialog(this, resposta);
                 
-                TxtMatricula.setText(null);
-                TxtNome.setText(null);
-                ForNascimento.setText(null);
-                ForCpf.setText(null);
-                TxtEmail.setText(null);
-                ForTelefone.setText(null);
-                TxtResposavel.setText(null);
-                ForCpfResposanvel.setText(null);
-                TxtEmailResposavel.setText(null);
-                ForTelefoneResposanvel.setText(null);
-                TxtEndereco.setText(null);
+            } else {
+
             }
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Matrícula Inválida!");
-            //System.out.println(e);
-            TxtMatricula.setText(null);
-            TxtNome.setText(null);
-            ForNascimento.setText(null);
-            ForCpf.setText(null);
-            TxtEmail.setText(null);
-            ForTelefone.setText(null);
-            TxtResposavel.setText(null);
-            ForCpfResposanvel.setText(null);
-            TxtEmailResposavel.setText(null);
-            ForTelefoneResposanvel.setText(null);
-            TxtEndereco.setText(null);
         }
-
-    }
-
-    //Busca os alunos.
-    private void BuscarAlunos() {
-        try {
-            String buscando = "select matricula, nome from alunos order by matricula;";
-            st = conn.prepareStatement(buscando);
-            String comcluido = "Sua busca foi realizada.";
-            rs = st.executeQuery();
-            JOptionPane.showMessageDialog(this, comcluido);
-            TabAlunos.setModel(DbUtils.resultSetToTableModel(rs));
-        } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(this, "Campo vazio!");
-            //System.out.println(e);
-        }
-    }
-
-    //Mostra o aluno na tabela.
-    private void Mostrar() {
-        int setar = TabAlunos.getSelectedRow();
-
-        try {
-            TxtMatricula.setText(TabAlunos.getModel().getValueAt(setar, 0).toString().trim());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Campo vazio!");
-            //System.out.println(e);
-        }
-
+        
     }
 
     // Limpa os campos.
@@ -188,7 +154,6 @@ public class TelaVerAlunos extends javax.swing.JInternalFrame {
         TxtEmailResposavel = new javax.swing.JTextField();
         LblEndereco = new javax.swing.JLabel();
         TxtEndereco = new javax.swing.JTextField();
-        BtnBuscar = new javax.swing.JButton();
         BtnLimpar = new javax.swing.JButton();
         ForNascimento = new javax.swing.JFormattedTextField();
         ForCpfResposanvel = new javax.swing.JFormattedTextField();
@@ -274,17 +239,6 @@ public class TelaVerAlunos extends javax.swing.JInternalFrame {
 
         TxtEndereco.setEditable(false);
         TxtEndereco.setBackground(new java.awt.Color(231, 223, 221));
-
-        BtnBuscar.setBackground(new java.awt.Color(0, 204, 204));
-        BtnBuscar.setForeground(new java.awt.Color(0, 0, 0));
-        BtnBuscar.setText("Mais");
-        BtnBuscar.setToolTipText("Mais informações sobre o aluno.");
-        BtnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        BtnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnBuscarActionPerformed(evt);
-            }
-        });
 
         BtnLimpar.setBackground(new java.awt.Color(204, 0, 204));
         BtnLimpar.setForeground(new java.awt.Color(0, 0, 0));
@@ -385,62 +339,62 @@ public class TelaVerAlunos extends javax.swing.JInternalFrame {
                         .addComponent(TxtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(52, 52, 52))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(LblResposavel)
-                            .addComponent(LblEmailResponsavel, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(LblCpfResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(LblTelefoneResponsavel)))
-                        .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(LblResposavel)
+                                .addComponent(LblEmailResponsavel, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TxtEmailResposavel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ForCpfResposanvel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TxtResposavel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(52, 52, 52)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(BtnBuscar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(BtnLimpar)
-                                        .addGap(90, 90, 90)
-                                        .addComponent(BtnBuscarAlunos))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(ForTelefoneResposanvel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(LblCpfResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(LblTelefoneResponsavel)))
                             .addComponent(LblNome)
                             .addComponent(LblTelefone)
                             .addComponent(LblMatricula))
-                        .addGap(19, 19, 19)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(TxtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                            .addComponent(ForTelefone))
-                        .addGap(50, 50, 50)
+                        .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(LblNascimento)
-                                    .addComponent(LblSituacao))
-                                .addGap(18, 19, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(ForNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                                    .addComponent(TxtSituacao))
-                                .addGap(36, 36, 36)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(LblEmail)
-                                    .addComponent(LblCpf))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(TxtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                                    .addComponent(ForCpf))
-                                .addContainerGap(54, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(LblEndereco)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                .addComponent(TxtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(92, 92, 92)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(LblNascimento)
+                                            .addComponent(LblSituacao))
+                                        .addGap(18, 19, Short.MAX_VALUE)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(ForNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                                            .addComponent(TxtSituacao))
+                                        .addGap(36, 36, 36)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(LblEmail)
+                                            .addComponent(LblCpf))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(TxtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                                            .addComponent(ForCpf))
+                                        .addContainerGap(54, Short.MAX_VALUE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(LblEndereco)
+                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ForTelefoneResposanvel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(ForTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(TxtEmailResposavel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(ForCpfResposanvel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(TxtResposavel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(TxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(52, 52, 52)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(BtnLimpar)
+                                                .addGap(126, 126, 126)
+                                                .addComponent(BtnBuscarAlunos)
+                                                .addGap(56, 56, 56))
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addContainerGap())))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -455,26 +409,26 @@ public class TelaVerAlunos extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
+                        .addGap(35, 35, 35)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(LblMatricula)
-                            .addComponent(TxtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(LblSituacao)
                             .addComponent(LblCpf)
                             .addComponent(ForCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(TxtSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TxtSituacao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtMatricula, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(LblEmail)
                         .addComponent(TxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(LblNascimento)
-                        .addComponent(ForNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(TxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(LblNome)))
+                        .addComponent(ForNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(LblNome))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LblTelefone)
@@ -506,8 +460,7 @@ public class TelaVerAlunos extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(BtnBuscarAlunos)
-                            .addComponent(BtnLimpar)
-                            .addComponent(BtnBuscar))))
+                            .addComponent(BtnLimpar))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(LogoBranco)
                 .addContainerGap())
@@ -527,10 +480,6 @@ public class TelaVerAlunos extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
-        Buscar();
-    }//GEN-LAST:event_BtnBuscarActionPerformed
-
     private void BtnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimparActionPerformed
         Limpar();
     }//GEN-LAST:event_BtnLimparActionPerformed
@@ -549,7 +498,6 @@ public class TelaVerAlunos extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    javax.swing.JButton BtnBuscar;
     javax.swing.JButton BtnBuscarAlunos;
     javax.swing.JButton BtnLimpar;
     javax.swing.JFormattedTextField ForCpf;

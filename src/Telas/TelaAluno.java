@@ -532,7 +532,7 @@ public class TelaAluno extends javax.swing.JInternalFrame {
         });
 
         LblNascimento.setForeground(new java.awt.Color(255, 255, 255));
-        LblNascimento.setText("Nascimeto *");
+        LblNascimento.setText("Nascimento *");
 
         LblEmail.setForeground(new java.awt.Color(255, 255, 255));
         LblEmail.setText("Email *");

@@ -53,77 +53,79 @@
                           <Component id="TxtEndereco" min="-2" pref="365" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="LblResposavel" min="-2" max="-2" attributes="0"/>
-                              <Component id="LblEmailResponsavel" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                  <Component id="LblCpfResponsavel" min="-2" pref="59" max="-2" attributes="0"/>
-                                  <Component id="LblTelefoneResponsavel" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="TxtEmailResposavel" alignment="0" min="-2" pref="142" max="-2" attributes="0"/>
-                                      <Component id="ForCpfResposanvel" alignment="0" min="-2" pref="142" max="-2" attributes="0"/>
-                                      <Component id="TxtResposavel" alignment="0" min="-2" pref="142" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="BtnBuscar" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="BtnLimpar" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
-                                          <Component id="BtnBuscarAlunos" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="jScrollPane1" min="-2" pref="390" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Component id="ForTelefoneResposanvel" alignment="0" min="-2" pref="142" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                  <Component id="LblResposavel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="LblEmailResponsavel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                      <Component id="LblCpfResponsavel" min="-2" pref="59" max="-2" attributes="0"/>
+                                      <Component id="LblTelefoneResponsavel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                               <Component id="LblNome" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="LblTelefone" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="LblMatricula" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="TxtMatricula" min="-2" pref="80" max="-2" attributes="0"/>
-                              <Component id="TxtNome" pref="142" max="32767" attributes="0"/>
-                              <Component id="ForTelefone" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="TxtMatricula" min="-2" pref="80" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="LblNascimento" min="-2" max="-2" attributes="0"/>
-                                      <Component id="LblSituacao" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="LblNascimento" min="-2" max="-2" attributes="0"/>
+                                              <Component id="LblSituacao" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="separate" pref="19" max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="ForNascimento" pref="142" max="32767" attributes="0"/>
+                                              <Component id="TxtSituacao" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="LblEmail" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="LblCpf" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="TxtEmail" pref="142" max="32767" attributes="0"/>
+                                              <Component id="ForCpf" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace pref="54" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="LblEndereco" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <EmptySpace type="separate" pref="19" max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="ForNascimento" pref="142" max="32767" attributes="0"/>
-                                      <Component id="TxtSituacao" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="LblEmail" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="LblCpf" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="TxtEmail" pref="142" max="32767" attributes="0"/>
-                                      <Component id="ForCpf" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace pref="54" max="32767" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="LblEndereco" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="ForTelefoneResposanvel" alignment="0" min="-2" pref="142" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="ForTelefone" min="-2" pref="142" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="TxtEmailResposavel" alignment="0" min="-2" pref="142" max="-2" attributes="0"/>
+                                                  <Component id="ForCpfResposanvel" alignment="0" min="-2" pref="142" max="-2" attributes="0"/>
+                                                  <Component id="TxtResposavel" alignment="0" min="-2" pref="142" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="TxtNome" alignment="1" min="-2" pref="142" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <Component id="BtnLimpar" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
+                                                  <Component id="BtnBuscarAlunos" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="jScrollPane1" min="-2" pref="390" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -147,10 +149,9 @@
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="LblMatricula" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="TxtMatricula" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="LblSituacao" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="LblCpf" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="ForCpf" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -158,7 +159,10 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="TxtSituacao" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="TxtSituacao" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="TxtMatricula" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -168,11 +172,9 @@
                           <Component id="TxtEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="LblNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ForNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="TxtNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="LblNome" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="LblNome" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -212,7 +214,6 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="BtnBuscarAlunos" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="BtnLimpar" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="BtnBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -382,24 +383,6 @@
               <Color blue="dd" green="df" red="e7" type="rgb"/>
             </Property>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="BtnBuscar">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="cc" red="0" type="rgb"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Mais"/>
-            <Property name="toolTipText" type="java.lang.String" value="Mais informa&#xe7;&#xf5;es sobre o aluno."/>
-            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Cursor em Forma de M&#xe3;o"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnBuscarActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="BtnLimpar">
           <Properties>

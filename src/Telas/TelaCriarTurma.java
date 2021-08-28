@@ -1,4 +1,5 @@
 package Telas;
+
 import Conexao.ConexaoBanco;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -44,7 +45,7 @@ public class TelaCriarTurma extends javax.swing.JInternalFrame {
             }
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, e);
+            JOptionPane.showMessageDialog(this, "Esse nome não é valido para uma turma. EX: Informatica_2022.2");
             ///System.out.println(e);
             TxtNovaTurma.setText(null);
         }
@@ -64,7 +65,6 @@ public class TelaCriarTurma extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
         setResizable(true);
         setTitle("Criar turma");
 

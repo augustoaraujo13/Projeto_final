@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
 public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
@@ -162,14 +163,25 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
     }
 
     private void Mostrar() {
-
         int setar = TabAlunoDaTurma.getSelectedRow();
-
         try {
-            TxtMatricula.setText(TabAlunoDaTurma.getModel().getValueAt(setar, 0).toString().trim());
-            TxtNome.setText(TabAlunoDaTurma.getModel().getValueAt(setar, 1).toString().trim());
 
-        } catch (Exception e) {
+            String id = TabAlunoDaTurma.getModel().getValueAt(setar, 0).toString().trim();
+            String busca = "select * from alunos where matricula =" + id;
+
+            st = conn.prepareStatement(busca);
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+                TxtNome.setText(rs.getString(3));
+                TxtMatricula.setText(TabAlunoDaTurma.getModel().getValueAt(setar, 0).toString().trim());
+                //TxtNome.setText(TabAlunoDaTurma.getModel().getValueAt(setar, 1).toString().trim());
+
+            } else {
+
+            }
+
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Campo vazio");
             //System.out.println(e);
         }
@@ -177,10 +189,8 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
     }
 
     private void DeletarAluno() {
-
         String confirmando = "Deseja deletar esse aluno da turma?";
         String confirmando2 = "Atenção";
-
         int confirmar = JOptionPane.showConfirmDialog(null, confirmando, confirmando2, JOptionPane.YES_NO_OPTION);
 
         if (confirmar == JOptionPane.YES_OPTION) {
@@ -210,6 +220,7 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
                         JOptionPane.showMessageDialog(this, comcluido);
                         TxtNomeDaTurma.setText(null);
                         TxtMatricula.setText(null);
+                        ((DefaultTableModel) TabAlunoDaTurma.getModel()).setRowCount(0);
 
                     }
 
@@ -220,11 +231,15 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
                 System.out.println(e);
                 TxtNomeDaTurma.setText(null);
                 TxtMatricula.setText(null);
+                TxtNome.setText(null);
+                ((DefaultTableModel) TabAlunoDaTurma.getModel()).setRowCount(0);
             }
         } else {
             JOptionPane.showMessageDialog(null, "O aluno não foi excluído da turma.");
             TxtNomeDaTurma.setText(null);
             TxtMatricula.setText(null);
+            TxtNome.setText(null);
+           ((DefaultTableModel) TabAlunoDaTurma.getModel()).setRowCount(0);
         }
 
     }
@@ -324,6 +339,7 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nome da turma");
 
+        TxtNomeDaTurma.setEditable(false);
         TxtNomeDaTurma.setBackground(new java.awt.Color(231, 223, 221));
         TxtNomeDaTurma.setForeground(new java.awt.Color(0, 0, 0));
         TxtNomeDaTurma.addActionListener(new java.awt.event.ActionListener() {
@@ -402,12 +418,16 @@ public class TelaAlterarDeletar extends javax.swing.JInternalFrame {
         LblMatricula.setForeground(new java.awt.Color(255, 255, 255));
         LblMatricula.setText("Matrícula");
 
+        TxtMatricula.setEditable(false);
         TxtMatricula.setBackground(new java.awt.Color(231, 223, 221));
+        TxtMatricula.setForeground(new java.awt.Color(0, 0, 0));
 
         LblNome.setForeground(new java.awt.Color(255, 255, 255));
         LblNome.setText("Nome");
 
+        TxtNome.setEditable(false);
         TxtNome.setBackground(new java.awt.Color(231, 223, 221));
+        TxtNome.setForeground(new java.awt.Color(0, 0, 0));
 
         BtnDeletarAluno.setBackground(new java.awt.Color(255, 0, 0));
         BtnDeletarAluno.setForeground(new java.awt.Color(0, 0, 0));

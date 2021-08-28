@@ -19,6 +19,8 @@ public class TelaLogin extends javax.swing.JFrame {
         initComponents();
         conn = ConexaoBanco.abrirBanco();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icones/logo1.png")));
+   
+        
     }
     /*
     private void setIcone() {
@@ -259,6 +261,18 @@ public class TelaLogin extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+        
+        /*
+         try {
+            // select Look and Feel
+            UIManager.setLookAndFeel("com.jtattoo.plaf.mint.MintLookAndFeel");
+            // start application
+           // new MinFrame();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        */
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
