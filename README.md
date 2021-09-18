@@ -48,9 +48,11 @@ escola, que seriam cadastro dos alunos, associar eles a uma turma e gerenciament
    
   ![Tela principal](https://raw.githubusercontent.com/augustoaraujo13/imagens-e-arquivos-para-o-readne/main/Projeto%20final/Imagens/Tela%20principal.png)
    
+   ![Tela principal](https://github.com/augustoaraujo13/imagens-e-arquivos-para-o-readme/blob/main/Projeto%20final/Imagens/Tela%20principal%202.png?raw=true)
+   
    Tela de cadastro de usuários:
    
-   ![Cadastro de usuários](https://raw.githubusercontent.com/augustoaraujo13/imagens-e-arquivos-para-o-readne/main/Projeto%20final/Imagens/Tela%20cadastro%20de%20usuarios.png)
+   ![Cadastro de usuários](https://github.com/augustoaraujo13/imagens-e-arquivos-para-o-readme/blob/main/Projeto%20final/Imagens/Cadatrso%20de%20usuarios.png?raw=true)
    
    
    Com tempo irei por um link com mais imagens do projeto 😅
