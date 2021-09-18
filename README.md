@@ -38,19 +38,19 @@ escola, que seriam cadastro dos alunos, associar eles a uma turma e gerenciament
  
  👉 [Slide de apresentação]( https://docs.google.com/presentation/d/1zmJpMChmEWjAc1XZooM4-IOcvdijuh8z/edit?usp=sharing&ouid=100937644386236832743&rtpof=true&sd=true)
 
-   Imagens do projeto 😊
+   Imagens do projeto 😊.
    
    Tela de login:
    
-  ![Tela de login]( https://1.bp.blogspot.com/-60ynOwMVLcY/YUUbOlQd_OI/AAAAAAAAAXg/2OfdLjNKr6sVHrHnhXzs_mIQyq6H_jtPgCLcBGAsYHQ/s357/Captura%2Bde%2BTela%2B%2528333%2529.png)
+  ![Tela de login](https://raw.githubusercontent.com/augustoaraujo13/imagens-e-arquivos-para-o-readne/main/Projeto%20final/Imagens/Tela%20Login.png)
    
    Tela principal:
    
-  ![Tela principal](https://1.bp.blogspot.com/-z4LrzAc4de0/YUUbTCgmAxI/AAAAAAAAAXk/NxOPklPoM6ABju5MFOEfkHowmoauReY2ACLcBGAsYHQ/s936/Captura%2Bde%2BTela%2B%2528336%2529.png)
+  ![Tela principal](https://raw.githubusercontent.com/augustoaraujo13/imagens-e-arquivos-para-o-readne/main/Projeto%20final/Imagens/Tela%20principal.png)
    
    Tela de cadastro de usuários:
    
-   ![Cadastro de usuários](https://1.bp.blogspot.com/-kFpqpGqdQ34/YUUbY1K8QGI/AAAAAAAAAXo/-9ac7kHoomI12wwrCS_d2yaHbUAe85NXgCLcBGAsYHQ/s943/Captura%2Bde%2BTela%2B%2528337%2529.png)
+   ![Cadastro de usuários](https://raw.githubusercontent.com/augustoaraujo13/imagens-e-arquivos-para-o-readne/main/Projeto%20final/Imagens/Tela%20cadastro%20de%20usuarios.png)
    
    
    Com tempo irei por um link com mais imagens do projeto 😅
@@ -59,17 +59,13 @@ escola, que seriam cadastro dos alunos, associar eles a uma turma e gerenciament
    
    ##
    
-   # Tecnologias usadas no projeto
+   # Tecnologias usadas no projeto.
    
    
    Para o desenvolvimento desse projeto foram usadas as seguintes tecnologias....
    
    Back end:
    - Java
-   
-   -mysql connector java 8.0.16
-   
-   - rs2xml
    
    Front End:
    
@@ -91,7 +87,7 @@ escola, que seriam cadastro dos alunos, associar eles a uma turma e gerenciament
    [Script do banco de dados](https://drive.google.com/file/d/135-OsFm1JEObYkf6OuVhFc2TXdmJrEtf/view?usp=sharing)
    
    ##
-   # Considerações
+   # Considerações.
    
    - Vale ressaltar que esse software faz parte de um TCC que foi feito em um grupo de alunos, alguns arquivos não serão divulgados 🚫.
    
@@ -106,8 +102,15 @@ escola, que seriam cadastro dos alunos, associar eles a uma turma e gerenciament
    Professor Responsável:
    
    - Prof. Josimar Ribeiro
-
-
-
+   
+##
+   
+  # Meios de contato.
+  
+  <div>
+  <a href="https://www.linkedin.com/in/augustoaraujo13/" target="_blank"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a> <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a> <a href="https://pt.stackoverflow.com/users/258077/augusto-araujo" target="_blank"><img src="https://aleen42.github.io/badges/src/stackoverflow.svg" target="_blank"></a>  
+    <a href="augustoaraujofoto@gmail.com" target="_blank">
+  </div>
    
    
+##
